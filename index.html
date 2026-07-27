@@ -1,0 +1,2088 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CoinQ 合约后台原型</title>
+    <style>
+      :root{
+        --bg:#08111b;
+        --bg-soft:#0d1724;
+        --panel:#101b2a;
+        --panel-2:#132133;
+        --card:#162436;
+        --card-2:#1a2b40;
+        --line:rgba(255,255,255,.08);
+        --line-strong:rgba(255,255,255,.14);
+        --text:#f4f8fc;
+        --muted:rgba(222,231,241,.68);
+        --muted-soft:rgba(222,231,241,.48);
+        --brand:#4de0a8;
+        --brand-soft:rgba(77,224,168,.16);
+        --blue:#7ab7ff;
+        --blue-soft:rgba(122,183,255,.16);
+        --orange:#ffbe6b;
+        --red:#ff7d7d;
+        --shadow:0 24px 60px rgba(0,0,0,.28);
+        --radius-xl:28px;
+        --radius-lg:22px;
+        --radius-md:18px;
+        --radius-sm:14px;
+      }
+
+      *{box-sizing:border-box}
+      html,body{height:100%}
+      body{
+        margin:0;
+        color:var(--text);
+        font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+        background:
+          radial-gradient(820px 460px at 12% 0%, rgba(77,224,168,.10), transparent 55%),
+          radial-gradient(720px 420px at 100% 0%, rgba(122,183,255,.14), transparent 50%),
+          linear-gradient(180deg, #09111a 0%, #0a1420 100%);
+      }
+
+      a{color:inherit;text-decoration:none}
+      button,input,select{font:inherit}
+
+      .shell{
+        min-height:100%;
+        padding:20px;
+      }
+
+      .layout{
+        max-width:1600px;
+        min-height:calc(100vh - 40px);
+        margin:0 auto;
+        display:grid;
+        grid-template-columns:280px minmax(0,1fr);
+        gap:20px;
+      }
+
+      .sidebar,
+      .main{
+        background:linear-gradient(180deg, rgba(14,23,35,.94), rgba(11,20,31,.88));
+        border:1px solid var(--line);
+        box-shadow:var(--shadow);
+        backdrop-filter:blur(18px);
+        -webkit-backdrop-filter:blur(18px);
+      }
+
+      .sidebar{
+        border-radius:30px;
+        padding:18px 16px;
+        display:flex;
+        flex-direction:column;
+        gap:14px;
+      }
+
+      .brand{
+        padding:12px 12px 18px;
+        border-bottom:1px solid var(--line);
+      }
+
+      .brandMark{
+        width:44px;
+        height:44px;
+        border-radius:14px;
+        display:grid;
+        place-items:center;
+        background:linear-gradient(135deg, rgba(77,224,168,.28), rgba(122,183,255,.24));
+        box-shadow:0 14px 30px rgba(77,224,168,.14);
+        font-weight:700;
+        letter-spacing:.08em;
+      }
+
+      .brand h1{
+        margin:14px 0 0;
+        font-size:22px;
+        font-weight:700;
+        letter-spacing:.04em;
+      }
+
+      .brand p{
+        margin:8px 0 0;
+        color:var(--muted);
+        font-size:12px;
+        line-height:1.75;
+      }
+
+      .navGroupTitle{
+        padding:0 12px;
+        margin-top:8px;
+        color:var(--muted-soft);
+        font-size:11px;
+        font-weight:700;
+        letter-spacing:.16em;
+        text-transform:uppercase;
+      }
+
+      .nav{
+        display:flex;
+        flex-direction:column;
+        gap:8px;
+      }
+
+      .navBtn{
+        width:100%;
+        min-height:52px;
+        padding:12px 14px;
+        border:none;
+        border-radius:18px;
+        background:transparent;
+        color:var(--text);
+        display:flex;
+        align-items:center;
+        gap:12px;
+        text-align:left;
+        cursor:pointer;
+        transition:all .2s ease;
+      }
+
+      .navBtn:hover{
+        background:rgba(255,255,255,.04);
+      }
+
+      .navBtn.active{
+        background:linear-gradient(135deg, rgba(77,224,168,.16), rgba(122,183,255,.10));
+        border:1px solid rgba(77,224,168,.16);
+      }
+
+      .navIcon{
+        width:34px;
+        height:34px;
+        border-radius:12px;
+        display:grid;
+        place-items:center;
+        background:rgba(255,255,255,.06);
+        color:var(--brand);
+        font-size:12px;
+        font-weight:700;
+      }
+
+      .navText strong{
+        display:block;
+        font-size:14px;
+        font-weight:700;
+      }
+
+      .navText span{
+        display:block;
+        margin-top:4px;
+        color:var(--muted);
+        font-size:11px;
+      }
+
+      .sideNote{
+        margin-top:auto;
+        padding:14px 16px;
+        border-radius:18px;
+        background:rgba(255,255,255,.03);
+        border:1px solid var(--line);
+        color:var(--muted);
+        font-size:12px;
+        line-height:1.8;
+      }
+
+      .main{
+        border-radius:32px;
+        padding:18px;
+        display:flex;
+        flex-direction:column;
+        gap:16px;
+      }
+
+      .topbar{
+        display:flex;
+        align-items:flex-start;
+        justify-content:space-between;
+        gap:16px;
+        padding:6px 6px 0;
+      }
+
+      .topbar h2{
+        margin:0;
+        font-size:28px;
+        font-weight:700;
+        letter-spacing:.04em;
+      }
+
+      .topbar p{
+        margin:8px 0 0;
+        color:var(--muted);
+        font-size:13px;
+        line-height:1.8;
+      }
+
+      .metaPills{
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+        justify-content:flex-end;
+      }
+
+      .pill{
+        height:38px;
+        padding:0 14px;
+        border-radius:999px;
+        background:rgba(255,255,255,.04);
+        border:1px solid var(--line);
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        color:var(--muted);
+        font-size:12px;
+        white-space:nowrap;
+      }
+
+      .pill strong{color:var(--text)}
+
+      .page{
+        display:none;
+        flex:1;
+      }
+
+      .page.active{
+        display:flex;
+        flex-direction:column;
+        gap:16px;
+      }
+
+      .toolbar{
+        display:block;
+      }
+
+      .toolbarCard{
+        background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+        border:1px solid var(--line);
+        border-radius:24px;
+        padding:18px;
+      }
+
+      .toolbarCard h3{
+        margin:0 0 14px;
+        font-size:14px;
+        font-weight:700;
+      }
+
+      .fieldGrid{
+        display:grid;
+        grid-template-columns:repeat(4,minmax(0,1fr));
+        gap:12px;
+      }
+
+      .field.span2{
+        grid-column:span 2;
+      }
+
+      .field.spanFull{
+        grid-column:1 / -1;
+      }
+
+      .field{
+        min-height:70px;
+        padding:12px 14px;
+        border-radius:16px;
+        background:rgba(255,255,255,.04);
+        border:1px solid rgba(255,255,255,.06);
+      }
+
+      .field label{
+        display:block;
+        margin-bottom:10px;
+        color:var(--muted);
+        font-size:12px;
+      }
+
+      .control{
+        width:100%;
+        height:40px;
+        padding:0 12px;
+        border-radius:12px;
+        border:1px solid var(--line);
+        background:rgba(7,12,18,.34);
+        color:var(--text);
+      }
+
+      .actions{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        flex-wrap:wrap;
+      }
+
+      .toolbarActions{
+        margin-top:14px;
+        padding-top:14px;
+        border-top:1px solid rgba(255,255,255,.08);
+        display:flex;
+        justify-content:flex-end;
+      }
+
+      .toolbarNote{
+        margin-top:14px;
+      }
+
+      .btn{
+        height:40px;
+        padding:0 16px;
+        border:none;
+        border-radius:12px;
+        cursor:pointer;
+        transition:transform .2s ease, opacity .2s ease;
+      }
+
+      .btn:hover{opacity:.92}
+      .btn:active{transform:translateY(1px)}
+
+      .btn.primary{
+        background:linear-gradient(135deg, #4de0a8, #62b4ff);
+        color:#08111b;
+        font-weight:700;
+      }
+
+      .btn.secondary{
+        background:rgba(255,255,255,.05);
+        color:var(--text);
+        border:1px solid var(--line);
+      }
+
+      .summary{
+        display:grid;
+        grid-template-columns:repeat(4,minmax(0,1fr));
+        gap:14px;
+      }
+
+      .summary.three{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+      }
+
+      .summary.five{
+        grid-template-columns:repeat(5,minmax(0,1fr));
+      }
+
+      .metric{
+        min-height:112px;
+        padding:16px 18px;
+        border-radius:22px;
+        background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+        border:1px solid var(--line);
+      }
+
+      .metric .k{
+        color:var(--muted);
+        font-size:12px;
+      }
+
+      .metric .v{
+        margin-top:16px;
+        font-size:28px;
+        font-weight:700;
+        letter-spacing:.02em;
+      }
+
+      .metric .sub{
+        margin-top:8px;
+        color:var(--muted-soft);
+        font-size:12px;
+      }
+
+      .contentCard{
+        background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+        border:1px solid var(--line);
+        border-radius:24px;
+        overflow:hidden;
+      }
+
+      .cardHead{
+        padding:16px 18px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:16px;
+        border-bottom:1px solid var(--line);
+      }
+
+      .cardHead h3{
+        margin:0;
+        font-size:16px;
+        font-weight:700;
+      }
+
+      .cardHead p{
+        margin:6px 0 0;
+        color:var(--muted);
+        font-size:12px;
+      }
+
+      .miniActions{
+        display:flex;
+        gap:8px;
+        flex-wrap:wrap;
+      }
+
+      .chip{
+        height:30px;
+        padding:0 12px;
+        border-radius:999px;
+        display:inline-flex;
+        align-items:center;
+        background:rgba(255,255,255,.04);
+        border:1px solid var(--line);
+        color:var(--muted);
+        font-size:12px;
+      }
+
+      .tableWrap{
+        overflow:auto;
+      }
+
+      table{
+        width:100%;
+        border-collapse:collapse;
+        min-width:1180px;
+      }
+
+      th,td{
+        padding:14px 16px;
+        border-bottom:1px solid rgba(255,255,255,.06);
+        text-align:left;
+        vertical-align:top;
+        font-size:12px;
+        line-height:1.7;
+        white-space:nowrap;
+      }
+
+      th{
+        color:var(--muted);
+        font-weight:700;
+        background:rgba(255,255,255,.02);
+      }
+
+      td{
+        color:#edf3fb;
+      }
+
+      tbody tr:hover{
+        background:rgba(255,255,255,.025);
+      }
+
+      .status{
+        display:inline-flex;
+        align-items:center;
+        height:28px;
+        padding:0 10px;
+        border-radius:999px;
+        font-size:12px;
+        font-weight:700;
+      }
+
+      .status.green{background:rgba(77,224,168,.12); color:#7ef3c3}
+      .status.blue{background:rgba(122,183,255,.12); color:#90c6ff}
+      .status.orange{background:rgba(255,190,107,.12); color:#ffd196}
+      .status.red{background:rgba(255,125,125,.12); color:#ff9e9e}
+      .status.gray{background:rgba(255,255,255,.08); color:#d6deea}
+
+      .linkBtn{
+        border:none;
+        background:transparent;
+        color:#90c6ff;
+        cursor:pointer;
+        padding:0;
+      }
+
+      .pagination{
+        padding:14px 18px 18px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+        color:var(--muted);
+        font-size:12px;
+      }
+
+      .pages{
+        display:flex;
+        gap:8px;
+      }
+
+      .pageBtn{
+        width:34px;
+        height:34px;
+        border-radius:10px;
+        border:1px solid var(--line);
+        background:rgba(255,255,255,.04);
+        color:var(--text);
+        display:grid;
+        place-items:center;
+      }
+
+      .pageBtn.active{
+        background:linear-gradient(135deg, rgba(77,224,168,.16), rgba(122,183,255,.10));
+        border-color:rgba(77,224,168,.16);
+      }
+
+      .drawerMask{
+        position:fixed;
+        inset:0;
+        background:rgba(3,7,12,.48);
+        opacity:0;
+        visibility:hidden;
+        transition:all .2s ease;
+      }
+
+      .drawerMask.show{
+        opacity:1;
+        visibility:visible;
+      }
+
+      .drawer{
+        position:fixed;
+        top:20px;
+        right:20px;
+        bottom:20px;
+        width:min(720px, calc(100vw - 40px));
+        background:linear-gradient(180deg, rgba(14,23,35,.98), rgba(10,18,29,.98));
+        border:1px solid var(--line);
+        border-radius:28px;
+        box-shadow:0 28px 80px rgba(0,0,0,.34);
+        transform:translateX(calc(100% + 24px));
+        transition:transform .22s ease;
+        display:flex;
+        flex-direction:column;
+        overflow:hidden;
+      }
+
+      .drawer.show{
+        transform:translateX(0);
+      }
+
+      .drawerHead{
+        padding:18px 20px;
+        border-bottom:1px solid var(--line);
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+      }
+
+      .drawerHead h3{
+        margin:0;
+        font-size:18px;
+      }
+
+      .drawerHead p{
+        margin:6px 0 0;
+        color:var(--muted);
+        font-size:12px;
+      }
+
+      .close{
+        width:36px;
+        height:36px;
+        border:none;
+        border-radius:12px;
+        background:rgba(255,255,255,.05);
+        color:var(--text);
+        cursor:pointer;
+      }
+
+      .drawerBody{
+        padding:18px;
+        overflow:auto;
+      }
+
+      .split{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:12px;
+        margin-bottom:16px;
+      }
+
+      .note{
+        padding:14px 16px;
+        border-radius:18px;
+        background:rgba(255,255,255,.04);
+        border:1px solid var(--line);
+        color:var(--muted);
+        font-size:12px;
+        line-height:1.8;
+      }
+
+      .pillButton{
+        cursor:pointer;
+      }
+
+      .auditDrawer{
+        width:min(860px, calc(100vw - 40px));
+      }
+
+      .auditIntro{
+        margin-bottom:16px;
+      }
+
+      .auditSection + .auditSection{
+        margin-top:20px;
+      }
+
+      .auditSection{
+        display:none;
+      }
+
+      .auditSection.active{
+        display:block;
+      }
+
+      .auditHead{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+        margin-bottom:10px;
+      }
+
+      .auditHead h4{
+        margin:0;
+        font-size:16px;
+        font-weight:700;
+      }
+
+      .auditMeta{
+        height:28px;
+        padding:0 10px;
+        border-radius:999px;
+        display:inline-flex;
+        align-items:center;
+        background:rgba(77,224,168,.10);
+        border:1px solid rgba(77,224,168,.14);
+        color:#7ef3c3;
+        font-size:11px;
+        white-space:nowrap;
+      }
+
+      .auditTable table{
+        min-width:920px;
+      }
+
+      .auditTable th,
+      .auditTable td{
+        white-space:normal;
+        line-height:1.6;
+      }
+
+      .auditTable th{
+        font-size:12px;
+      }
+
+      .auditTable td{
+        font-size:12px;
+        color:#e8eef8;
+      }
+
+      .auditTable .mutedCell{
+        color:var(--muted);
+      }
+
+      .auditOverview{
+        display:grid;
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        gap:12px;
+        margin-bottom:18px;
+      }
+
+      .auditOverview .metric{
+        min-height:unset;
+      }
+
+      .auditBullet{
+        margin:0;
+        padding-left:18px;
+        color:#dbe6f6;
+        line-height:1.8;
+        font-size:13px;
+      }
+
+      .auditBullet li + li{
+        margin-top:4px;
+      }
+
+      .auditPageLead{
+        margin-bottom:12px;
+      }
+
+      @media (max-width: 1200px){
+        .layout{
+          grid-template-columns:1fr;
+        }
+
+        .toolbar,
+        .summary,
+        .summary.three,
+        .split{
+          grid-template-columns:1fr;
+        }
+      }
+
+      @media (max-width: 760px){
+        .shell{padding:12px}
+        .sidebar,.main{border-radius:24px}
+        .topbar{flex-direction:column}
+        .topbar h2{font-size:22px}
+        .fieldGrid{grid-template-columns:1fr}
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="layout">
+        <aside class="sidebar" aria-label="页面导航">
+          <div class="brand">
+            <div class="brandMark">CQ</div>
+            <h1>CoinQ 合约后台</h1>
+            <p>根据《CoinQ合约后台需求》生成的单文件高保真原型，覆盖交易管理与数据管理核心页面。</p>
+          </div>
+
+          <div class="navGroupTitle">交易管理</div>
+          <div class="nav">
+            <button class="navBtn active" data-page="tp-sl">
+              <div class="navIcon">01</div>
+              <div class="navText"><strong>止盈止损</strong><span>移动止盈止损查询与状态管理</span></div>
+            </button>
+            <button class="navBtn" data-page="positions">
+              <div class="navIcon">02</div>
+              <div class="navText"><strong>当前持仓</strong><span>实时仓位、保证金与盈亏</span></div>
+            </button>
+            <button class="navBtn" data-page="orders">
+              <div class="navIcon">03</div>
+              <div class="navText"><strong>当前委托</strong><span>挂单、止盈止损与委托类型</span></div>
+            </button>
+            <button class="navBtn" data-page="open-records">
+              <div class="navIcon">04</div>
+              <div class="navText"><strong>开仓记录</strong><span>开仓订单明细与手续费</span></div>
+            </button>
+            <button class="navBtn" data-page="close-records">
+              <div class="navIcon">05</div>
+              <div class="navText"><strong>平仓记录</strong><span>平仓成交与价格回溯</span></div>
+            </button>
+            <button class="navBtn" data-page="history">
+              <div class="navIcon">06</div>
+              <div class="navText"><strong>历史仓位</strong><span>历史仓位与平仓盈亏联动</span></div>
+            </button>
+          </div>
+
+          <div class="navGroupTitle">数据管理</div>
+          <div class="nav">
+            <button class="navBtn" data-page="net-pnl">
+              <div class="navIcon">07</div>
+              <div class="navText"><strong>净盈亏查询</strong><span>用户维度资金与净收益统计</span></div>
+            </button>
+            <button class="navBtn" data-page="funding">
+              <div class="navIcon">08</div>
+              <div class="navText"><strong>资金费历史</strong><span>资金费率与结算记录查询</span></div>
+            </button>
+          </div>
+
+          <div class="sideNote">说明：原型重点对齐字段、层级和后台视图结构。列表、筛选、汇总和详情联动已按需求文档映射。</div>
+        </aside>
+
+        <main class="main">
+          <div class="topbar">
+            <div>
+              <h2>合约后台原型</h2>
+              <p>统一后台视图语言，便于评审交易管理与数据管理的字段覆盖、筛选关系和表格承载能力。</p>
+            </div>
+            <div class="metaPills">
+              <div class="pill"><strong>8</strong> 个页面</div>
+              <div class="pill"><strong>搜索 / 筛选 / 表格</strong> 标准结构</div>
+              <div class="pill"><strong>历史仓位</strong> 详情联动</div>
+              <button class="pill pillButton" id="openCaliberDrawer"><strong>口径定义</strong>字段对照</button>
+            </div>
+          </div>
+
+          <section class="page active" id="tp-sl">
+            <div class="toolbar">
+              <div class="toolbarCard">
+                <h3>查询与筛选</h3>
+                <div class="fieldGrid">
+                  <div class="field"><label>止盈止损 ID</label><input class="control" value="TP24071810928" /></div>
+                  <div class="field"><label>对应委托订单 ID</label><input class="control" value="ODR-991728898" /></div>
+                  <div class="field"><label>用户 UID</label><input class="control" value="10248391" /></div>
+                  <div class="field"><label>合约名称</label><select class="control"><option>全部合约名称</option><option>BTCUSDT 永续</option><option>ETHUSDT 永续</option></select></div>
+                  <div class="field"><label>开仓类型</label><select class="control"><option>全部开仓类型</option><option>全仓</option><option>逐仓</option></select></div>
+                  <div class="field"><label>状态</label><select class="control"><option>全部状态</option><option>未激活</option><option>已激活</option><option>触发中</option><option>已触发</option><option>用户撤销</option><option>平台撤销</option><option>已过期</option></select></div>
+                  <div class="field"><label>时间筛选</label><select class="control"><option>全部时间</option><option>今日</option><option>近 7 天</option><option>近 30 天</option><option>自定义范围</option></select></div>
+                  <div class="field"><label>盘口类型</label><select class="control"><option>全部盘口类型</option><option>实盘</option><option>模拟盘</option></select></div>
+                </div>
+                <div class="toolbarActions"><div class="actions"><button class="btn secondary">重置</button><button class="btn primary">查询</button><button class="btn secondary">导出</button></div></div>
+              </div>
+            </div>
+
+            <div class="summary">
+              <div class="metric"><div class="k">止盈止损订单总数</div><div class="v">2,184</div><div class="sub">近 7 日 +12.40%</div></div>
+              <div class="metric"><div class="k">已激活订单</div><div class="v">1,026</div><div class="sub">实时可触发监控中</div></div>
+              <div class="metric"><div class="k">触发中订单</div><div class="v">342</div><div class="sub">回调幅度持续跟踪</div></div>
+              <div class="metric"><div class="k">已触发订单</div><div class="v">816</div><div class="sub">含用户撤销与平台撤销</div></div>
+            </div>
+
+            <div class="contentCard">
+              <div class="cardHead">
+                <div><h3>移动止盈止损列表</h3><p>覆盖激活价格、回调幅度、持仓成本、触发价格、关联委托订单 ID 与状态字段。</p></div>
+                <div class="miniActions"><span class="chip">信息栏</span><span class="chip">页码条</span></div>
+              </div>
+              <div class="tableWrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>合约名称</th><th>止盈止损 ID</th><th>对应委托订单 ID</th><th>用户 UID</th><th>盘口类型</th><th>激活价格</th><th>创建时当前价格</th><th>价距</th><th>回调幅度</th><th>持仓成本</th><th>数量</th><th>触发价格</th><th>仓位模式</th><th>触发价格类型</th><th>委托数量</th><th>订单状态</th><th>创建时间</th><th>更新时间</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>BTCUSDT 永续</td><td>TP24071810928</td><td>ODR-991728898</td><td>10248391</td><td>实盘</td><td>68,800</td><td>68,210</td><td>590</td><td>1.20%</td><td>66,950</td><td>0.60 BTC</td><td>68,560</td><td>全仓</td><td>标记价格</td><td>0.60 BTC</td><td><span class="status blue">触发中</span></td><td>2026-07-18 10:42:18</td><td>2026-07-18 11:16:50</td></tr>
+                    <tr><td>ETHUSDT 永续</td><td>TP24071810955</td><td>ODR-991728712</td><td>10277109</td><td>模拟盘</td><td>3,820</td><td>3,768</td><td>52</td><td>0.80%</td><td>3,640</td><td>12 ETH</td><td>3,792</td><td>逐仓</td><td>最新价</td><td>12 ETH</td><td><span class="status green">已激活</span></td><td>2026-07-18 09:31:02</td><td>2026-07-18 09:36:11</td></tr>
+                    <tr><td>BTCUSDT 永续</td><td>TP24071787419</td><td>ODR-991720114</td><td>10300421</td><td>实盘</td><td>69,120</td><td>68,905</td><td>215</td><td>1.50%</td><td>68,240</td><td>0.25 BTC</td><td>69,030</td><td>全仓</td><td>标记价格</td><td>0.25 BTC</td><td><span class="status orange">已触发</span></td><td>2026-07-17 20:14:58</td><td>2026-07-17 21:08:43</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="pagination"><span>共 2184 条</span><div class="pages"><div class="pageBtn active">1</div><div class="pageBtn">2</div><div class="pageBtn">3</div><div class="pageBtn">4</div></div></div>
+            </div>
+          </section>
+
+          <section class="page" id="positions">
+            <div class="toolbar">
+              <div class="toolbarCard">
+                <h3>查询与筛选</h3>
+                <div class="fieldGrid">
+                  <div class="field"><label>顶级合伙人 UID</label><input class="control" value="80012001" /></div>
+                  <div class="field"><label>用户 UID</label><input class="control" value="10248391" /></div>
+                  <div class="field"><label>合伙人 UID</label><input class="control" value="30087511" /></div>
+                  <div class="field"><label>仓位 ID</label><input class="control" value="POS-78721194" /></div>
+                  <div class="field"><label>仓位模式</label><select class="control"><option>全部仓位模式</option><option>全仓</option><option>逐仓</option></select></div>
+                  <div class="field"><label>方向</label><select class="control"><option>全部方向</option><option>开多</option><option>开空</option></select></div>
+                  <div class="field"><label>合约名称</label><select class="control"><option>全部合约名称</option><option>BTCUSDT 永续</option><option>ETHUSDT 永续</option></select></div>
+                  <div class="field"><label>时间筛选</label><select class="control"><option>全部时间</option><option>今日</option><option>近 7 天</option><option>近 30 天</option><option>自定义范围</option></select></div>
+                </div>
+                <div class="toolbarActions"><div class="actions"><button class="btn secondary">重置</button><button class="btn primary">查询</button><button class="btn secondary">导出</button></div></div>
+              </div>
+            </div>
+
+            <div class="summary">
+              <div class="metric"><div class="k">当前仓位数</div><div class="v">1,238</div><div class="sub">实时持仓用户 924</div></div>
+              <div class="metric"><div class="k">保证金总额（U）</div><div class="v">8.64M</div><div class="sub">体验金占比 3.80%</div></div>
+              <div class="metric"><div class="k">未实现盈亏</div><div class="v">+426,180</div><div class="sub">按最新价格浮动</div></div>
+              <div class="metric"><div class="k">已实现盈亏</div><div class="v">+182,400</div><div class="sub">当日累计</div></div>
+            </div>
+
+            <div class="contentCard">
+              <div class="cardHead">
+                <div><h3>当前持仓列表</h3><p>按需求文档映射顶级合伙人、保证金、盈利率、资金费金额与强平价等字段。</p></div>
+                <div class="miniActions"><span class="chip">当前持仓</span><span class="chip">实时快照</span></div>
+              </div>
+              <div class="tableWrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>合伙人 UID</th><th>用户 UID</th><th>顶级合伙人 UID</th><th>仓位 ID</th><th>合约名称</th><th>杠杆</th><th>买卖方向</th><th>持仓数量</th><th>手续费</th><th>保证金（U）</th><th>保证金（体验金）</th><th>开仓均价</th><th>盈利率</th><th>未实现盈亏</th><th>已实现盈亏</th><th>资金费金额</th><th>预估强平价</th><th>止盈止损价格</th><th>仓位类型</th><th>开仓时间</th><th>关联记录</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>30087511</td><td>10248391</td><td>80012001</td><td>POS-78721194</td><td>BTCUSDT 永续</td><td>20x</td><td>开多</td><td>0.80 BTC</td><td>48.20</td><td>19,860</td><td>0</td><td>67,540</td><td style="color:#7ef3c3">+112.49%</td><td style="color:#7ef3c3">+18,920</td><td>+3,420</td><td><button class="linkBtn" data-nav-page="funding" data-drawer-key="funding-current-btc">+12.36 查看资金费</button></td><td>63,882</td><td>70,200 / 65,800</td><td>全仓</td><td>2026-07-18 08:15:36</td><td><button class="linkBtn" data-drawer-key="position-btc">查看关联</button></td></tr>
+                    <tr><td>30087511</td><td>10277109</td><td>80012001</td><td>POS-78724903</td><td>ETHUSDT 永续</td><td>10x</td><td>开空</td><td>32 ETH</td><td>36.80</td><td>11,220</td><td>120</td><td>3,710</td><td style="color:#ff9e9e">-39.93%</td><td style="color:#ff9e9e">-5,460</td><td>+980</td><td><button class="linkBtn" data-nav-page="funding" data-drawer-key="funding-current-eth">-8.31 查看资金费</button></td><td>4,024</td><td>3,580 / 3,885</td><td>逐仓</td><td>2026-07-18 09:04:11</td><td><button class="linkBtn" data-drawer-key="position-eth">查看关联</button></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="pagination"><span>共 1238 条</span><div class="pages"><div class="pageBtn active">1</div><div class="pageBtn">2</div><div class="pageBtn">3</div></div></div>
+            </div>
+          </section>
+
+          <section class="page" id="orders">
+            <div class="toolbar">
+              <div class="toolbarCard">
+                <h3>查询与筛选</h3>
+                <div class="fieldGrid">
+                  <div class="field"><label>顶级合伙人 UID</label><input class="control" value="80012001" /></div>
+                  <div class="field"><label>用户 UID</label><input class="control" value="10277109" /></div>
+                  <div class="field"><label>委托订单 ID</label><input class="control" value="ODR-991728712" /></div>
+                  <div class="field"><label>对应止盈止损 ID</label><input class="control" value="TP24071810955" /></div>
+                  <div class="field"><label>仓位 ID</label><input class="control" value="POS-78724903" /></div>
+                  <div class="field"><label>合约名称</label><select class="control"><option>全部合约名称</option><option>BTCUSDT 永续</option><option>ETHUSDT 永续</option></select></div>
+                  <div class="field"><label>时间筛选</label><select class="control"><option>全部时间</option><option>近 24 小时</option><option>近 7 天</option><option>近 30 天</option><option>自定义范围</option></select></div>
+                  <div class="field"><label>盘口类型</label><select class="control"><option>全部盘口类型</option><option>实盘</option><option>模拟盘</option></select></div>
+                </div>
+                <div class="toolbarActions"><div class="actions"><button class="btn secondary">重置</button><button class="btn primary">查询</button><button class="btn secondary">导出</button></div></div>
+              </div>
+            </div>
+
+            <div class="summary">
+              <div class="metric"><div class="k">当前委托总数</div><div class="v">3,904</div><div class="sub">挂单中委托</div></div>
+              <div class="metric"><div class="k">限价委托</div><div class="v">2,318</div><div class="sub">占比 59.40%</div></div>
+              <div class="metric"><div class="k">止盈止损委托</div><div class="v">684</div><div class="sub">附带止盈止损价格</div></div>
+              <div class="metric"><div class="k">模拟盘委托</div><div class="v">126</div><div class="sub">便于隔离观察</div></div>
+            </div>
+
+            <div class="contentCard">
+              <div class="cardHead">
+                <div><h3>当前委托列表</h3><p>包括委托价格、委托数量、类型、止盈止损价格、对应止盈止损 ID 与下单时间。</p></div>
+                <div class="miniActions"><span class="chip">当前委托</span></div>
+              </div>
+              <div class="tableWrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>委托订单 ID</th><th>对应止盈止损 ID</th><th>仓位 ID</th><th>用户 UID</th><th>合伙人 UID</th><th>盘口类型</th><th>合约名称</th><th>订单方向</th><th>委托价格</th><th>委托数量</th><th>委托类型</th><th>止盈价</th><th>止损价</th><th>委托时间</th><th>关联开/平仓</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>ODR-991728712</td><td>TP24071810955</td><td>POS-78724903</td><td>10277109</td><td>30087511</td><td>模拟盘</td><td>ETHUSDT 永续</td><td>买入开空</td><td>3,728</td><td>18 ETH</td><td>限价</td><td>3,610</td><td>3,840</td><td>2026-07-18 11:08:24</td><td><button class="linkBtn" data-drawer-key="order-eth">查看记录</button></td></tr>
+                    <tr><td>ODR-991728898</td><td>TP24071810928</td><td>POS-78721194</td><td>10248391</td><td>30087511</td><td>实盘</td><td>BTCUSDT 永续</td><td>卖出平多</td><td>68,940</td><td>0.25 BTC</td><td>市价</td><td>69,120</td><td>67,980</td><td>2026-07-18 11:15:32</td><td><button class="linkBtn" data-drawer-key="order-btc">查看记录</button></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="pagination"><span>共 3904 条</span><div class="pages"><div class="pageBtn active">1</div><div class="pageBtn">2</div><div class="pageBtn">3</div></div></div>
+            </div>
+          </section>
+
+          <section class="page" id="open-records">
+            <div class="toolbar">
+              <div class="toolbarCard">
+                <h3>查询与筛选</h3>
+                <div class="fieldGrid">
+                  <div class="field"><label>顶级合伙人 UID</label><input class="control" value="80012001" /></div>
+                  <div class="field"><label>用户 UID</label><input class="control" value="10248391" /></div>
+                  <div class="field"><label>合伙人 UID</label><input class="control" value="30087511" /></div>
+                  <div class="field"><label>订单 ID</label><input class="control" value="OPEN-718201" /></div>
+                  <div class="field"><label>委托订单 ID</label><input class="control" value="ODR-991728650" /></div>
+                  <div class="field"><label>仓位 ID</label><input class="control" value="POS-78721194" /></div>
+                  <div class="field"><label>仓位模式</label><select class="control"><option>全部仓位模式</option><option>全仓</option><option>逐仓</option></select></div>
+                  <div class="field"><label>方向</label><select class="control"><option>全部方向</option><option>开多</option><option>开空</option></select></div>
+                  <div class="field"><label>订单类型</label><select class="control"><option>全部订单类型</option><option>限价</option><option>市价</option></select></div>
+                  <div class="field"><label>合约名称</label><select class="control"><option>全部合约名称</option><option>BTCUSDT 永续</option><option>ETHUSDT 永续</option></select></div>
+                  <div class="field"><label>盘口类型</label><select class="control"><option>全部盘口类型</option><option>实盘</option><option>模拟盘</option></select></div>
+                </div>
+                <div class="toolbarActions"><div class="actions"><button class="btn secondary">重置</button><button class="btn primary">查询</button><button class="btn secondary">导出</button></div></div>
+              </div>
+            </div>
+
+            <div class="contentCard">
+              <div class="cardHead">
+                <div><h3>开仓记录列表</h3><p>覆盖订单 ID、仓位 ID、杠杆、方向、价格、数量、手续费和时间。</p></div>
+                <div class="miniActions"><span class="chip">开仓记录</span></div>
+              </div>
+              <div class="tableWrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>用户 UID</th><th>合伙人 UID</th><th>盘口类型</th><th>合约名称</th><th>订单 ID</th><th>委托订单 ID</th><th>仓位 ID</th><th>杠杆</th><th>方向</th><th>开仓价格</th><th>开仓数量</th><th>委托价格</th><th>手续费</th><th>订单类型</th><th>开仓时间</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>10248391</td><td>30087511</td><td>实盘</td><td>BTCUSDT 永续</td><td>OPEN-718201</td><td>ODR-991728650</td><td>POS-78721194</td><td>20x</td><td>开多</td><td>67,540</td><td>0.80 BTC</td><td>67,520</td><td>48.20</td><td>限价</td><td>2026-07-18 08:15:36</td></tr>
+                    <tr><td>10277109</td><td>30087511</td><td>模拟盘</td><td>ETHUSDT 永续</td><td>OPEN-718245</td><td>ODR-991728712</td><td>POS-78724903</td><td>10x</td><td>开空</td><td>3,710</td><td>32 ETH</td><td>3,712</td><td>36.80</td><td>市价</td><td>2026-07-18 09:04:11</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="pagination"><span>共 1967 条</span><div class="pages"><div class="pageBtn active">1</div><div class="pageBtn">2</div></div></div>
+            </div>
+          </section>
+
+          <section class="page" id="close-records">
+            <div class="toolbar">
+              <div class="toolbarCard">
+                <h3>查询与筛选</h3>
+                <div class="fieldGrid">
+                  <div class="field"><label>顶级合伙人 UID</label><input class="control" value="80012001" /></div>
+                  <div class="field"><label>用户 UID</label><input class="control" value="10277109" /></div>
+                  <div class="field"><label>合伙人 UID</label><input class="control" value="30087511" /></div>
+                  <div class="field"><label>订单 ID</label><input class="control" value="CLOSE-718981" /></div>
+                  <div class="field"><label>委托订单 ID</label><input class="control" value="ODR-991728703" /></div>
+                  <div class="field"><label>仓位 ID</label><input class="control" value="POS-78724903" /></div>
+                  <div class="field"><label>仓位模式</label><select class="control"><option>全部仓位模式</option><option>全仓</option><option>逐仓</option></select></div>
+                  <div class="field"><label>方向</label><select class="control"><option>全部方向</option><option>平多</option><option>平空</option></select></div>
+                  <div class="field"><label>订单类型</label><select class="control"><option>全部订单类型</option><option>限价</option><option>市价</option></select></div>
+                  <div class="field"><label>合约名称</label><select class="control"><option>全部合约名称</option><option>BTCUSDT 永续</option><option>ETHUSDT 永续</option></select></div>
+                  <div class="field"><label>盘口类型</label><select class="control"><option>全部盘口类型</option><option>实盘</option><option>模拟盘</option></select></div>
+                </div>
+                <div class="toolbarActions"><div class="actions"><button class="btn secondary">重置</button><button class="btn primary">查询</button><button class="btn secondary">导出</button></div></div>
+              </div>
+            </div>
+
+            <div class="contentCard">
+              <div class="cardHead">
+                <div><h3>平仓记录列表</h3><p>覆盖仓位模式、方向、平仓价格、数量、手续费与时间。</p></div>
+                <div class="miniActions"><span class="chip">平仓记录</span></div>
+              </div>
+              <div class="tableWrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>用户 UID</th><th>合伙人 UID</th><th>盘口类型</th><th>合约名称</th><th>订单 ID</th><th>委托订单 ID</th><th>仓位 ID</th><th>杠杆</th><th>仓位模式</th><th>方向</th><th>平仓价格</th><th>平仓数量</th><th>手续费</th><th>平仓时间</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>10277109</td><td>30087511</td><td>模拟盘</td><td>ETHUSDT 永续</td><td>CLOSE-718981</td><td>ODR-991728703</td><td>POS-78724903</td><td>10x</td><td>逐仓</td><td>平空</td><td>3,655</td><td>12 ETH</td><td>14.60</td><td>2026-07-18 12:22:04</td></tr>
+                    <tr><td>10248391</td><td>30087511</td><td>实盘</td><td>BTCUSDT 永续</td><td>CLOSE-718996</td><td>ODR-991728898</td><td>POS-78721194</td><td>20x</td><td>全仓</td><td>平多</td><td>68,920</td><td>0.20 BTC</td><td>12.00</td><td>2026-07-18 12:28:39</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="pagination"><span>共 1288 条</span><div class="pages"><div class="pageBtn active">1</div><div class="pageBtn">2</div></div></div>
+            </div>
+          </section>
+
+          <section class="page" id="history">
+            <div class="toolbar">
+              <div class="toolbarCard">
+                <h3>查询与筛选</h3>
+                <div class="fieldGrid">
+                  <div class="field"><label>顶级合伙人 UID</label><input class="control" value="80012001" /></div>
+                  <div class="field"><label>用户 UID</label><input class="control" value="10248391" /></div>
+                  <div class="field"><label>合伙人 UID</label><input class="control" value="30087511" /></div>
+                  <div class="field"><label>仓位 ID</label><input class="control" value="HIS-55721291" /></div>
+                  <div class="field"><label>仓位模式</label><select class="control"><option>全部仓位模式</option><option>全仓</option><option>逐仓</option></select></div>
+                  <div class="field"><label>仓位方向</label><select class="control"><option>全部仓位方向</option><option>开多</option><option>开空</option></select></div>
+                  <div class="field"><label>仓位状态</label><select class="control"><option>全部仓位状态</option><option>全部平仓</option><option>爆仓</option></select></div>
+                  <div class="field"><label>合约名称</label><select class="control"><option>全部合约名称</option><option>BTCUSDT 永续</option><option>ETHUSDT 永续</option></select></div>
+                  <div class="field"><label>时间筛选</label><select class="control"><option>全部时间</option><option>近 7 天</option><option>近 30 天</option><option>近 90 天</option><option>自定义范围</option></select></div>
+                  <div class="field"><label>盘口类型</label><select class="control"><option>全部盘口类型</option><option>实盘</option><option>模拟盘</option></select></div>
+                </div>
+                <div class="toolbarActions"><div class="actions"><button class="btn secondary">重置</button><button class="btn primary">查询</button><button class="btn secondary">导出</button></div></div>
+              </div>
+            </div>
+
+            <div class="summary five">
+              <div class="metric"><div class="k">总手续费</div><div class="v">1.26M</div><div class="sub">历史仓位累计</div></div>
+              <div class="metric"><div class="k">总平仓盈亏</div><div class="v">+3.84M</div><div class="sub">不含资金费</div></div>
+              <div class="metric"><div class="k">总净盈亏</div><div class="v">+2.58M</div><div class="sub">扣除手续费后</div></div>
+              <div class="metric"><div class="k">总交易额</div><div class="v">86.2M</div><div class="sub">历史成交额累计</div></div>
+              <div class="metric"><div class="k">风险率</div><div class="v">1.82%</div><div class="sub">高风险历史仓位占比</div></div>
+            </div>
+
+            <div class="contentCard">
+              <div class="cardHead">
+                <div><h3>历史仓位列表</h3><p>支持查看平仓盈亏详情、盈利率、资金费金额及关联资金费历史。</p></div>
+                <div class="miniActions"><span class="chip">历史仓位</span><span class="chip">详情联动</span></div>
+              </div>
+              <div class="tableWrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>仓位 ID</th><th>用户 UID</th><th>合伙人 UID</th><th>顶级合伙人 UID</th><th>盘口类型</th><th>合约名称</th><th>杠杆倍数</th><th>仓位方向</th><th>仓位状态</th><th>开仓类型</th><th>开仓价格</th><th>最大持仓量</th><th>强平触发价</th><th>平仓均价</th><th>已平仓量</th><th>总手续费</th><th>盈利率</th><th>资金费金额</th><th>仓位保证金（U）</th><th>仓位保证金（体验金）</th><th>平仓盈亏</th><th>开仓时间</th><th>平仓时间</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>HIS-55721291</td><td>10248391</td><td>30087511</td><td>80012001</td><td>实盘</td><td>BTCUSDT 永续</td><td>20x</td><td>开多</td><td><span class="status gray">全部平仓</span></td><td>全仓</td><td>66,880</td><td>1.00 BTC</td><td>63,220</td><td>68,540</td><td>1.00 BTC</td><td>128.60</td><td style="color:#7ef3c3">+85.02%</td><td><button class="linkBtn" data-nav-page="funding" data-drawer-key="funding-history-btc">+26.48 查看资金费</button></td><td>22,300</td><td>0</td><td><button class="linkBtn" data-drawer-key="history-btc">+18,960 查看关联</button></td><td>2026-07-11 09:10:00</td><td>2026-07-14 17:45:28</td></tr>
+                    <tr><td>HIS-55721109</td><td>10277109</td><td>30087511</td><td>80012001</td><td>模拟盘</td><td>ETHUSDT 永续</td><td>12x</td><td>开空</td><td><span class="status red">爆仓</span></td><td>逐仓</td><td>3,780</td><td>46 ETH</td><td>4,066</td><td>4,054</td><td>46 ETH</td><td>96.44</td><td style="color:#ff9e9e">-91.12%</td><td><button class="linkBtn" data-nav-page="funding" data-drawer-key="funding-history-eth">-19.84 查看资金费</button></td><td>9,240</td><td>200</td><td><button class="linkBtn" data-drawer-key="history-eth">-8,420 查看关联</button></td><td>2026-07-09 13:24:52</td><td>2026-07-10 02:16:40</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="pagination"><span>共 6592 条</span><div class="pages"><div class="pageBtn active">1</div><div class="pageBtn">2</div><div class="pageBtn">3</div><div class="pageBtn">4</div></div></div>
+            </div>
+          </section>
+
+          <section class="page" id="net-pnl">
+            <div class="toolbar">
+              <div class="toolbarCard">
+                <h3>查询与筛选</h3>
+                <div class="fieldGrid">
+                  <div class="field"><label>顶级合伙人 UID</label><input class="control" value="80012001" /></div>
+                  <div class="field"><label>用户 UID</label><input class="control" value="10248391" /></div>
+                  <div class="field"><label>合伙人 UID</label><input class="control" value="30087511" /></div>
+                  <div class="field"><label>时间筛选</label><select class="control"><option>全部时间</option><option>今日</option><option>近 7 天</option><option>近 30 天</option><option>2026-07-01 至 2026-07-18</option><option>自定义范围</option></select></div>
+                </div>
+                <div class="note toolbarNote">净盈亏查询用于数据管理，突出总结算盈亏、总手续费、总净盈亏、盈利率及充提体验金等用户维度统计。</div>
+                <div class="toolbarActions"><div class="actions"><button class="btn secondary">重置</button><button class="btn primary">查询</button><button class="btn secondary">导出</button></div></div>
+              </div>
+            </div>
+
+            <div class="summary three">
+              <div class="metric"><div class="k">总结算盈亏</div><div class="v">+5.62M</div><div class="sub">统计周期内累计</div></div>
+              <div class="metric"><div class="k">总手续费</div><div class="v">1.14M</div><div class="sub">交易手续费合计</div></div>
+              <div class="metric"><div class="k">总净盈亏</div><div class="v">+4.48M</div><div class="sub">总结算盈亏 - 总手续费</div></div>
+            </div>
+
+            <div class="contentCard">
+              <div class="cardHead">
+                <div><h3>净盈亏查询明细</h3><p>对应文档中的用户维度资金与体验金字段。</p></div>
+                <div class="miniActions"><span class="chip">数据管理</span></div>
+              </div>
+              <div class="tableWrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>用户 UID</th><th>合伙人 UID</th><th>总成交额</th><th>总手续费</th><th>总结算盈亏</th><th>总净盈亏</th><th>盈利率</th><th>总划入</th><th>总划出</th><th>净划入</th><th>体验金领取</th><th>体验金收益</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>10248391</td><td>30087511</td><td>12.8M</td><td>168,800</td><td>+760,200</td><td>+591,400</td><td style="color:#7ef3c3">105.61%</td><td>820,000</td><td>260,000</td><td>560,000</td><td>2,000</td><td>+428</td></tr>
+                    <tr><td>10277109</td><td>30087511</td><td>8.2M</td><td>94,300</td><td>-120,800</td><td>-215,100</td><td style="color:#ff9e9e">-430.20%</td><td>410,000</td><td>360,000</td><td>50,000</td><td>1,500</td><td>-116</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="pagination"><span>共 2084 条</span><div class="pages"><div class="pageBtn active">1</div><div class="pageBtn">2</div><div class="pageBtn">3</div></div></div>
+            </div>
+          </section>
+
+          <section class="page" id="funding">
+            <div class="toolbar">
+              <div class="toolbarCard">
+                <h3>查询与筛选</h3>
+                <div class="fieldGrid">
+                  <div class="field"><label>顶级合伙人 UID</label><input class="control" value="80012001" /></div>
+                  <div class="field"><label>用户 UID</label><input class="control" value="10248391" /></div>
+                  <div class="field"><label>仓位 ID</label><input class="control" value="POS-78721194" /></div>
+                  <div class="field"><label>合约名称</label><select class="control"><option>全部合约名称</option><option>BTCUSDT 永续</option><option>ETHUSDT 永续</option></select></div>
+                  <div class="field"><label>盘口类型</label><select class="control"><option>全部盘口类型</option><option>实盘</option><option>模拟盘</option></select></div>
+                  <div class="field"><label>时间筛选</label><select class="control"><option>全部时间</option><option>近 7 天</option><option>近 30 天</option><option>近 90 天</option><option>自定义范围</option></select></div>
+                </div>
+                <div class="note toolbarNote">资金费历史用于追溯资金费率、资金费计算时持仓金额、资金费用及结算时间；同一结算批次涉及 2 个及以上仓位时，可展开查看仓位明细，并联动当前持仓或历史仓位。</div>
+                <div class="toolbarActions"><div class="actions"><button class="btn secondary">重置</button><button class="btn primary">查询</button><button class="btn secondary">导出</button></div></div>
+              </div>
+            </div>
+
+            <div class="summary">
+              <div class="metric"><div class="k">资金费结算笔数</div><div class="v">9,248</div><div class="sub">近 30 天</div></div>
+              <div class="metric"><div class="k">平均资金费率</div><div class="v">0.010000%</div><div class="sub">正负方向动态切换</div></div>
+              <div class="metric"><div class="k">累计资金费用</div><div class="v">186,420</div><div class="sub">按结算周期聚合</div></div>
+              <div class="metric"><div class="k">高频合约</div><div class="v">BTCUSDT</div><div class="sub">占比 38.60%</div></div>
+            </div>
+
+            <div class="contentCard">
+              <div class="cardHead">
+                <div><h3>资金费历史列表</h3><p>按结算批次聚合展示；当单批次涉及多个仓位时，可展开查看对应仓位 ID 与资金费计算时持仓金额。</p></div>
+                <div class="miniActions"><span class="chip">资金费历史</span></div>
+              </div>
+              <div class="tableWrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>用户 UID</th><th>顶级合伙人 UID</th><th>盘口类型</th><th>结算批次</th><th>合约名称</th><th>涉及仓位数</th><th>资金费率</th><th>累计资金费用</th><th>结算时间</th><th>详情</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>10248391</td><td>80012001</td><td>实盘</td><td>FUND-20260718-0800-A</td><td>BTCUSDT 永续</td><td>2 个仓位</td><td>0.010000%</td><td>9.86</td><td>2026-07-18 08:00:00</td><td><button class="linkBtn" data-drawer-key="funding-batch-current-0800">查看详情</button></td></tr>
+                    <tr><td>10277109</td><td>80012001</td><td>模拟盘</td><td>FUND-20260718-0800-B</td><td>ETHUSDT 永续</td><td>1 个仓位</td><td>-0.007000%</td><td>-8.31</td><td>2026-07-18 08:00:00</td><td><span class="status gray">单仓位</span></td></tr>
+                    <tr><td>10248391</td><td>80012001</td><td>实盘</td><td>FUND-20260714-0800-C</td><td>BTCUSDT 永续</td><td>2 个仓位</td><td>0.012000%</td><td>18.22</td><td>2026-07-14 08:00:00</td><td><button class="linkBtn" data-drawer-key="funding-batch-history-0800">查看详情</button></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="pagination"><span>共 9248 条</span><div class="pages"><div class="pageBtn active">1</div><div class="pageBtn">2</div><div class="pageBtn">3</div></div></div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <div class="drawerMask" id="drawerMask"></div>
+    <aside class="drawer" id="drawer" aria-label="关联记录明细">
+      <div class="drawerHead">
+        <div>
+          <h3 id="drawerTitle">关联记录明细</h3>
+          <p id="drawerSubtitle">围绕当前页面对象查看委托、开仓和平仓链路。</p>
+        </div>
+        <button class="close" id="closeDrawer" aria-label="关闭">✕</button>
+      </div>
+      <div class="drawerBody">
+        <div class="split">
+          <div class="metric"><div class="k" id="drawerPrimaryLabel">仓位 ID</div><div class="v" id="drawerPrimaryValue" style="font-size:22px">POS-78721194</div><div class="sub" id="drawerPrimarySub">BTCUSDT 永续 / 用户 10248391 / 开多</div></div>
+          <div class="metric"><div class="k" id="drawerSecondaryLabel">联动范围</div><div class="v" id="drawerSecondaryValue" style="font-size:22px">委托 / 开仓 / 平仓</div><div class="sub" id="drawerSecondarySub">围绕同一对象回看交易链路</div></div>
+        </div>
+        <div class="note" id="drawerNote">说明：联动抽屉会按照当前页面对象展示对应的委托记录、开仓记录和平仓记录，便于开发和测试对同一条交易链路做交叉核对。</div>
+        <div id="drawerSections"></div>
+      </div>
+    </aside>
+
+    <div class="drawerMask" id="caliberMask"></div>
+    <aside class="drawer auditDrawer" id="caliberDrawer" aria-label="口径定义与字段对照">
+      <div class="drawerHead">
+        <div>
+          <h3>口径定义与逐页逐字段对照</h3>
+          <p>先看总览口径，再看当前页面的字段对照；抽屉只显示当前正在浏览页面的说明。</p>
+        </div>
+        <button class="close" id="closeCaliberDrawer" aria-label="关闭">✕</button>
+      </div>
+      <div class="drawerBody">
+        <div class="note auditPageLead">
+          <strong id="caliberCurrentPage">当前页面：止盈止损</strong><br />
+          仅保留当前页面的字段口径、联动说明和分页说明，供开发与测试直接查看。
+        </div>
+
+        <div class="contentCard" style="margin-bottom:18px">
+          <div class="cardHead">
+            <div><h3>数值展示规则</h3><p>以下规则适用于所有页面的金额、比例、价格和汇总展示。</p></div>
+          </div>
+          <ul class="auditBullet">
+            <li>列表、详情抽屉、搜索条件中的金额类字段一律显示完整数字，不使用 K 或 M，并统一加千分位分隔符，方便开发排查和测试逐项核对。</li>
+            <li>仅汇总卡片、总览指标、批量统计值允许使用 K 或 M 缩写；数值绝对值小于 1,000 时显示完整数字，达到 1,000 且小于 1,000,000 时使用 K，达到 1,000,000 及以上时使用 M。</li>
+            <li>K 和 M 缩写统一保留最多 2 位小数，末尾无意义的 0 不补，例如 12.8M、8.64M、186.42K；若需要做精确对账，仍以列表和详情中的完整数字为准。</li>
+            <li>价格、手续费、资金费金额、保证金、持仓金额、平仓盈亏、净盈亏等金额类字段默认保留 2 位小数；若本身为整数则不强制补 `.00`，但像 48.20 这类已带业务精度的示例值允许保留到 2 位。</li>
+            <li>盈利率、风险率、占比、回调幅度等比例类字段统一保留 2 位小数后再加 `%`，例如 `112.49%`、`1.20%`。</li>
+            <li>资金费率统一保留 6 位小数后再加 `%`，例如 `0.010000%`、`-0.007000%`。</li>
+            <li>数量字段统一按成交后的实际数量口径展示，计算关系为：`数量 = 张数 * 合约面值`。</li>
+          </ul>
+        </div>
+
+        <section class="auditSection active" data-audit-page="tp-sl" data-audit-title="止盈止损">
+          <div class="auditHead">
+            <h4>1. 移动止盈止损</h4>
+            <span class="auditMeta">交易管理</span>
+          </div>
+          <div class="note">口径定义：“订单 ID”在当前页面按止盈止损单主键展示；同时补充“对应委托订单 ID”方便追踪关联委托。回调幅度统一按百分比展示，固定保留 2 位小数。</div>
+          <div class="contentCard" style="margin-top:12px">
+            <div class="tableWrap auditTable">
+              <table>
+                <thead>
+                  <tr><th>区块</th><th>字段项</th><th>原型字段</th><th>口径定义</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>搜索栏</td><td>订单 ID</td><td>止盈止损 ID</td><td>支持按止盈止损订单主键检索。当前原型已经将该字段拆成独立搜索项，避免与其他条件共用输入框。</td></tr>
+                  <tr><td>搜索栏</td><td class="mutedCell">无（原型补充）</td><td>对应委托订单 ID</td><td>支持按关联委托主单 ID 追踪止盈止损记录。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>搜索栏</td><td>用户 UID</td><td>用户 UID</td><td>支持按用户主账号检索。当前原型已经将该字段拆成独立搜索项，避免与其他条件共用输入框。</td></tr>
+                  <tr><td>筛选栏</td><td>合约名称</td><td>合约名称</td><td>指止盈止损所属合约。当前原型已经将该字段做成独立项，便于单独筛选或识别。</td></tr>
+                  <tr><td>筛选栏</td><td>开仓类型（全仓/逐仓）</td><td>开仓类型</td><td>指仓位保证金模式。当前原型已经将该字段做成独立项，便于单独筛选或识别。</td></tr>
+                  <tr><td>筛选栏</td><td>全部状态</td><td>状态</td><td>默认值为“全部状态”，可选未激活/已激活/触发中/已触发/用户撤销/平台撤销/已过期。当前原型已经将该字段做成独立筛选项，并按需求补齐全部枚举值。</td></tr>
+                  <tr><td>筛选栏</td><td>时间筛选</td><td>时间筛选</td><td>按创建或更新时间窗口查询。当前原型已经将该字段做成独立项，便于单独筛选或识别。</td></tr>
+                  <tr><td>筛选栏</td><td>盘口类型（实盘/模拟盘）</td><td>盘口类型</td><td>区分真实交易与模拟交易环境。当前原型已经将该字段做成独立项，便于单独筛选或识别。</td></tr>
+                  <tr><td>信息栏</td><td>合约名称</td><td>合约名称</td><td>止盈止损所属合约。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>订单 ID</td><td>止盈止损 ID</td><td>按止盈止损订单唯一主键展示，字段命名更明确，便于和其他订单主键区分。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（原型补充）</td><td>对应委托订单 ID</td><td>关联当前委托主单 ID。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>下单用户唯一标识。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">由筛选项映射</td><td>盘口类型</td><td>由盘口类型筛选项映射到列表展示字段，值为实盘或模拟盘，用于直接识别该记录所属交易环境。</td></tr>
+                  <tr><td>信息栏</td><td>激活价格</td><td>激活价格</td><td>条件单开始生效的参考价。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>创建时当前价格</td><td>创建时当前价格</td><td>创建该单时市场价格。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>价距</td><td>价距</td><td>激活价与创建时价格差值。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>回调幅度</td><td>回调幅度</td><td>移动止盈止损触发回撤比例，统一按百分比展示并固定保留 2 位小数。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>持仓成本</td><td>持仓成本</td><td>对应仓位的开仓成本价。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>数量</td><td>数量</td><td>原始止盈止损关联仓位数量。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>触发价格</td><td>触发价格</td><td>当前条件下预计触发的价格。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>仓位模式</td><td>仓位模式</td><td>全仓或逐仓。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>触发价格类型</td><td>触发价格类型</td><td>标记价格/最新价等。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>委托数量</td><td>委托数量</td><td>触发后实际委托数量。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>订单状态</td><td>订单状态</td><td>止盈止损单实时状态。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>创建时间</td><td>创建时间</td><td>止盈止损单创建时间。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>更新时间</td><td>更新时间</td><td>止盈止损单最后更新时间。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>页码栏</td><td>页码条</td><td>分页条</td><td>列表分页与总数展示。当前原型已经提供该展示或交互能力。</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="auditSection" data-audit-page="positions" data-audit-title="当前持仓">
+          <div class="auditHead">
+            <h4>2. 当前持仓</h4>
+            <span class="auditMeta">交易管理</span>
+          </div>
+          <div class="note">口径定义：当前持仓以“仍未完全平仓的实时仓位”为口径，盈利率按（未实现盈亏 + 已实现盈亏 - 累计资金费金额）/ 保证金（U）计算；资金费金额支持联动查看该仓位对应的资金费历史，原型同时补充“关联记录”入口，用于围绕仓位联动当前委托、开仓记录和平仓记录。</div>
+          <div class="contentCard" style="margin-top:12px">
+            <div class="tableWrap auditTable">
+              <table>
+                <thead>
+                  <tr><th>区块</th><th>字段项</th><th>原型字段</th><th>口径定义</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>搜索栏</td><td>顶级合伙人 UID</td><td>顶级合伙人 UID</td><td>代理链路最上层 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>用户 UID</td><td>用户 UID</td><td>持仓所属用户 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直接归属合伙人 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>仓位 ID</td><td>仓位 ID</td><td>仓位唯一标识。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>全部仓位模式</td><td>仓位模式</td><td>全仓/逐仓。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>全部方向</td><td>方向</td><td>开多/开空。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>全部合约名称</td><td>合约名称</td><td>当前持仓所属合约。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>时间筛选</td><td>时间筛选</td><td>按开仓时间窗口筛选。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直接合伙人标识。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>持仓用户标识。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>顶级合伙人 UID</td><td>顶级合伙人 UID</td><td>代理顶层标识。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>仓位 ID</td><td>仓位 ID</td><td>仓位唯一主键。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>合约名称</td><td>合约名称</td><td>持仓所属合约。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>杠杆</td><td>杠杆</td><td>开仓使用杠杆倍数。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>买卖方向</td><td>买卖方向</td><td>开多/开空方向。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>持仓数量</td><td>持仓数量</td><td>当前未平仓数量。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>手续费</td><td>手续费</td><td>当前仓位累计手续费。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>保证金（U）</td><td>保证金（U）</td><td>真实资金保证金。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>保证金（体验金）</td><td>保证金（体验金）</td><td>体验金占用保证金。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>开仓均价</td><td>开仓均价</td><td>该仓位加权开仓均价。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>盈利率</td><td>按（未实现盈亏 + 已实现盈亏 - 累计资金费金额）/ 保证金（U）计算，用于从收益角度快速判断当前持仓表现。该字段为当前页面的补充定义。</td></tr>
+                  <tr><td>信息栏</td><td>未结算盈亏</td><td>未实现盈亏</td><td>按当前价格计算的浮盈亏，即仍未平仓部分的实时盈亏。原型把字段命名明确为“未实现盈亏”，便于与已实现盈亏区分。</td></tr>
+                  <tr><td>信息栏</td><td>已结算盈亏</td><td>已实现盈亏</td><td>该持仓已发生的实现盈亏，来自已成交平仓部分。原型把字段命名明确为“已实现盈亏”，便于与未实现盈亏区分。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>资金费金额</td><td>当前持仓截至当前时点累计发生的资金费金额；点击后会联动到资金费历史抽屉，继续查看每个结算时点的资金费率、资金费金额和资金费计算时持仓金额。该字段为当前页面的补充定义。</td></tr>
+                  <tr><td>信息栏</td><td>预估强平价</td><td>预估强平价</td><td>按当前保证金状态估算。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>止盈止损价格</td><td>止盈止损价格</td><td>当前仓位挂接止盈止损价格。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>仓位类型</td><td>仓位类型</td><td>全仓/逐仓类型展示。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>开仓时间</td><td>开仓时间</td><td>首次开仓时间。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（原型补充）</td><td>关联记录</td><td>围绕当前持仓仓位 ID 联动当前委托、开仓记录和平仓记录，便于从实时仓位回溯完整交易链路。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>页码栏</td><td>页码条</td><td>分页条</td><td>列表分页与总数展示。当前原型已经提供该展示或交互能力。</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="auditSection" data-audit-page="orders" data-audit-title="当前委托">
+          <div class="auditHead">
+            <h4>3. 当前委托</h4>
+            <span class="auditMeta">交易管理</span>
+          </div>
+          <div class="note">口径定义：当前委托为尚未完全成交或撤销的有效委托。若委托附带止盈止损，则补充展示对应止盈止损 ID；原型同时补充“关联开/平仓”入口，用于查看该委托所属仓位下的开仓和平仓成交结果。</div>
+          <div class="contentCard" style="margin-top:12px">
+            <div class="tableWrap auditTable">
+              <table>
+                <thead>
+                  <tr><th>区块</th><th>字段项</th><th>原型字段</th><th>口径定义</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>搜索栏</td><td>顶级合伙人 UID</td><td>顶级合伙人 UID</td><td>代理链路最上层 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>用户 UID</td><td>用户 UID</td><td>委托所属用户 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>委托订单 ID</td><td>委托订单 ID</td><td>委托单唯一主键。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td class="mutedCell">无（原型补充）</td><td>对应止盈止损 ID</td><td>支持按挂接止盈止损单 ID 追踪委托。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>搜索栏</td><td>仓位 ID</td><td>仓位 ID</td><td>委托关联仓位。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>全部合约名称</td><td>合约名称</td><td>委托所属合约。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>时间筛选</td><td>时间筛选</td><td>按委托时间窗口筛选。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>盘口类型（实盘/模拟盘）</td><td>盘口类型</td><td>区分实盘与模拟盘。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>委托订单 ID</td><td>委托订单 ID</td><td>委托单唯一标识。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（原型补充）</td><td>对应止盈止损 ID</td><td>委托若挂接止盈止损则展示其 ID。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>信息栏</td><td>仓位 ID</td><td>仓位 ID</td><td>委托关联仓位。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>下单用户。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>所属合伙人。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">由筛选项映射</td><td>盘口类型</td><td>由盘口类型筛选项映射到列表展示字段，值为实盘或模拟盘，用于直接识别该委托所属交易环境。</td></tr>
+                  <tr><td>信息栏</td><td>合约名称</td><td>合约名称</td><td>委托合约。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>订单方向</td><td>订单方向</td><td>买入开多/卖出平多等。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>委托价格</td><td>委托价格</td><td>用户下单价。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>委托数量</td><td>委托数量</td><td>本次委托数量。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>委托类型</td><td>委托类型</td><td>限价/市价等。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>止盈价</td><td>止盈价</td><td>委托附带止盈触发价。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>止损价</td><td>止损价</td><td>委托附带止损触发价。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>委托时间</td><td>委托时间</td><td>委托创建时间。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（原型补充）</td><td>关联开/平仓记录</td><td>围绕当前委托所属仓位展示对应的开仓记录和平仓记录，便于核对委托、成交与仓位结果是否一致。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>页码栏</td><td>页码条</td><td>分页条</td><td>列表分页与总数展示。当前原型已经提供该展示或交互能力。</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="auditSection" data-audit-page="open-records" data-audit-title="开仓记录">
+          <div class="auditHead">
+            <h4>4. 开仓记录</h4>
+            <span class="auditMeta">交易管理</span>
+          </div>
+          <div class="note">口径定义：开仓记录按成交开仓明细展示，一条记录对应一次开仓成交结果。原型补充“委托订单 ID”，用于将成交结果回挂到对应委托主单。</div>
+          <div class="contentCard" style="margin-top:12px">
+            <div class="tableWrap auditTable">
+              <table>
+                <thead>
+                  <tr><th>区块</th><th>字段项</th><th>原型字段</th><th>口径定义</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>搜索栏</td><td>顶级合伙人 UID</td><td>顶级合伙人 UID</td><td>代理顶层 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>用户 UID</td><td>用户 UID</td><td>成交用户 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直接合伙人 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td class="mutedCell">无（原型补充）</td><td>订单 ID</td><td>支持按开仓成交订单主键检索。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>搜索栏</td><td class="mutedCell">无（原型补充）</td><td>委托订单 ID</td><td>支持按开仓成交所归属的委托主单 ID 检索，便于从成交结果反查委托来源。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>搜索栏</td><td>仓位 ID</td><td>仓位 ID</td><td>成交关联仓位。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>全部仓位模式</td><td>仓位模式</td><td>全仓/逐仓。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>全部方向</td><td>方向</td><td>开多/开空。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>全部订单类型（限价/市价）</td><td>订单类型</td><td>按下单类型筛选。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>全部合约名称</td><td>合约名称</td><td>开仓记录所属合约。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>盘口类型（实盘/模拟盘）</td><td>盘口类型</td><td>区分实盘与模拟盘。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>成交用户。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>所属合伙人。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">由筛选项映射</td><td>盘口类型</td><td>由盘口类型筛选项映射到列表展示字段，值为实盘或模拟盘，用于直接识别该开仓记录所属交易环境。</td></tr>
+                  <tr><td>信息栏</td><td>合约名称</td><td>合约名称</td><td>成交合约。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>订单 ID</td><td>订单 ID</td><td>成交订单主键。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（原型补充）</td><td>委托订单 ID</td><td>开仓成交所归属的委托主单 ID，用于把成交结果和原始委托链路对应起来。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>信息栏</td><td>仓位 ID</td><td>仓位 ID</td><td>归属仓位。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>杠杆</td><td>杠杆</td><td>成交时杠杆倍数。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>方向</td><td>方向</td><td>开多/开空方向。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>开仓价格</td><td>开仓价格</td><td>实际成交价。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>开仓数量</td><td>开仓数量</td><td>实际成交数量。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>委托价格</td><td>委托价格</td><td>下单价格。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>手续费</td><td>手续费</td><td>本笔成交手续费。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>订单类型</td><td>订单类型</td><td>限价/市价。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>开仓时间</td><td>开仓时间</td><td>成交时间。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>页码栏</td><td>页码栏</td><td>分页条</td><td>列表分页与总数展示。当前原型已经提供该展示或交互能力。</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="auditSection" data-audit-page="close-records" data-audit-title="平仓记录">
+          <div class="auditHead">
+            <h4>5. 平仓记录</h4>
+            <span class="auditMeta">交易管理</span>
+          </div>
+          <div class="note">口径定义：平仓记录按实际平仓成交明细展示，一条记录对应一次平仓成交结果。原型补充“委托订单 ID”，用于将平仓成交结果回挂到对应委托主单。</div>
+          <div class="contentCard" style="margin-top:12px">
+            <div class="tableWrap auditTable">
+              <table>
+                <thead>
+                  <tr><th>区块</th><th>字段项</th><th>原型字段</th><th>口径定义</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>搜索栏</td><td>顶级合伙人 UID</td><td>顶级合伙人 UID</td><td>代理顶层 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>用户 UID</td><td>用户 UID</td><td>成交用户 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直接合伙人 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td class="mutedCell">无（原型补充）</td><td>订单 ID</td><td>支持按平仓成交订单主键检索。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>搜索栏</td><td class="mutedCell">无（原型补充）</td><td>委托订单 ID</td><td>支持按平仓成交所归属的委托主单 ID 检索，便于从成交结果反查委托来源。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>搜索栏</td><td>仓位 ID</td><td>仓位 ID</td><td>归属仓位。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>全部仓位模式</td><td>仓位模式</td><td>全仓/逐仓。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>全部方向</td><td>方向</td><td>平多/平空。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>全部订单类型</td><td>订单类型</td><td>限价/市价等。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>全部合约名称</td><td>合约名称</td><td>平仓所属合约。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>盘口类型（实盘/模拟盘）</td><td>盘口类型</td><td>区分实盘与模拟盘。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>平仓用户。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>所属合伙人。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">由筛选项映射</td><td>盘口类型</td><td>由盘口类型筛选项映射到列表展示字段，值为实盘或模拟盘，用于直接识别该平仓记录所属交易环境。</td></tr>
+                  <tr><td>信息栏</td><td>合约名称</td><td>合约名称</td><td>平仓所属合约。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>订单 ID</td><td>订单 ID</td><td>平仓订单主键。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（原型补充）</td><td>委托订单 ID</td><td>平仓成交所归属的委托主单 ID，用于把平仓结果和原始委托链路对应起来。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>信息栏</td><td>仓位 ID</td><td>仓位 ID</td><td>对应仓位。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>杠杆</td><td>杠杆</td><td>成交时杠杆倍数。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>仓位模式</td><td>仓位模式</td><td>全仓/逐仓。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>方向</td><td>方向</td><td>平多/平空方向。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>平仓价格</td><td>平仓价格</td><td>实际成交均价。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>平仓数量</td><td>平仓数量</td><td>实际成交数量。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>手续费</td><td>手续费</td><td>本笔平仓手续费。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>平仓时间</td><td>平仓时间</td><td>成交时间。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>页码栏</td><td>页码栏</td><td>分页条</td><td>列表分页与总数展示。当前原型已经提供该展示或交互能力。</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="auditSection" data-audit-page="history" data-audit-title="历史仓位">
+          <div class="auditHead">
+            <h4>6. 历史仓位</h4>
+            <span class="auditMeta">交易管理</span>
+          </div>
+          <div class="note">口径定义：历史仓位为已结束仓位集合，包含全部平仓与爆仓；盈利率按（平仓盈亏 - 总手续费 - 累计资金费金额）/ 仓位保证金（U）计算。页面同时承载汇总指标、资金费金额联动以及围绕历史仓位展开的委托记录、开仓记录和平仓记录联动查看。</div>
+          <div class="contentCard" style="margin-top:12px">
+            <div class="tableWrap auditTable">
+              <table>
+                <thead>
+                  <tr><th>区块</th><th>字段项</th><th>原型字段</th><th>口径定义</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>搜索栏</td><td>顶级合伙人 UID</td><td>顶级合伙人 UID</td><td>统一命名为顶级合伙人 UID。</td></tr>
+                  <tr><td>搜索栏</td><td>用户 UID</td><td>用户 UID</td><td>历史仓位所属用户。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直接合伙人 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>仓位 ID</td><td>仓位 ID</td><td>历史仓位主键。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>全部仓位模式</td><td>仓位模式</td><td>全仓/逐仓。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>全部仓位方向</td><td>仓位方向</td><td>开多/开空。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>仓位状态</td><td>仓位状态</td><td>全部平仓/爆仓。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>合约名称</td><td>合约名称</td><td>仓位所属合约。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>时间筛选</td><td>时间筛选</td><td>按开仓/平仓时间窗口查询。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>盘口类型（实盘/模拟盘）</td><td>盘口类型</td><td>区分实盘与模拟盘。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>汇总信息</td><td>总手续费</td><td>总手续费</td><td>历史仓位累计手续费。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>汇总信息</td><td>总平仓盈亏</td><td>总平仓盈亏</td><td>不含手续费的平仓盈亏汇总。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>汇总信息</td><td>总净盈亏</td><td>总净盈亏</td><td>总平仓盈亏扣除手续费后。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>汇总信息</td><td>总交易额</td><td>总交易额</td><td>历史仓位累计成交额。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>汇总信息</td><td>风险率</td><td>风险率</td><td>高风险历史仓位占历史仓位比率。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>仓位 ID</td><td>仓位 ID</td><td>历史仓位主键。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>所属用户。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>所属合伙人。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>顶级合伙人 UID</td><td>顶级合伙人 UID</td><td>代理顶层 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">由筛选项映射</td><td>盘口类型</td><td>由盘口类型筛选项映射到列表展示字段，值为实盘或模拟盘，用于直接识别该历史仓位所属交易环境。</td></tr>
+                  <tr><td>信息栏</td><td>合约名称</td><td>合约名称</td><td>仓位所属合约。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>杠杆倍数</td><td>杠杆倍数</td><td>开仓杠杆。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>仓位方向</td><td>仓位方向</td><td>开多/开空。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>仓位状态（全部平仓/爆仓）</td><td>仓位状态</td><td>仓位终态。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>开仓类型</td><td>开仓类型</td><td>全仓/逐仓。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>开仓价格</td><td>开仓价格</td><td>仓位平均开仓价。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>最大持仓量</td><td>最大持仓量</td><td>生命周期内最大仓位量。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>强平触发价</td><td>强平触发价</td><td>仓位强平阈值价。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>平仓均价</td><td>平仓均价</td><td>已平仓部分加权均价。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>已平仓量</td><td>已平仓量</td><td>累计已平仓数量。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>总手续费</td><td>总手续费</td><td>仓位生命周期总手续费。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>盈利率</td><td>按（平仓盈亏 - 总手续费 - 累计资金费金额）/ 仓位保证金（U）计算，用于从最终收益角度评估历史仓位表现。该字段为当前页面的补充定义。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>资金费金额</td><td>历史仓位在整个生命周期内累计发生的资金费金额；点击后会联动到资金费历史抽屉，查看该仓位各个结算时点的资金费率、资金费金额和资金费计算时持仓金额。该字段为当前页面的补充定义。</td></tr>
+                  <tr><td>信息栏</td><td>仓位保证金（U）</td><td>仓位保证金（U）</td><td>真实资金保证金。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>仓位保证金（体验金）</td><td>仓位保证金（体验金）</td><td>体验金保证金。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>平仓盈亏（链接页面）</td><td>平仓盈亏</td><td>点击后打开右侧关联记录抽屉，查看该历史仓位对应的委托记录、开仓记录和平仓记录。当前原型已经完成联动展示。</td></tr>
+                  <tr><td>信息栏</td><td>开仓时间</td><td>开仓时间</td><td>首笔开仓时间。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>平仓时间</td><td>平仓时间</td><td>最终平仓或爆仓时间。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>链接页</td><td class="mutedCell">无（原型补充）</td><td>关联委托记录</td><td>围绕历史仓位查看该仓位生命周期内的委托主单，包含普通委托、止盈止损触发或风控触发等来源。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>链接页</td><td class="mutedCell">无（原型补充）</td><td>关联开仓记录</td><td>围绕历史仓位查看最初形成该仓位的开仓成交记录，用于和后续平仓结果做完整链路比对。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>链接页</td><td>订单 ID</td><td>订单 ID</td><td>关联平仓记录中的平仓订单主键。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>链接页</td><td class="mutedCell">无（原型补充）</td><td>委托订单 ID</td><td>关联平仓记录中的委托主单 ID，用于把最终平仓结果和触发它的委托链路对应起来。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>链接页</td><td>用户 UID</td><td>用户 UID</td><td>所属用户。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>链接页</td><td>合约名称</td><td>合约名称</td><td>订单合约。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>链接页</td><td>方向</td><td>方向</td><td>买入/卖出平仓方向。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>链接页</td><td>平仓盈亏</td><td>平仓盈亏</td><td>单笔订单盈亏。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>链接页</td><td>下单价格</td><td>下单价格</td><td>用户下单时价格。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>链接页</td><td>成交均价</td><td>成交均价</td><td>最终成交均价。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>链接页</td><td>开平仓数量</td><td>开平仓数量</td><td>本笔订单数量。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>链接页</td><td>订单类型</td><td>订单类型</td><td>限价/市价等。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>链接页</td><td>杠杆倍数</td><td>杠杆倍数</td><td>订单对应杠杆。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>链接页</td><td>触发类型（普通订单/止盈止损）</td><td>触发类型</td><td>区分普通平仓与止盈止损触发。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>链接页</td><td>来源 ID（止盈止损订单 ID）</td><td>来源 ID</td><td>若为止盈止损触发则回填止盈止损 ID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>链接页</td><td>更新时间</td><td>更新时间</td><td>订单最后更新时间。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>页码栏</td><td>页码栏</td><td>分页条</td><td>列表分页与总数展示。当前原型已经提供该展示或交互能力。</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="auditSection" data-audit-page="net-pnl" data-audit-title="净盈亏查询">
+          <div class="auditHead">
+            <h4>7. 净盈亏查询——数据管理</h4>
+            <span class="auditMeta">数据管理</span>
+          </div>
+          <div class="note">口径定义：净盈亏查询按用户维度聚合，净盈亏 = 总结算盈亏 - 总手续费；净划入 = 总划入 - 总划出；盈利率 = 总净盈亏 / 净划入。盈利率统一按百分比展示并固定保留 2 位小数。</div>
+          <div class="contentCard" style="margin-top:12px">
+            <div class="tableWrap auditTable">
+              <table>
+                <thead>
+                  <tr><th>区块</th><th>字段项</th><th>原型字段</th><th>口径定义</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>搜索栏</td><td>顶级合伙人 UID</td><td>顶级合伙人 UID</td><td>代理顶层 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>用户 UID</td><td>用户 UID</td><td>统计所属用户。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直接合伙人 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>时间筛选</td><td>时间筛选</td><td>统计周期范围。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>汇总信息</td><td>总结算盈亏</td><td>总结算盈亏</td><td>统计周期内已结算盈亏总额。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>汇总信息</td><td>总手续费</td><td>总手续费</td><td>统计周期内累计手续费。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>汇总信息</td><td>总净盈亏</td><td>总净盈亏</td><td>总结算盈亏减总手续费。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>统计对象用户。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>所属合伙人。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>总成交额</td><td>总成交额</td><td>统计周期累计成交额。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>总手续费</td><td>总手续费</td><td>统计周期累计手续费。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>总结算盈亏</td><td>总结算盈亏</td><td>统计周期累计已结算盈亏。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>总净盈亏</td><td>总净盈亏</td><td>净收益结果。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>盈利率</td><td>按总净盈亏除以净划入计算，统一按百分比展示并固定保留 2 位小数，用于从用户维度观察统计周期内的资金使用收益效率。该字段为当前页面的补充定义。</td></tr>
+                  <tr><td>信息栏</td><td>总划入</td><td>总划入</td><td>统计周期内划入总额。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>总划出</td><td>总划出</td><td>统计周期内划出总额。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>净划入</td><td>净划入</td><td>总划入减总划出。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>体验金领取</td><td>体验金领取</td><td>统计周期领取体验金总额。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>体验金收益</td><td>体验金收益</td><td>体验金贡献收益。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>页码栏</td><td>页码栏</td><td>分页条</td><td>列表分页与总数展示。当前原型已经提供该展示或交互能力。</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="auditSection" data-audit-page="funding" data-audit-title="资金费历史">
+          <div class="auditHead">
+            <h4>8. 资金费历史</h4>
+            <span class="auditMeta">数据管理</span>
+          </div>
+          <div class="note">口径定义：资金费历史主列表按“结算批次”聚合展示；当同一批次涉及 2 个及以上仓位时，列表先展示聚合结果，再通过详情抽屉展开到单仓位明细。单仓位明细中，“资金费计算时持仓金额”表示结算时刻用于计算资金费的仓位名义金额，并可继续联动当前持仓或历史仓位。</div>
+          <div class="contentCard" style="margin-top:12px">
+            <div class="tableWrap auditTable">
+              <table>
+                <thead>
+                  <tr><th>区块</th><th>字段项</th><th>原型字段</th><th>口径定义</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>搜索栏</td><td>顶级合伙人 UID</td><td>顶级合伙人 UID</td><td>代理顶层 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>用户 UID</td><td>用户 UID</td><td>所属用户。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>仓位 ID</td><td>仓位 ID</td><td>对应仓位主键。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>合约名称</td><td>合约名称</td><td>资金费所属合约。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>盘口类型（实盘/模拟盘）</td><td>盘口类型</td><td>区分实盘与模拟盘。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>筛选栏</td><td>时间筛选</td><td>时间筛选</td><td>按结算时间窗口查询。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>所属用户。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>顶级合伙人 UID</td><td>顶级合伙人 UID</td><td>代理顶层 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">由筛选项映射</td><td>盘口类型</td><td>由盘口类型筛选项映射到列表展示字段，值为实盘或模拟盘，用于直接识别该资金费记录所属交易环境。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>结算批次</td><td>把同一用户、同一合约、同一结算时间下的资金费结算聚合成一条批次记录，便于先看批次，再展开看单仓位。该字段为当前页面的补充定义。</td></tr>
+                  <tr><td>信息栏</td><td>合约名称</td><td>合约名称</td><td>结算合约。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>涉及仓位数</td><td>表示该结算批次下实际参与资金费结算的仓位数量；当数量大于等于 2 时，需要通过详情展开到单仓位明细。该字段为当前页面的补充定义。</td></tr>
+                  <tr><td>信息栏</td><td>资金费率</td><td>资金费率</td><td>该结算批次对应的资金费率。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>资金费用</td><td>累计资金费用</td><td>该结算批次下所有仓位资金费用的汇总结果；若进入详情抽屉，则会拆解到单仓位资金费金额。原型将字段命名明确为“累计资金费用”，用于强调这里是批次聚合值。</td></tr>
+                  <tr><td>信息栏</td><td>结算时间</td><td>结算时间</td><td>资金费结算发生时间。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>详情</td><td>当同一结算批次下存在 2 个及以上仓位时，点击后展开该批次里的单仓位明细，包括仓位 ID、资金费计算时持仓金额、资金费率、资金费金额以及跳转当前持仓/历史仓位的联动入口。该字段为当前页面的补充定义。</td></tr>
+                  <tr><td>详情抽屉</td><td>仓位 ID</td><td>仓位 ID</td><td>批次详情里拆开的单仓位主键，可直接定位到具体仓位。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>详情抽屉</td><td>仓位价值</td><td>资金费计算时持仓金额</td><td>表示结算时刻用于计算资金费的仓位名义金额。原型把字段命名明确为“资金费计算时持仓金额”，便于开发和测试理解其计算用途。</td></tr>
+                  <tr><td>详情抽屉</td><td>资金费率</td><td>资金费率</td><td>拆分到单仓位后的结算费率。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>详情抽屉</td><td>资金费用</td><td>资金费金额</td><td>拆分到单仓位后的资金费结算结果。原型把字段命名明确为“资金费金额”，便于和批次层的累计资金费用区分。</td></tr>
+                  <tr><td>详情抽屉</td><td class="mutedCell">无（本轮补充）</td><td>所属页 / 联动</td><td>用于标明该仓位当前属于“当前持仓”还是“历史仓位”，并提供一键跳转入口，便于顺着资金费数据继续追查仓位和交易链路。该字段为当前页面的补充定义。</td></tr>
+                  <tr><td>页码栏</td><td>页码栏</td><td>分页条</td><td>列表分页与总数展示。当前原型已经提供该展示或交互能力。</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </aside>
+
+    <script>
+      (function () {
+        var navButtons = Array.prototype.slice.call(document.querySelectorAll(".navBtn"));
+        var pages = Array.prototype.slice.call(document.querySelectorAll(".page"));
+        var drawer = document.getElementById("drawer");
+        var drawerMask = document.getElementById("drawerMask");
+        var closeDrawer = document.getElementById("closeDrawer");
+        var caliberDrawer = document.getElementById("caliberDrawer");
+        var caliberMask = document.getElementById("caliberMask");
+        var openCaliberDrawer = document.getElementById("openCaliberDrawer");
+        var closeCaliberDrawer = document.getElementById("closeCaliberDrawer");
+        var caliberCurrentPage = document.getElementById("caliberCurrentPage");
+        var auditSections = Array.prototype.slice.call(document.querySelectorAll(".auditSection"));
+        var drawerTitle = document.getElementById("drawerTitle");
+        var drawerSubtitle = document.getElementById("drawerSubtitle");
+        var drawerPrimaryLabel = document.getElementById("drawerPrimaryLabel");
+        var drawerPrimaryValue = document.getElementById("drawerPrimaryValue");
+        var drawerPrimarySub = document.getElementById("drawerPrimarySub");
+        var drawerSecondaryLabel = document.getElementById("drawerSecondaryLabel");
+        var drawerSecondaryValue = document.getElementById("drawerSecondaryValue");
+        var drawerSecondarySub = document.getElementById("drawerSecondarySub");
+        var drawerNote = document.getElementById("drawerNote");
+        var drawerSections = document.getElementById("drawerSections");
+        var relationData = {
+          "position-btc": {
+            title: "当前持仓关联记录",
+            subtitle: "围绕当前持仓仓位查看对应委托、开仓记录和平仓记录。",
+            primaryLabel: "仓位 ID",
+            primaryValue: "POS-78721194",
+            primarySub: "BTCUSDT 永续 / 用户 10248391 / 开多",
+            secondaryLabel: "联动范围",
+            secondaryValue: "1 条委托 / 1 条开仓 / 1 条平仓",
+            secondarySub: "用于从实时仓位回溯订单链路",
+            note: "说明：当前持仓页联动的是该仓位下仍有效的当前委托，以及该仓位已经发生的开仓和平仓成交记录。",
+            sections: [
+              {
+                title: "关联委托记录",
+                caption: "当前持仓回看该仓位仍有效的委托主单。",
+                tag: "当前委托",
+                headers: ["委托订单 ID", "对应止盈止损 ID", "订单方向", "委托价格", "委托数量", "委托时间"],
+                rows: [["ODR-991728898", "TP24071810928", "卖出平多", "68,940", "0.25 BTC", "2026-07-18 11:15:32"]]
+              },
+              {
+                title: "关联开仓记录",
+                caption: "开仓记录用于确认该持仓最初是由哪一笔成交形成。",
+                tag: "开仓记录",
+                headers: ["开仓订单 ID", "委托订单 ID", "仓位 ID", "开仓价格", "开仓数量", "开仓时间"],
+                rows: [["OPEN-718201", "ODR-991728650", "POS-78721194", "67,540", "0.80 BTC", "2026-07-18 08:15:36"]]
+              },
+              {
+                title: "关联平仓记录",
+                caption: "平仓记录展示该仓位已成交的平仓明细，便于核对已实现盈亏来源。",
+                tag: "平仓记录",
+                headers: ["平仓订单 ID", "委托订单 ID", "仓位 ID", "平仓价格", "平仓数量", "平仓时间"],
+                rows: [["CLOSE-718996", "ODR-991728898", "POS-78721194", "68,920", "0.20 BTC", "2026-07-18 12:28:39"]]
+              }
+            ]
+          },
+          "position-eth": {
+            title: "当前持仓关联记录",
+            subtitle: "围绕当前持仓仓位查看对应委托、开仓记录和平仓记录。",
+            primaryLabel: "仓位 ID",
+            primaryValue: "POS-78724903",
+            primarySub: "ETHUSDT 永续 / 用户 10277109 / 开空",
+            secondaryLabel: "联动范围",
+            secondaryValue: "1 条委托 / 1 条开仓 / 1 条平仓",
+            secondarySub: "用于从实时仓位回溯订单链路",
+            note: "说明：当前持仓页联动的是该仓位下仍有效的当前委托，以及该仓位已经发生的开仓和平仓成交记录。",
+            sections: [
+              {
+                title: "关联委托记录",
+                caption: "当前持仓回看该仓位仍有效的委托主单。",
+                tag: "当前委托",
+                headers: ["委托订单 ID", "对应止盈止损 ID", "订单方向", "委托价格", "委托数量", "委托时间"],
+                rows: [["ODR-991728712", "TP24071810955", "买入开空", "3,728", "18 ETH", "2026-07-18 11:08:24"]]
+              },
+              {
+                title: "关联开仓记录",
+                caption: "开仓记录用于确认该持仓最初是由哪一笔成交形成。",
+                tag: "开仓记录",
+                headers: ["开仓订单 ID", "委托订单 ID", "仓位 ID", "开仓价格", "开仓数量", "开仓时间"],
+                rows: [["OPEN-718245", "ODR-991728712", "POS-78724903", "3,710", "32 ETH", "2026-07-18 09:04:11"]]
+              },
+              {
+                title: "关联平仓记录",
+                caption: "平仓记录展示该仓位已成交的平仓明细，便于核对已实现盈亏来源。",
+                tag: "平仓记录",
+                headers: ["平仓订单 ID", "委托订单 ID", "仓位 ID", "平仓价格", "平仓数量", "平仓时间"],
+                rows: [["CLOSE-718981", "ODR-991728703", "POS-78724903", "3,655", "12 ETH", "2026-07-18 12:22:04"]]
+              }
+            ]
+          },
+          "order-btc": {
+            title: "当前委托关联记录",
+            subtitle: "围绕当前委托查看其所属仓位的开仓和平仓成交链路。",
+            primaryLabel: "委托订单 ID",
+            primaryValue: "ODR-991728898",
+            primarySub: "BTCUSDT 永续 / 用户 10248391 / 卖出平多",
+            secondaryLabel: "关联仓位",
+            secondaryValue: "POS-78721194",
+            secondarySub: "当前委托、开仓记录和平仓记录联动查看",
+            note: "说明：当前委托页联动展示的是该委托所属仓位下的开仓和平仓记录，用于确认委托和成交结果是否对齐。",
+            sections: [
+              {
+                title: "当前委托记录",
+                caption: "先确认当前委托主单本身的下单信息。",
+                tag: "当前委托",
+                headers: ["委托订单 ID", "对应止盈止损 ID", "仓位 ID", "委托价格", "委托数量", "委托时间"],
+                rows: [["ODR-991728898", "TP24071810928", "POS-78721194", "68,940", "0.25 BTC", "2026-07-18 11:15:32"]]
+              },
+              {
+                title: "关联开仓记录",
+                caption: "回看该仓位最初的开仓成交记录。",
+                tag: "开仓记录",
+                headers: ["开仓订单 ID", "委托订单 ID", "仓位 ID", "开仓价格", "开仓数量", "开仓时间"],
+                rows: [["OPEN-718201", "ODR-991728650", "POS-78721194", "67,540", "0.80 BTC", "2026-07-18 08:15:36"]]
+              },
+              {
+                title: "关联平仓记录",
+                caption: "核对该委托所在仓位已发生的平仓成交结果。",
+                tag: "平仓记录",
+                headers: ["平仓订单 ID", "委托订单 ID", "仓位 ID", "平仓价格", "平仓数量", "平仓时间"],
+                rows: [["CLOSE-718996", "ODR-991728898", "POS-78721194", "68,920", "0.20 BTC", "2026-07-18 12:28:39"]]
+              }
+            ]
+          },
+          "order-eth": {
+            title: "当前委托关联记录",
+            subtitle: "围绕当前委托查看其所属仓位的开仓和平仓成交链路。",
+            primaryLabel: "委托订单 ID",
+            primaryValue: "ODR-991728712",
+            primarySub: "ETHUSDT 永续 / 用户 10277109 / 买入开空",
+            secondaryLabel: "关联仓位",
+            secondaryValue: "POS-78724903",
+            secondarySub: "当前委托、开仓记录和平仓记录联动查看",
+            note: "说明：当前委托页联动展示的是该委托所属仓位下的开仓和平仓记录，用于确认委托和成交结果是否对齐。",
+            sections: [
+              {
+                title: "当前委托记录",
+                caption: "先确认当前委托主单本身的下单信息。",
+                tag: "当前委托",
+                headers: ["委托订单 ID", "对应止盈止损 ID", "仓位 ID", "委托价格", "委托数量", "委托时间"],
+                rows: [["ODR-991728712", "TP24071810955", "POS-78724903", "3,728", "18 ETH", "2026-07-18 11:08:24"]]
+              },
+              {
+                title: "关联开仓记录",
+                caption: "回看该仓位最初的开仓成交记录。",
+                tag: "开仓记录",
+                headers: ["开仓订单 ID", "委托订单 ID", "仓位 ID", "开仓价格", "开仓数量", "开仓时间"],
+                rows: [["OPEN-718245", "ODR-991728712", "POS-78724903", "3,710", "32 ETH", "2026-07-18 09:04:11"]]
+              },
+              {
+                title: "关联平仓记录",
+                caption: "核对该委托所在仓位已经发生的平仓成交结果。",
+                tag: "平仓记录",
+                headers: ["平仓订单 ID", "委托订单 ID", "仓位 ID", "平仓价格", "平仓数量", "平仓时间"],
+                rows: [["CLOSE-718981", "ODR-991728703", "POS-78724903", "3,655", "12 ETH", "2026-07-18 12:22:04"]]
+              }
+            ]
+          },
+          "history-btc": {
+            title: "历史仓位关联记录",
+            subtitle: "围绕历史仓位查看生命周期内的委托、开仓和平仓记录。",
+            primaryLabel: "历史仓位 ID",
+            primaryValue: "HIS-55721291",
+            primarySub: "BTCUSDT 永续 / 用户 10248391 / 全部平仓",
+            secondaryLabel: "链路汇总",
+            secondaryValue: "2 条委托 / 1 条开仓 / 2 条平仓",
+            secondarySub: "便于复盘历史仓位的完整交易过程",
+            note: "说明：历史仓位联动展示该仓位生命周期内的委托记录、开仓记录和平仓记录。平仓记录同时保留平仓盈亏、触发类型和来源 ID，方便开发与测试核对收益归因。",
+            sections: [
+              {
+                title: "关联委托记录",
+                caption: "历史仓位下单链路，包含普通委托与止盈止损触发委托。",
+                tag: "委托记录",
+                headers: ["委托订单 ID", "触发来源", "订单方向", "委托价格", "委托数量", "委托时间"],
+                rows: [["ODR-991719650", "普通委托", "买入开多", "66,860", "1.00 BTC", "2026-07-11 09:10:00"], ["ODR-991720114", "止盈止损触发", "卖出平多", "68,510", "0.60 BTC", "2026-07-14 17:44:49"]]
+              },
+              {
+                title: "关联开仓记录",
+                caption: "历史仓位的开仓成交起点。",
+                tag: "开仓记录",
+                headers: ["开仓订单 ID", "委托订单 ID", "仓位 ID", "开仓价格", "开仓数量", "开仓时间"],
+                rows: [["OPEN-700801", "ODR-991719650", "HIS-55721291", "66,880", "1.00 BTC", "2026-07-11 09:10:00"]]
+              },
+              {
+                title: "关联平仓记录",
+                caption: "平仓记录保留平仓盈亏与触发来源，用于对应历史仓位详情链接页。",
+                tag: "平仓记录",
+                minWidth: 1280,
+                headers: ["订单 ID", "委托订单 ID", "用户 UID", "合约名称", "方向", "平仓盈亏", "下单价格", "成交均价", "开平仓数量", "订单类型", "杠杆倍数", "触发类型", "来源 ID", "更新时间"],
+                rows: [["CLOSE-700921", "ODR-991720002", "10248391", "BTCUSDT 永续", "卖出平多", "<span style='color:#7ef3c3'>+8,420</span>", "67,980", "68,120", "0.40 BTC", "限价", "20x", "普通订单", "-", "2026-07-13 09:22:18"], ["CLOSE-700992", "ODR-991720114", "10248391", "BTCUSDT 永续", "卖出平多", "<span style='color:#7ef3c3'>+10,540</span>", "68,510", "68,720", "0.60 BTC", "市价", "20x", "止盈止损", "TP2407138891", "2026-07-14 17:45:28"]]
+              }
+            ]
+          },
+          "history-eth": {
+            title: "历史仓位关联记录",
+            subtitle: "围绕历史仓位查看生命周期内的委托、开仓和平仓记录。",
+            primaryLabel: "历史仓位 ID",
+            primaryValue: "HIS-55721109",
+            primarySub: "ETHUSDT 永续 / 用户 10277109 / 爆仓",
+            secondaryLabel: "链路汇总",
+            secondaryValue: "2 条委托 / 1 条开仓 / 1 条平仓",
+            secondarySub: "便于复盘历史仓位的完整交易过程",
+            note: "说明：历史仓位联动展示该仓位生命周期内的委托记录、开仓记录和平仓记录。若仓位以爆仓结束，平仓记录会体现爆仓触发的来源和最终盈亏。",
+            sections: [
+              {
+                title: "关联委托记录",
+                caption: "历史仓位的委托链路，包含开仓委托与爆仓前最后一笔平仓委托。",
+                tag: "委托记录",
+                headers: ["委托订单 ID", "触发来源", "订单方向", "委托价格", "委托数量", "委托时间"],
+                rows: [["ODR-991719702", "普通委托", "卖出开空", "3,778", "46 ETH", "2026-07-09 13:24:52"], ["ODR-991719955", "风控强平", "买入平空", "4,054", "46 ETH", "2026-07-10 02:16:40"]]
+              },
+              {
+                title: "关联开仓记录",
+                caption: "历史仓位的开仓成交起点。",
+                tag: "开仓记录",
+                headers: ["开仓订单 ID", "委托订单 ID", "仓位 ID", "开仓价格", "开仓数量", "开仓时间"],
+                rows: [["OPEN-700845", "ODR-991719702", "HIS-55721109", "3,780", "46 ETH", "2026-07-09 13:24:52"]]
+              },
+              {
+                title: "关联平仓记录",
+                caption: "爆仓或全部平仓后的最终成交结果。",
+                tag: "平仓记录",
+                headers: ["平仓订单 ID", "委托订单 ID", "仓位 ID", "平仓价格", "平仓数量", "平仓盈亏", "平仓时间"],
+                rows: [["CLOSE-700884", "ODR-991719955", "HIS-55721109", "4,054", "46 ETH", "<span style='color:#ff9e9e'>-8,420</span>", "2026-07-10 02:16:40"]]
+              }
+            ]
+          },
+          "funding-current-btc": {
+            title: "当前持仓资金费历史",
+            subtitle: "从当前持仓回看该仓位历次资金费结算结果。",
+            primaryLabel: "仓位 ID",
+            primaryValue: "POS-78721194",
+            primarySub: "BTCUSDT 永续 / 用户 10248391 / 当前持仓",
+            secondaryLabel: "联动页面",
+            secondaryValue: "资金费历史",
+            secondarySub: "支持跳回对应结算批次查看同批次其他仓位",
+            note: "说明：这里展示的是当前持仓仓位对应的资金费结算历史，字段里的“资金费计算时持仓金额”表示结算时刻用于计算资金费的仓位名义金额。",
+            sections: [
+              {
+                title: "该仓位资金费结算明细",
+                caption: "按结算时间倒序展示该仓位的资金费率、资金费金额和结算时持仓金额。",
+                tag: "资金费历史",
+                headers: ["结算时间", "仓位 ID", "资金费计算时持仓金额", "资金费率", "资金费金额", "联动"],
+                rows: [
+                  ["2026-07-18 08:00:00", "POS-78721194", "54,720", "0.010000%", "+5.47", "<button class='linkBtn' data-nav-page='funding' data-drawer-key='funding-batch-current-0800'>查看同批次详情</button>"],
+                  ["2026-07-17 16:00:00", "POS-78721194", "68,840", "0.010000%", "+6.89", "<button class='linkBtn' data-nav-page='funding'>查看资金费页</button>"]
+                ]
+              }
+            ]
+          },
+          "funding-current-eth": {
+            title: "当前持仓资金费历史",
+            subtitle: "从当前持仓回看该仓位历次资金费结算结果。",
+            primaryLabel: "仓位 ID",
+            primaryValue: "POS-78724903",
+            primarySub: "ETHUSDT 永续 / 用户 10277109 / 当前持仓",
+            secondaryLabel: "联动页面",
+            secondaryValue: "资金费历史",
+            secondarySub: "支持跳回对应结算批次查看同批次其他仓位",
+            note: "说明：这里展示的是当前持仓仓位对应的资金费结算历史，若某一结算批次只有 1 个仓位，则不再额外展开批次详情。",
+            sections: [
+              {
+                title: "该仓位资金费结算明细",
+                caption: "按结算时间倒序展示该仓位的资金费率、资金费金额和结算时持仓金额。",
+                tag: "资金费历史",
+                headers: ["结算时间", "仓位 ID", "资金费计算时持仓金额", "资金费率", "资金费金额", "联动"],
+                rows: [
+                  ["2026-07-18 08:00:00", "POS-78724903", "118,720", "-0.007000%", "-8.31", "<button class='linkBtn' data-nav-page='funding'>查看资金费页</button>"],
+                  ["2026-07-17 16:00:00", "POS-78724903", "109,840", "-0.006000%", "-6.59", "<button class='linkBtn' data-nav-page='funding'>查看资金费页</button>"]
+                ]
+              }
+            ]
+          },
+          "funding-history-btc": {
+            title: "历史仓位资金费历史",
+            subtitle: "从历史仓位回看该仓位生命周期内发生过的资金费结算。",
+            primaryLabel: "历史仓位 ID",
+            primaryValue: "HIS-55721291",
+            primarySub: "BTCUSDT 永续 / 用户 10248391 / 全部平仓",
+            secondaryLabel: "联动页面",
+            secondaryValue: "资金费历史",
+            secondarySub: "支持跳回结算批次详情并联动历史仓位",
+            note: "说明：历史仓位的资金费金额是该仓位在存续期间历次资金费结算结果的累计。点击同批次详情后，可查看同一结算时点下其他仓位的持仓金额与联动入口。",
+            sections: [
+              {
+                title: "该仓位资金费结算明细",
+                caption: "展示历史仓位在存续周期内每个结算时点对应的持仓金额和资金费金额。",
+                tag: "资金费历史",
+                headers: ["结算时间", "仓位 ID", "资金费计算时持仓金额", "资金费率", "资金费金额", "联动"],
+                rows: [
+                  ["2026-07-14 08:00:00", "HIS-55721291", "112,400", "0.012000%", "+13.49", "<button class='linkBtn' data-nav-page='funding' data-drawer-key='funding-batch-history-0800'>查看同批次详情</button>"],
+                  ["2026-07-13 08:00:00", "HIS-55721291", "108,260", "0.012000%", "+12.99", "<button class='linkBtn' data-nav-page='funding'>查看资金费页</button>"]
+                ]
+              }
+            ]
+          },
+          "funding-history-eth": {
+            title: "历史仓位资金费历史",
+            subtitle: "从历史仓位回看该仓位生命周期内发生过的资金费结算。",
+            primaryLabel: "历史仓位 ID",
+            primaryValue: "HIS-55721109",
+            primarySub: "ETHUSDT 永续 / 用户 10277109 / 爆仓",
+            secondaryLabel: "联动页面",
+            secondaryValue: "资金费历史",
+            secondarySub: "支持按结算时点回查资金费明细",
+            note: "说明：历史仓位的资金费金额仍然保留到仓位结束，用于解释净盈亏为什么会和单看平仓盈亏存在差异。",
+            sections: [
+              {
+                title: "该仓位资金费结算明细",
+                caption: "展示历史仓位在存续周期内每个结算时点对应的持仓金额和资金费金额。",
+                tag: "资金费历史",
+                headers: ["结算时间", "仓位 ID", "资金费计算时持仓金额", "资金费率", "资金费金额", "联动"],
+                rows: [
+                  ["2026-07-10 00:00:00", "HIS-55721109", "163,800", "-0.006000%", "-9.83", "<button class='linkBtn' data-nav-page='funding'>查看资金费页</button>"],
+                  ["2026-07-09 16:00:00", "HIS-55721109", "166,820", "-0.006000%", "-10.01", "<button class='linkBtn' data-nav-page='funding'>查看资金费页</button>"]
+                ]
+              }
+            ]
+          },
+          "funding-batch-current-0800": {
+            title: "资金费批次详情",
+            subtitle: "查看同一结算批次下涉及的多个当前仓位明细。",
+            primaryLabel: "结算批次",
+            primaryValue: "FUND-20260718-0800-A",
+            primarySub: "BTCUSDT 永续 / 用户 10248391 / 2026-07-18 08:00:00",
+            secondaryLabel: "涉及仓位",
+            secondaryValue: "2 个当前仓位",
+            secondarySub: "明细含仓位 ID、结算时持仓金额和联动入口",
+            note: "说明：当同一结算批次下存在 2 个及以上仓位时，资金费历史列表只展示聚合结果；点击“查看详情”后，再展开每个仓位的结算明细。",
+            sections: [
+              {
+                title: "仓位明细",
+                caption: "每一行代表该结算批次中的 1 个仓位，支持跳回当前持仓查看完整交易链路。",
+                tag: "批次详情",
+                headers: ["仓位 ID", "资金费计算时持仓金额", "资金费率", "资金费金额", "所属页", "联动"],
+                rows: [
+                  ["POS-78721194", "54,720", "0.010000%", "+5.47", "当前持仓", "<button class='linkBtn' data-nav-page='positions' data-drawer-key='position-btc'>打开当前持仓</button>"],
+                  ["POS-78721240", "43,880", "0.010000%", "+4.39", "当前持仓", "<button class='linkBtn' data-nav-page='positions'>跳转当前持仓页</button>"]
+                ]
+              }
+            ]
+          },
+          "funding-batch-history-0800": {
+            title: "资金费批次详情",
+            subtitle: "查看同一结算批次下涉及的多个历史仓位明细。",
+            primaryLabel: "结算批次",
+            primaryValue: "FUND-20260714-0800-C",
+            primarySub: "BTCUSDT 永续 / 用户 10248391 / 2026-07-14 08:00:00",
+            secondaryLabel: "涉及仓位",
+            secondaryValue: "2 个历史仓位",
+            secondarySub: "明细含仓位 ID、结算时持仓金额和联动入口",
+            note: "说明：这个批次里的仓位都已经结束，因此联动入口会跳到历史仓位页，便于继续查看平仓盈亏和委托链路。",
+            sections: [
+              {
+                title: "仓位明细",
+                caption: "每一行代表该结算批次中的 1 个历史仓位，支持跳回历史仓位查看完整交易链路。",
+                tag: "批次详情",
+                headers: ["仓位 ID", "资金费计算时持仓金额", "资金费率", "资金费金额", "所属页", "联动"],
+                rows: [
+                  ["HIS-55721291", "112,400", "0.012000%", "+13.49", "历史仓位", "<button class='linkBtn' data-nav-page='history' data-drawer-key='history-btc'>打开历史仓位</button>"],
+                  ["HIS-55721402", "39,450", "0.012000%", "+4.73", "历史仓位", "<button class='linkBtn' data-nav-page='history'>跳转历史仓位页</button>"]
+                ]
+              }
+            ]
+          }
+        };
+
+        function buildRelationSection(section) {
+          var headers = section.headers.map(function (header) {
+            return "<th>" + header + "</th>";
+          }).join("");
+          var rows = section.rows.map(function (row) {
+            return "<tr>" + row.map(function (cell) {
+              return "<td>" + cell + "</td>";
+            }).join("") + "</tr>";
+          }).join("");
+          return [
+            "<div class=\"contentCard\" style=\"margin-top:16px\">",
+            "<div class=\"cardHead\"><div><h3>", section.title, "</h3><p>", section.caption, "</p></div><div class=\"miniActions\"><span class=\"chip\">", section.tag, "</span></div></div>",
+            "<div class=\"tableWrap\"><table style=\"min-width:", String(section.minWidth || 980), "px\"><thead><tr>", headers, "</tr></thead><tbody>", rows, "</tbody></table></div>",
+            "</div>"
+          ].join("");
+        }
+
+        function renderRelationDrawer(key) {
+          var data = relationData[key];
+          if (!data) return;
+          drawerTitle.textContent = data.title;
+          drawerSubtitle.textContent = data.subtitle;
+          drawerPrimaryLabel.textContent = data.primaryLabel;
+          drawerPrimaryValue.textContent = data.primaryValue;
+          drawerPrimarySub.textContent = data.primarySub;
+          drawerSecondaryLabel.textContent = data.secondaryLabel;
+          drawerSecondaryValue.textContent = data.secondaryValue;
+          drawerSecondarySub.textContent = data.secondarySub;
+          drawerNote.textContent = data.note;
+          drawerSections.innerHTML = data.sections.map(buildRelationSection).join("");
+        }
+
+        function syncCaliberDrawer(id) {
+          var activeSection = null;
+          auditSections.forEach(function (section) {
+            var isActive = section.getAttribute("data-audit-page") === id;
+            section.classList.toggle("active", isActive);
+            if (isActive) activeSection = section;
+          });
+
+          if (activeSection && caliberCurrentPage) {
+            caliberCurrentPage.textContent = "当前页面：" + activeSection.getAttribute("data-audit-title");
+          }
+        }
+
+        function switchPage(id) {
+          navButtons.forEach(function (button) {
+            button.classList.toggle("active", button.getAttribute("data-page") === id);
+          });
+          pages.forEach(function (page) {
+            page.classList.toggle("active", page.id === id);
+          });
+          syncCaliberDrawer(id);
+        }
+
+        navButtons.forEach(function (button) {
+          button.addEventListener("click", function () {
+            switchPage(button.getAttribute("data-page"));
+          });
+        });
+
+        function hideDrawer(targetDrawer, targetMask) {
+          targetDrawer.classList.remove("show");
+          targetMask.classList.remove("show");
+        }
+
+        function closeAllDrawers() {
+          hideDrawer(drawer, drawerMask);
+          hideDrawer(caliberDrawer, caliberMask);
+        }
+
+        function showDrawer(targetDrawer, targetMask) {
+          closeAllDrawers();
+          targetDrawer.classList.add("show");
+          targetMask.classList.add("show");
+        }
+
+        function openHistoryDrawer(key) {
+          renderRelationDrawer(key);
+          showDrawer(drawer, drawerMask);
+        }
+
+        function openCaliberPanel() {
+          showDrawer(caliberDrawer, caliberMask);
+        }
+
+        document.addEventListener("click", function (event) {
+          var trigger = event.target.closest("[data-drawer-key], [data-nav-page]");
+          if (!trigger) return;
+          if (trigger.hasAttribute("data-nav-page")) {
+            switchPage(trigger.getAttribute("data-nav-page"));
+          }
+          if (trigger.hasAttribute("data-drawer-key")) {
+            openHistoryDrawer(trigger.getAttribute("data-drawer-key"));
+          }
+        });
+
+        openCaliberDrawer.addEventListener("click", openCaliberPanel);
+        closeDrawer.addEventListener("click", closeAllDrawers);
+        closeCaliberDrawer.addEventListener("click", closeAllDrawers);
+        drawerMask.addEventListener("click", closeAllDrawers);
+        caliberMask.addEventListener("click", closeAllDrawers);
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") closeAllDrawers();
+        });
+
+        syncCaliberDrawer("tp-sl");
+      })();
+    </script>
+  </body>
+</html>
+
+
