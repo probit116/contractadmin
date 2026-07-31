@@ -919,7 +919,6 @@
             <div class="contentCard">
               <div class="cardHead">
                 <div><h3>移动止盈止损列表</h3><p>覆盖激活价格、回调幅度、持仓成本、触发价格、关联委托订单 ID 与状态字段。</p></div>
-                <div class="miniActions"><span class="chip">信息栏</span><span class="chip">页码条</span></div>
               </div>
               <div class="tableWrap">
                 <table>
@@ -966,19 +965,18 @@
 
             <div class="contentCard">
               <div class="cardHead">
-                <div><h3>当前持仓列表</h3><p>按需求文档映射顶级合伙人、保证金、盈利率、资金费金额与强平价等字段。</p></div>
-                <div class="miniActions"><span class="chip">当前持仓</span><span class="chip">实时快照</span></div>
+                <div><h3>当前持仓列表</h3><p>按需求文档映射顶级合伙人、保证金、盈利率与强平价等字段。</p></div>
               </div>
               <div class="tableWrap">
                 <table>
                   <thead>
                     <tr>
-                      <th>合伙人 UID</th><th>用户 UID</th><th>顶级合伙人 UID</th><th>仓位 ID</th><th>合约名称</th><th>杠杆</th><th>买卖方向</th><th>持仓数量</th><th>手续费</th><th>保证金（U）</th><th>保证金（体验金）</th><th>开仓均价</th><th>盈利率</th><th>未实现盈亏</th><th>已实现盈亏</th><th>资金费金额</th><th>预估强平价</th><th>止盈止损价格</th><th>仓位类型</th><th>开仓时间</th><th>关联记录</th>
+                      <th>合伙人 UID</th><th>用户 UID</th><th>顶级合伙人 UID</th><th>仓位 ID</th><th>合约名称</th><th>杠杆</th><th>买卖方向</th><th>持仓数量</th><th>手续费</th><th>保证金（U）</th><th>保证金（体验金）</th><th>开仓均价</th><th>盈利率</th><th>未实现盈亏</th><th>已实现盈亏</th><th>预估强平价</th><th>止盈止损价格</th><th>仓位类型</th><th>开仓时间</th><th>关联记录</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>30087511</td><td>10248391</td><td>80012001</td><td>POS-78721194</td><td>BTCUSDT 永续</td><td>20x</td><td>开多</td><td>0.80 BTC</td><td>48.20</td><td>19,860</td><td>0</td><td>67,540</td><td style="color:#7ef3c3">+112.49%</td><td style="color:#7ef3c3">+18,920</td><td>+3,420</td><td><button class="linkBtn" data-nav-page="funding" data-drawer-key="funding-current-btc">+12.36 查看资金费</button></td><td>63,882</td><td>70,200 / 65,800</td><td>全仓</td><td>2026-07-18 08:15:36</td><td><button class="linkBtn" data-drawer-key="position-btc">查看关联</button></td></tr>
-                    <tr><td>30087511</td><td>10277109</td><td>80012001</td><td>POS-78724903</td><td>ETHUSDT 永续</td><td>10x</td><td>开空</td><td>32 ETH</td><td>36.80</td><td>11,220</td><td>120</td><td>3,710</td><td style="color:#ff9e9e">-39.93%</td><td style="color:#ff9e9e">-5,460</td><td>+980</td><td><button class="linkBtn" data-nav-page="funding" data-drawer-key="funding-current-eth">-8.31 查看资金费</button></td><td>4,024</td><td>3,580 / 3,885</td><td>逐仓</td><td>2026-07-18 09:04:11</td><td><button class="linkBtn" data-drawer-key="position-eth">查看关联</button></td></tr>
+                    <tr><td>30087511</td><td>10248391</td><td>80012001</td><td>POS-78721194</td><td>BTCUSDT 永续</td><td>20x</td><td>开多</td><td>0.80 BTC</td><td>48.20</td><td>19,860</td><td>0</td><td>67,540</td><td style="color:#7ef3c3">+112.49%</td><td style="color:#7ef3c3">+18,920</td><td>+3,420</td><td>63,882</td><td>70,200 / 65,800</td><td>全仓</td><td>2026-07-18 08:15:36</td><td><button class="linkBtn" data-drawer-key="position-btc">查看关联</button></td></tr>
+                    <tr><td>30087511</td><td>10277109</td><td>80012001</td><td>POS-78724903</td><td>ETHUSDT 永续</td><td>10x</td><td>开空</td><td>32 ETH</td><td>36.80</td><td>11,220</td><td>120</td><td>3,710</td><td style="color:#ff9e9e">-39.93%</td><td style="color:#ff9e9e">-5,460</td><td>+980</td><td>4,024</td><td>3,580 / 3,885</td><td>逐仓</td><td>2026-07-18 09:04:11</td><td><button class="linkBtn" data-drawer-key="position-eth">查看关联</button></td></tr>
                   </tbody>
                 </table>
               </div>
@@ -1014,7 +1012,6 @@
             <div class="contentCard">
               <div class="cardHead">
                 <div><h3>当前委托列表</h3><p>包括委托价格、委托数量、类型、止盈止损价格、对应止盈止损 ID 与下单时间。</p></div>
-                <div class="miniActions"><span class="chip">当前委托</span></div>
               </div>
               <div class="tableWrap">
                 <table>
@@ -1057,7 +1054,6 @@
             <div class="contentCard">
               <div class="cardHead">
                 <div><h3>开仓记录列表</h3><p>覆盖订单 ID、仓位 ID、杠杆、方向、价格、数量、手续费和时间。</p></div>
-                <div class="miniActions"><span class="chip">开仓记录</span></div>
               </div>
               <div class="tableWrap">
                 <table>
@@ -1100,7 +1096,6 @@
             <div class="contentCard">
               <div class="cardHead">
                 <div><h3>平仓记录列表</h3><p>覆盖仓位模式、方向、平仓价格、数量、手续费与时间。</p></div>
-                <div class="miniActions"><span class="chip">平仓记录</span></div>
               </div>
               <div class="tableWrap">
                 <table>
@@ -1149,19 +1144,18 @@
 
             <div class="contentCard">
               <div class="cardHead">
-                <div><h3>历史仓位列表</h3><p>支持查看平仓盈亏详情、盈利率、资金费金额及关联资金费历史。</p></div>
-                <div class="miniActions"><span class="chip">历史仓位</span><span class="chip">详情联动</span></div>
+                <div><h3>历史仓位列表</h3><p>支持查看平仓盈亏详情、盈利率与关联记录。</p></div>
               </div>
               <div class="tableWrap">
                 <table>
                   <thead>
                     <tr>
-                      <th>仓位 ID</th><th>用户 UID</th><th>合伙人 UID</th><th>顶级合伙人 UID</th><th>盘口类型</th><th>合约名称</th><th>杠杆倍数</th><th>仓位方向</th><th>仓位状态</th><th>开仓类型</th><th>开仓价格</th><th>最大持仓量</th><th>强平触发价</th><th>平仓均价</th><th>已平仓量</th><th>总手续费</th><th>盈利率</th><th>资金费金额</th><th>仓位保证金（U）</th><th>仓位保证金（体验金）</th><th>平仓盈亏</th><th>开仓时间</th><th>平仓时间</th>
+                      <th>仓位 ID</th><th>用户 UID</th><th>合伙人 UID</th><th>顶级合伙人 UID</th><th>盘口类型</th><th>合约名称</th><th>杠杆倍数</th><th>仓位方向</th><th>仓位状态</th><th>开仓类型</th><th>开仓价格</th><th>最大持仓量</th><th>强平触发价</th><th>平仓均价</th><th>已平仓量</th><th>总手续费</th><th>盈利率</th><th>仓位保证金（U）</th><th>仓位保证金（体验金）</th><th>平仓盈亏</th><th>开仓时间</th><th>平仓时间</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>HIS-55721291</td><td>10248391</td><td>30087511</td><td>80012001</td><td>实盘</td><td>BTCUSDT 永续</td><td>20x</td><td>开多</td><td><span class="status gray">全部平仓</span></td><td>全仓</td><td>66,880</td><td>1.00 BTC</td><td>63,220</td><td>68,540</td><td>1.00 BTC</td><td>128.60</td><td style="color:#7ef3c3">+85.02%</td><td><button class="linkBtn" data-nav-page="funding" data-drawer-key="funding-history-btc">+26.48 查看资金费</button></td><td>22,300</td><td>0</td><td><button class="linkBtn" data-drawer-key="history-btc">+18,960 查看关联</button></td><td>2026-07-11 09:10:00</td><td>2026-07-14 17:45:28</td></tr>
-                    <tr><td>HIS-55721109</td><td>10277109</td><td>30087511</td><td>80012001</td><td>模拟盘</td><td>ETHUSDT 永续</td><td>12x</td><td>开空</td><td><span class="status red">爆仓</span></td><td>逐仓</td><td>3,780</td><td>46 ETH</td><td>4,066</td><td>4,054</td><td>46 ETH</td><td>96.44</td><td style="color:#ff9e9e">-91.12%</td><td><button class="linkBtn" data-nav-page="funding" data-drawer-key="funding-history-eth">-19.84 查看资金费</button></td><td>9,240</td><td>200</td><td><button class="linkBtn" data-drawer-key="history-eth">-8,420 查看关联</button></td><td>2026-07-09 13:24:52</td><td>2026-07-10 02:16:40</td></tr>
+                    <tr><td>HIS-55721291</td><td>10248391</td><td>30087511</td><td>80012001</td><td>实盘</td><td>BTCUSDT 永续</td><td>20x</td><td>开多</td><td><span class="status gray">全部平仓</span></td><td>全仓</td><td>66,880</td><td>1.00 BTC</td><td>63,220</td><td>68,540</td><td>1.00 BTC</td><td>128.60</td><td style="color:#7ef3c3">+85.02%</td><td>22,300</td><td>0</td><td><button class="linkBtn" data-drawer-key="history-btc">+18,960 查看关联</button></td><td>2026-07-11 09:10:00</td><td>2026-07-14 17:45:28</td></tr>
+                    <tr><td>HIS-55721109</td><td>10277109</td><td>30087511</td><td>80012001</td><td>模拟盘</td><td>ETHUSDT 永续</td><td>12x</td><td>开空</td><td><span class="status red">爆仓</span></td><td>逐仓</td><td>3,780</td><td>46 ETH</td><td>4,066</td><td>4,054</td><td>46 ETH</td><td>96.44</td><td style="color:#ff9e9e">-91.12%</td><td>9,240</td><td>200</td><td><button class="linkBtn" data-drawer-key="history-eth">-8,420 查看关联</button></td><td>2026-07-09 13:24:52</td><td>2026-07-10 02:16:40</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -1193,7 +1187,6 @@
             <div class="contentCard">
               <div class="cardHead">
                 <div><h3>净盈亏查询明细</h3><p>对应文档中的用户维度资金与体验金字段。</p></div>
-                <div class="miniActions"><span class="chip">数据管理</span></div>
               </div>
               <div class="tableWrap">
                 <table>
@@ -1239,7 +1232,6 @@
             <div class="contentCard">
               <div class="cardHead">
                 <div><h3>资金费历史列表</h3><p>按结算批次聚合展示；当单批次涉及多个仓位时，可展开查看对应仓位 ID 与资金费计算时持仓金额。</p></div>
-                <div class="miniActions"><span class="chip">资金费历史</span></div>
               </div>
               <div class="tableWrap">
                 <table>
@@ -1366,7 +1358,7 @@
             <h4>2. 当前持仓</h4>
             <span class="auditMeta">交易管理</span>
           </div>
-          <div class="note">口径定义：当前持仓以“仍未完全平仓的实时仓位”为口径，盈利率按（未实现盈亏 + 已实现盈亏 - 累计资金费金额）/ 保证金（U）计算；资金费金额支持联动查看该仓位对应的资金费历史，原型同时补充“关联记录”入口，用于围绕仓位按时间轴倒序联动当前委托、开仓记录和平仓记录。</div>
+          <div class="note">口径定义：当前持仓以“仍未完全平仓的实时仓位”为口径，盈利率按（未实现盈亏 + 已实现盈亏）/ 保证金（U）计算；原型补充“关联记录”入口。关联记录抽屉默认按时间轴倒序展示，可切换为按类型查看；当前仅保留委托、开仓、平仓三类交易链路，用于还原同一仓位的真实成交过程。列表标题右上角不再展示静态描述标签，避免用户误认为该区域可点击。</div>
           <div class="contentCard" style="margin-top:12px">
             <div class="tableWrap auditTable">
               <table>
@@ -1378,6 +1370,7 @@
                   <tr><td>搜索栏</td><td>用户 UID</td><td>用户 UID</td><td>持仓所属用户 UID。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>搜索栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直接归属合伙人 UID。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>搜索栏</td><td>仓位 ID</td><td>仓位 ID</td><td>仓位唯一标识。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>标题栏</td><td class="mutedCell">无（本轮调整）</td><td>右上角静态描述标签</td><td>当前持仓列表标题区不再展示纯说明性质的静态标签，仅保留标题与说明文案，避免用户将其误判为可点击操作。该项为本轮展示规范调整。</td></tr>
                   <tr><td>筛选栏</td><td>全部仓位模式</td><td>仓位模式</td><td>全仓/逐仓。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>筛选栏</td><td>全部方向</td><td>方向</td><td>开多/开空。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>筛选栏</td><td>全部合约名称</td><td>合约名称</td><td>当前持仓所属合约。字段名称和业务含义与页面定义一致。</td></tr>
@@ -1394,15 +1387,14 @@
                   <tr><td>信息栏</td><td>保证金（U）</td><td>保证金（U）</td><td>真实资金保证金。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>保证金（体验金）</td><td>保证金（体验金）</td><td>体验金占用保证金。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>开仓均价</td><td>开仓均价</td><td>该仓位加权开仓均价。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>盈利率</td><td>按（未实现盈亏 + 已实现盈亏 - 累计资金费金额）/ 保证金（U）计算，用于从收益角度快速判断当前持仓表现。该字段为当前页面的补充定义。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>盈利率</td><td>按（未实现盈亏 + 已实现盈亏）/ 保证金（U）计算，用于从收益角度快速判断当前持仓表现。该字段为当前页面的补充定义。</td></tr>
                   <tr><td>信息栏</td><td>未结算盈亏</td><td>未实现盈亏</td><td>按当前价格计算的浮盈亏，即仍未平仓部分的实时盈亏。原型把字段命名明确为“未实现盈亏”，便于与已实现盈亏区分。</td></tr>
                   <tr><td>信息栏</td><td>已结算盈亏</td><td>已实现盈亏</td><td>该持仓已发生的实现盈亏，来自已成交平仓部分。原型把字段命名明确为“已实现盈亏”，便于与未实现盈亏区分。</td></tr>
-                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>资金费金额</td><td>当前持仓截至当前时点累计发生的资金费金额；点击后会联动到资金费历史抽屉，继续查看每个结算时点的资金费率、资金费金额和资金费计算时持仓金额。该字段为当前页面的补充定义。</td></tr>
                   <tr><td>信息栏</td><td>预估强平价</td><td>预估强平价</td><td>按当前保证金状态估算。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>止盈止损价格</td><td>止盈止损价格</td><td>当前仓位挂接止盈止损价格。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>仓位类型</td><td>仓位类型</td><td>全仓/逐仓类型展示。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>开仓时间</td><td>开仓时间</td><td>首次开仓时间。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>信息栏</td><td class="mutedCell">无（原型补充）</td><td>关联记录</td><td>围绕当前持仓仓位 ID 联动当前委托、开仓记录和平仓记录，并按时间轴倒序展示，便于从实时仓位顺着事件发展回溯完整交易链路。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（原型补充）</td><td>关联记录</td><td>围绕当前持仓仓位 ID 联动当前委托、开仓记录和平仓记录。抽屉默认按时间轴倒序展示，支持切换为按类型分组查看；仅改变归类方式，不改变各列表表头和字段参数。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
                   <tr><td>页码栏</td><td>页码条</td><td>分页条</td><td>列表分页与总数展示。当前原型已经提供该展示或交互能力。</td></tr>
                 </tbody>
               </table>
@@ -1549,7 +1541,7 @@
             <h4>6. 历史仓位</h4>
             <span class="auditMeta">交易管理</span>
           </div>
-          <div class="note">口径定义：历史仓位为已结束仓位集合，包含全部平仓与爆仓；盈利率按（平仓盈亏 - 总手续费 - 累计资金费金额）/ 仓位保证金（U）计算。页面同时承载汇总指标、资金费金额联动以及围绕历史仓位展开、按时间轴倒序展示的委托记录、开仓记录和平仓记录联动查看。</div>
+          <div class="note">口径定义：历史仓位为已结束仓位集合，包含全部平仓与爆仓；盈利率按（平仓盈亏 - 总手续费）/ 仓位保证金（U）计算。页面同时承载汇总指标以及围绕历史仓位展开的关联记录查看。关联记录抽屉默认按时间轴倒序展示，可切换为按类型查看；当前仅保留委托、开仓、平仓三类交易链路，用于复盘同一仓位的完整成交过程。列表标题右上角不再展示静态描述标签，避免用户误认为该区域可点击。</div>
           <div class="contentCard" style="margin-top:12px">
             <div class="tableWrap auditTable">
               <table>
@@ -1561,6 +1553,7 @@
                   <tr><td>搜索栏</td><td>用户 UID</td><td>用户 UID</td><td>历史仓位所属用户。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>搜索栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直接合伙人 UID。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>搜索栏</td><td>仓位 ID</td><td>仓位 ID</td><td>历史仓位主键。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>标题栏</td><td class="mutedCell">无（本轮调整）</td><td>右上角静态描述标签</td><td>历史仓位列表标题区不再展示纯说明性质的静态标签，仅保留标题与说明文案，避免用户将其误判为可点击操作。该项为本轮展示规范调整。</td></tr>
                   <tr><td>筛选栏</td><td>全部仓位模式</td><td>仓位模式</td><td>全仓/逐仓。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>筛选栏</td><td>全部仓位方向</td><td>仓位方向</td><td>开多/开空。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>筛选栏</td><td>仓位状态</td><td>仓位状态</td><td>全部平仓/爆仓。字段名称和业务含义与页面定义一致。</td></tr>
@@ -1588,11 +1581,11 @@
                   <tr><td>信息栏</td><td>平仓均价</td><td>平仓均价</td><td>已平仓部分加权均价。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>已平仓量</td><td>已平仓量</td><td>累计已平仓数量。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>总手续费</td><td>总手续费</td><td>仓位生命周期总手续费。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>盈利率</td><td>按（平仓盈亏 - 总手续费 - 累计资金费金额）/ 仓位保证金（U）计算，用于从最终收益角度评估历史仓位表现。该字段为当前页面的补充定义。</td></tr>
-                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>资金费金额</td><td>历史仓位在整个生命周期内累计发生的资金费金额；点击后会联动到资金费历史抽屉，查看该仓位各个结算时点的资金费率、资金费金额和资金费计算时持仓金额。该字段为当前页面的补充定义。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>盈利率</td><td>按（平仓盈亏 - 总手续费）/ 仓位保证金（U）计算，用于从最终收益角度评估历史仓位表现。该字段为当前页面的补充定义。</td></tr>
                   <tr><td>信息栏</td><td>仓位保证金（U）</td><td>仓位保证金（U）</td><td>真实资金保证金。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>仓位保证金（体验金）</td><td>仓位保证金（体验金）</td><td>体验金保证金。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>信息栏</td><td>平仓盈亏（链接页面）</td><td>平仓盈亏</td><td>点击后打开右侧关联记录抽屉，按时间轴倒序查看该历史仓位对应的委托记录、开仓记录和平仓记录。当前原型已经完成联动展示。</td></tr>
+                  <tr><td>信息栏</td><td>平仓盈亏（链接页面）</td><td>平仓盈亏</td><td>点击后打开右侧关联记录抽屉，默认按时间轴倒序查看该历史仓位对应的委托记录、开仓记录和平仓记录；同时支持切换为按类型分组查看。当前原型已经完成联动展示。</td></tr>
+                  <tr><td>链接页</td><td class="mutedCell">无（本轮补充）</td><td>查看模式</td><td>关联记录抽屉提供“时间轴 / 类型”两种查看模式，默认时间轴。时间轴用于顺着事件发展阅读完整过程，类型用于按委托、开仓、平仓分组汇总查看；两种模式使用同一份底层数据，不改变各列表字段参数。</td></tr>
                   <tr><td>信息栏</td><td>开仓时间</td><td>开仓时间</td><td>首笔开仓时间。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>平仓时间</td><td>平仓时间</td><td>最终平仓或爆仓时间。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>链接页</td><td class="mutedCell">无（原型补充）</td><td>关联委托记录</td><td>围绕历史仓位查看该仓位生命周期内的委托主单，包含普通委托、止盈止损触发或风控触发等来源。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
@@ -1750,18 +1743,10 @@
             primaryValue: "POS-78721194",
             primarySub: "BTCUSDT 永续 / 用户 10248391 / 开多",
             secondaryLabel: "联动范围",
-            secondaryValue: "2 条委托 / 2 条开仓 / 2 条平仓 / 2 次资金费",
+            secondaryValue: "2 条委托 / 2 条开仓 / 2 条平仓",
             secondarySub: "按时间轴倒序回看仓位事件链路",
-            note: "说明：当前持仓页联动的是该仓位下仍有效的当前委托，以及该仓位已经发生的开仓和平仓成交记录；时间轴中会穿插资金费结算事件（正负均可能），用于还原真实交易过程。",
+            note: "说明：当前持仓页联动的是该仓位下仍有效的当前委托，以及该仓位已经发生的开仓和平仓成交记录；以下按时间轴倒序展示，便于顺着事件发展阅读。",
             timeline: [
-              {
-                time: "2026-07-18 14:00:00",
-                title: "资金费结算",
-                caption: "资金费结算会影响净盈亏，可能为正或负。",
-                tag: "资金费",
-                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
-                rows: [["2026-07-18 14:00:00", "0.010000%", "71,240", "<span style='color:#7ef3c3'>+7.12</span>", "<button class='linkBtn' data-drawer-key='funding-current-btc'>查看资金费明细</button>"]]
-              },
               {
                 time: "2026-07-18 12:28:39",
                 title: "关联平仓记录",
@@ -1769,14 +1754,6 @@
                 tag: "平仓记录",
                 headers: ["平仓订单 ID", "委托订单 ID", "仓位 ID", "平仓价格", "平仓数量", "平仓时间"],
                 rows: [["CLOSE-718996", "ODR-991728898", "POS-78721194", "68,920", "0.20 BTC", "2026-07-18 12:28:39"]]
-              },
-              {
-                time: "2026-07-18 12:00:00",
-                title: "资金费结算",
-                caption: "同一仓位在存续期间可能发生多次资金费结算。",
-                tag: "资金费",
-                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
-                rows: [["2026-07-18 12:00:00", "0.010000%", "69,880", "<span style='color:#ff9e9e'>-6.99</span>", "<button class='linkBtn' data-drawer-key='funding-current-btc'>查看资金费明细</button>"]]
               },
               {
                 time: "2026-07-18 11:40:18",
@@ -1827,18 +1804,10 @@
             primaryValue: "POS-78724903",
             primarySub: "ETHUSDT 永续 / 用户 10277109 / 开空",
             secondaryLabel: "联动范围",
-            secondaryValue: "2 条委托 / 2 条开仓 / 2 条平仓 / 2 次资金费",
+            secondaryValue: "2 条委托 / 2 条开仓 / 2 条平仓",
             secondarySub: "按时间轴倒序回看仓位事件链路",
-            note: "说明：当前持仓页联动的是该仓位下仍有效的当前委托，以及该仓位已经发生的开仓和平仓成交记录；时间轴中会穿插资金费结算事件（正负均可能），用于还原真实交易过程。",
+            note: "说明：当前持仓页联动的是该仓位下仍有效的当前委托，以及该仓位已经发生的开仓和平仓成交记录；以下按时间轴倒序展示，便于顺着事件发展阅读。",
             timeline: [
-              {
-                time: "2026-07-18 14:00:00",
-                title: "资金费结算",
-                caption: "资金费结算会影响净盈亏，可能为正或负。",
-                tag: "资金费",
-                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
-                rows: [["2026-07-18 14:00:00", "-0.007000%", "118,960", "<span style='color:#7ef3c3'>+8.33</span>", "<button class='linkBtn' data-drawer-key='funding-current-eth'>查看资金费明细</button>"]]
-              },
               {
                 time: "2026-07-18 12:22:04",
                 title: "关联平仓记录",
@@ -1846,14 +1815,6 @@
                 tag: "平仓记录",
                 headers: ["平仓订单 ID", "委托订单 ID", "仓位 ID", "平仓价格", "平仓数量", "平仓时间"],
                 rows: [["CLOSE-718981", "ODR-991728703", "POS-78724903", "3,655", "12 ETH", "2026-07-18 12:22:04"]]
-              },
-              {
-                time: "2026-07-18 12:00:00",
-                title: "资金费结算",
-                caption: "同一仓位在存续期间可能发生多次资金费结算。",
-                tag: "资金费",
-                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
-                rows: [["2026-07-18 12:00:00", "-0.007000%", "120,240", "<span style='color:#ff9e9e'>-8.42</span>", "<button class='linkBtn' data-drawer-key='funding-current-eth'>查看资金费明细</button>"]]
               },
               {
                 time: "2026-07-18 11:38:20",
@@ -1972,9 +1933,9 @@
             primaryValue: "HIS-55721291",
             primarySub: "BTCUSDT 永续 / 用户 10248391 / 全部平仓",
             secondaryLabel: "链路汇总",
-            secondaryValue: "3 条委托 / 2 条开仓 / 3 条平仓 / 3 次资金费",
+            secondaryValue: "3 条委托 / 2 条开仓 / 3 条平仓",
             secondarySub: "按时间轴倒序复盘历史仓位的完整交易过程",
-            note: "说明：历史仓位联动展示该仓位生命周期内的委托记录、开仓记录和平仓记录；时间轴中会穿插资金费结算事件（正负均可能），用于更真实复盘仓位过程；以下按时间轴倒序展示。",
+            note: "说明：历史仓位联动展示该仓位生命周期内的委托记录、开仓记录和平仓记录；以下按时间轴倒序展示。",
             timeline: [
               {
                 time: "2026-07-14 17:45:28",
@@ -1994,14 +1955,6 @@
                 rows: [["ODR-991720114", "止盈止损触发", "卖出平多", "68,510", "0.60 BTC", "2026-07-14 17:44:49"]]
               },
               {
-                time: "2026-07-14 08:00:00",
-                title: "资金费结算",
-                caption: "资金费结算会影响净盈亏，可能为正或负。",
-                tag: "资金费",
-                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
-                rows: [["2026-07-14 08:00:00", "0.012000%", "112,400", "<span style='color:#7ef3c3'>+13.49</span>", "<button class='linkBtn' data-drawer-key='funding-history-btc'>查看资金费明细</button>"]]
-              },
-              {
                 time: "2026-07-13 09:22:18",
                 title: "关联平仓记录",
                 caption: "平仓记录保留平仓盈亏与触发来源，用于对应历史仓位详情链接页。",
@@ -2009,14 +1962,6 @@
                 minWidth: 1280,
                 headers: ["订单 ID", "委托订单 ID", "用户 UID", "合约名称", "方向", "平仓盈亏", "下单价格", "成交均价", "开平仓数量", "订单类型", "杠杆倍数", "触发类型", "来源 ID", "更新时间"],
                 rows: [["CLOSE-700921", "ODR-991720002", "10248391", "BTCUSDT 永续", "卖出平多", "<span style='color:#7ef3c3'>+8,420</span>", "67,980", "68,120", "0.40 BTC", "限价", "20x", "普通订单", "-", "2026-07-13 09:22:18"]]
-              },
-              {
-                time: "2026-07-13 08:00:00",
-                title: "资金费结算",
-                caption: "同一仓位在存续期间可能发生多次资金费结算。",
-                tag: "资金费",
-                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
-                rows: [["2026-07-13 08:00:00", "0.012000%", "108,360", "<span style='color:#ff9e9e'>-12.99</span>", "<button class='linkBtn' data-drawer-key='funding-history-btc'>查看资金费明细</button>"]]
               },
               {
                 time: "2026-07-12 10:05:26",
@@ -2033,14 +1978,6 @@
                 tag: "委托记录",
                 headers: ["委托订单 ID", "触发来源", "订单方向", "委托价格", "委托数量", "委托时间"],
                 rows: [["ODR-991719988", "普通委托", "买入开多", "67,180", "0.50 BTC", "2026-07-12 10:04:50"]]
-              },
-              {
-                time: "2026-07-12 08:00:00",
-                title: "资金费结算",
-                caption: "资金费结算会影响净盈亏，可能为正或负。",
-                tag: "资金费",
-                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
-                rows: [["2026-07-12 08:00:00", "0.012000%", "104,880", "<span style='color:#7ef3c3'>+12.59</span>", "<button class='linkBtn' data-drawer-key='funding-history-btc'>查看资金费明细</button>"]]
               },
               {
                 time: "2026-07-11 12:18:08",
@@ -2084,9 +2021,9 @@
             primaryValue: "HIS-55721109",
             primarySub: "ETHUSDT 永续 / 用户 10277109 / 爆仓",
             secondaryLabel: "链路汇总",
-            secondaryValue: "3 条委托 / 2 条开仓 / 1 条平仓 / 2 次资金费",
+            secondaryValue: "3 条委托 / 2 条开仓 / 1 条平仓",
             secondarySub: "按时间轴倒序复盘历史仓位的完整交易过程",
-            note: "说明：历史仓位联动展示该仓位生命周期内的委托记录、开仓记录和平仓记录；时间轴中会穿插资金费结算事件（正负均可能），用于更真实复盘仓位过程；以下按时间轴倒序展示。若仓位以爆仓结束，平仓记录会体现爆仓触发的来源和最终盈亏。",
+            note: "说明：历史仓位联动展示该仓位生命周期内的委托记录、开仓记录和平仓记录；以下按时间轴倒序展示。若仓位以爆仓结束，平仓记录会体现爆仓触发的来源和最终盈亏。",
             timeline: [
               {
                 time: "2026-07-10 02:16:40",
@@ -2105,14 +2042,6 @@
                 rows: [["ODR-991719955", "风控强平", "买入平空", "4,054", "46 ETH", "2026-07-10 02:16:40"]]
               },
               {
-                time: "2026-07-10 00:00:00",
-                title: "资金费结算",
-                caption: "资金费结算会影响净盈亏，可能为正或负。",
-                tag: "资金费",
-                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
-                rows: [["2026-07-10 00:00:00", "-0.006000%", "163,800", "<span style='color:#ff9e9e'>-9.83</span>", "<button class='linkBtn' data-drawer-key='funding-history-eth'>查看资金费明细</button>"]]
-              },
-              {
                 time: "2026-07-09 18:40:12",
                 title: "关联开仓记录",
                 caption: "同一历史仓位可能出现加仓/再次开仓，形成多段开仓成交。",
@@ -2127,14 +2056,6 @@
                 tag: "委托记录",
                 headers: ["委托订单 ID", "触发来源", "订单方向", "委托价格", "委托数量", "委托时间"],
                 rows: [["ODR-991719812", "普通委托", "卖出开空", "3,848", "18 ETH", "2026-07-09 18:39:50"]]
-              },
-              {
-                time: "2026-07-09 16:00:00",
-                title: "资金费结算",
-                caption: "同一仓位在存续期间可能发生多次资金费结算。",
-                tag: "资金费",
-                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
-                rows: [["2026-07-09 16:00:00", "-0.006000%", "166,820", "<span style='color:#ff9e9e'>-10.01</span>", "<button class='linkBtn' data-drawer-key='funding-history-eth'>查看资金费明细</button>"]]
               },
               {
                 time: "2026-07-09 13:24:52",
