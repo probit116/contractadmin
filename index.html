@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
@@ -609,6 +609,98 @@
         line-height:1.8;
       }
 
+      .drawerViewBar{
+        margin-top:14px;
+        display:flex;
+        width:fit-content;
+        padding:4px;
+        border-radius:999px;
+        background:rgba(255,255,255,.04);
+        border:1px solid var(--line);
+        gap:4px;
+      }
+
+      .drawerViewBtn{
+        border:none;
+        background:transparent;
+        color:var(--muted);
+        height:34px;
+        padding:0 14px;
+        border-radius:999px;
+        cursor:pointer;
+        font-size:13px;
+        font-weight:700;
+      }
+
+      .drawerViewBtn.active{
+        background:rgba(124,92,255,.18);
+        color:#efeaff;
+        box-shadow:0 0 0 1px rgba(124,92,255,.28) inset;
+      }
+
+      .drawerViewBtn:focus-visible{
+        outline:2px solid rgba(124,92,255,.35);
+        outline-offset:2px;
+      }
+
+      .timelineList{
+        position:relative;
+        margin-top:16px;
+        padding-left:34px;
+      }
+
+      .timelineList::before{
+        content:"";
+        position:absolute;
+        left:11px;
+        top:6px;
+        bottom:6px;
+        width:2px;
+        background:linear-gradient(180deg, rgba(122,183,255,.38), rgba(77,224,168,.18));
+      }
+
+      .timelineItem{
+        position:relative;
+      }
+
+      .timelineItem + .timelineItem{
+        margin-top:16px;
+      }
+
+      .timelineItem::before{
+        content:"";
+        position:absolute;
+        left:-28px;
+        top:14px;
+        width:12px;
+        height:12px;
+        border-radius:50%;
+        background:linear-gradient(135deg, var(--blue), var(--brand));
+        box-shadow:0 0 0 4px rgba(122,183,255,.12);
+      }
+
+      .timelineTime{
+        margin-bottom:10px;
+        color:#d9e9ff;
+        font-size:12px;
+        font-weight:700;
+        letter-spacing:.04em;
+      }
+
+      .timelineTime span{
+        display:inline-flex;
+        align-items:center;
+        height:28px;
+        padding:0 12px;
+        border-radius:999px;
+        background:rgba(122,183,255,.10);
+        border:1px solid rgba(122,183,255,.16);
+      }
+
+      .timelineCard{
+        overflow:hidden;
+      }
+
       .pillButton{
         cursor:pointer;
       }
@@ -1185,6 +1277,10 @@
           <div class="metric"><div class="k" id="drawerSecondaryLabel">联动范围</div><div class="v" id="drawerSecondaryValue" style="font-size:22px">委托 / 开仓 / 平仓</div><div class="sub" id="drawerSecondarySub">围绕同一对象回看交易链路</div></div>
         </div>
         <div class="note" id="drawerNote">说明：联动抽屉会按照当前页面对象展示对应的委托记录、开仓记录和平仓记录，便于开发和测试对同一条交易链路做交叉核对。</div>
+        <div class="drawerViewBar" id="drawerViewBar" style="display:none">
+          <button class="drawerViewBtn active" type="button" data-drawer-view="timeline">时间轴</button>
+          <button class="drawerViewBtn" type="button" data-drawer-view="type">类型</button>
+        </div>
         <div id="drawerSections"></div>
       </div>
     </aside>
@@ -1270,7 +1366,7 @@
             <h4>2. 当前持仓</h4>
             <span class="auditMeta">交易管理</span>
           </div>
-          <div class="note">口径定义：当前持仓以“仍未完全平仓的实时仓位”为口径，盈利率按（未实现盈亏 + 已实现盈亏 - 累计资金费金额）/ 保证金（U）计算；资金费金额支持联动查看该仓位对应的资金费历史，原型同时补充“关联记录”入口，用于围绕仓位联动当前委托、开仓记录和平仓记录。</div>
+          <div class="note">口径定义：当前持仓以“仍未完全平仓的实时仓位”为口径，盈利率按（未实现盈亏 + 已实现盈亏 - 累计资金费金额）/ 保证金（U）计算；资金费金额支持联动查看该仓位对应的资金费历史，原型同时补充“关联记录”入口，用于围绕仓位按时间轴倒序联动当前委托、开仓记录和平仓记录。</div>
           <div class="contentCard" style="margin-top:12px">
             <div class="tableWrap auditTable">
               <table>
@@ -1306,7 +1402,7 @@
                   <tr><td>信息栏</td><td>止盈止损价格</td><td>止盈止损价格</td><td>当前仓位挂接止盈止损价格。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>仓位类型</td><td>仓位类型</td><td>全仓/逐仓类型展示。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>开仓时间</td><td>开仓时间</td><td>首次开仓时间。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>信息栏</td><td class="mutedCell">无（原型补充）</td><td>关联记录</td><td>围绕当前持仓仓位 ID 联动当前委托、开仓记录和平仓记录，便于从实时仓位回溯完整交易链路。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（原型补充）</td><td>关联记录</td><td>围绕当前持仓仓位 ID 联动当前委托、开仓记录和平仓记录，并按时间轴倒序展示，便于从实时仓位顺着事件发展回溯完整交易链路。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
                   <tr><td>页码栏</td><td>页码条</td><td>分页条</td><td>列表分页与总数展示。当前原型已经提供该展示或交互能力。</td></tr>
                 </tbody>
               </table>
@@ -1453,7 +1549,7 @@
             <h4>6. 历史仓位</h4>
             <span class="auditMeta">交易管理</span>
           </div>
-          <div class="note">口径定义：历史仓位为已结束仓位集合，包含全部平仓与爆仓；盈利率按（平仓盈亏 - 总手续费 - 累计资金费金额）/ 仓位保证金（U）计算。页面同时承载汇总指标、资金费金额联动以及围绕历史仓位展开的委托记录、开仓记录和平仓记录联动查看。</div>
+          <div class="note">口径定义：历史仓位为已结束仓位集合，包含全部平仓与爆仓；盈利率按（平仓盈亏 - 总手续费 - 累计资金费金额）/ 仓位保证金（U）计算。页面同时承载汇总指标、资金费金额联动以及围绕历史仓位展开、按时间轴倒序展示的委托记录、开仓记录和平仓记录联动查看。</div>
           <div class="contentCard" style="margin-top:12px">
             <div class="tableWrap auditTable">
               <table>
@@ -1496,7 +1592,7 @@
                   <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>资金费金额</td><td>历史仓位在整个生命周期内累计发生的资金费金额；点击后会联动到资金费历史抽屉，查看该仓位各个结算时点的资金费率、资金费金额和资金费计算时持仓金额。该字段为当前页面的补充定义。</td></tr>
                   <tr><td>信息栏</td><td>仓位保证金（U）</td><td>仓位保证金（U）</td><td>真实资金保证金。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>仓位保证金（体验金）</td><td>仓位保证金（体验金）</td><td>体验金保证金。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>信息栏</td><td>平仓盈亏（链接页面）</td><td>平仓盈亏</td><td>点击后打开右侧关联记录抽屉，查看该历史仓位对应的委托记录、开仓记录和平仓记录。当前原型已经完成联动展示。</td></tr>
+                  <tr><td>信息栏</td><td>平仓盈亏（链接页面）</td><td>平仓盈亏</td><td>点击后打开右侧关联记录抽屉，按时间轴倒序查看该历史仓位对应的委托记录、开仓记录和平仓记录。当前原型已经完成联动展示。</td></tr>
                   <tr><td>信息栏</td><td>开仓时间</td><td>开仓时间</td><td>首笔开仓时间。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>平仓时间</td><td>平仓时间</td><td>最终平仓或爆仓时间。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>链接页</td><td class="mutedCell">无（原型补充）</td><td>关联委托记录</td><td>围绕历史仓位查看该仓位生命周期内的委托主单，包含普通委托、止盈止损触发或风控触发等来源。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
@@ -1626,20 +1722,72 @@
         var drawerSecondaryValue = document.getElementById("drawerSecondaryValue");
         var drawerSecondarySub = document.getElementById("drawerSecondarySub");
         var drawerNote = document.getElementById("drawerNote");
+        var drawerViewBar = document.getElementById("drawerViewBar");
+        var drawerViewButtons = Array.prototype.slice.call(document.querySelectorAll("#drawerViewBar [data-drawer-view]"));
         var drawerSections = document.getElementById("drawerSections");
+        var currentDrawerView = "timeline";
+        var currentDrawerKey = null;
+
+        function setDrawerView(view) {
+          currentDrawerView = view;
+          drawerViewButtons.forEach(function (button) {
+            button.classList.toggle("active", button.getAttribute("data-drawer-view") === view);
+          });
+        }
+
+        drawerViewButtons.forEach(function (button) {
+          button.addEventListener("click", function () {
+            setDrawerView(button.getAttribute("data-drawer-view"));
+            if (currentDrawerKey) renderRelationDrawer(currentDrawerKey);
+          });
+        });
+
         var relationData = {
           "position-btc": {
             title: "当前持仓关联记录",
-            subtitle: "围绕当前持仓仓位查看对应委托、开仓记录和平仓记录。",
+            subtitle: "围绕当前持仓仓位按时间轴倒序查看对应委托、开仓记录和平仓记录。",
             primaryLabel: "仓位 ID",
             primaryValue: "POS-78721194",
             primarySub: "BTCUSDT 永续 / 用户 10248391 / 开多",
             secondaryLabel: "联动范围",
-            secondaryValue: "1 条委托 / 1 条开仓 / 1 条平仓",
-            secondarySub: "用于从实时仓位回溯订单链路",
-            note: "说明：当前持仓页联动的是该仓位下仍有效的当前委托，以及该仓位已经发生的开仓和平仓成交记录。",
-            sections: [
+            secondaryValue: "2 条委托 / 2 条开仓 / 2 条平仓 / 2 次资金费",
+            secondarySub: "按时间轴倒序回看仓位事件链路",
+            note: "说明：当前持仓页联动的是该仓位下仍有效的当前委托，以及该仓位已经发生的开仓和平仓成交记录；时间轴中会穿插资金费结算事件（正负均可能），用于还原真实交易过程。",
+            timeline: [
               {
+                time: "2026-07-18 14:00:00",
+                title: "资金费结算",
+                caption: "资金费结算会影响净盈亏，可能为正或负。",
+                tag: "资金费",
+                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
+                rows: [["2026-07-18 14:00:00", "0.010000%", "71,240", "<span style='color:#7ef3c3'>+7.12</span>", "<button class='linkBtn' data-drawer-key='funding-current-btc'>查看资金费明细</button>"]]
+              },
+              {
+                time: "2026-07-18 12:28:39",
+                title: "关联平仓记录",
+                caption: "平仓记录展示该仓位已成交的平仓明细，便于核对已实现盈亏来源。",
+                tag: "平仓记录",
+                headers: ["平仓订单 ID", "委托订单 ID", "仓位 ID", "平仓价格", "平仓数量", "平仓时间"],
+                rows: [["CLOSE-718996", "ODR-991728898", "POS-78721194", "68,920", "0.20 BTC", "2026-07-18 12:28:39"]]
+              },
+              {
+                time: "2026-07-18 12:00:00",
+                title: "资金费结算",
+                caption: "同一仓位在存续期间可能发生多次资金费结算。",
+                tag: "资金费",
+                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
+                rows: [["2026-07-18 12:00:00", "0.010000%", "69,880", "<span style='color:#ff9e9e'>-6.99</span>", "<button class='linkBtn' data-drawer-key='funding-current-btc'>查看资金费明细</button>"]]
+              },
+              {
+                time: "2026-07-18 11:40:18",
+                title: "关联开仓记录",
+                caption: "同一仓位可能发生加仓/再次开仓，形成多段开仓成交。",
+                tag: "开仓记录",
+                headers: ["开仓订单 ID", "委托订单 ID", "仓位 ID", "开仓价格", "开仓数量", "开仓时间"],
+                rows: [["OPEN-718455", "ODR-991728820", "POS-78721194", "68,120", "0.30 BTC", "2026-07-18 11:40:18"]]
+              },
+              {
+                time: "2026-07-18 11:15:32",
                 title: "关联委托记录",
                 caption: "当前持仓回看该仓位仍有效的委托主单。",
                 tag: "当前委托",
@@ -1647,33 +1795,76 @@
                 rows: [["ODR-991728898", "TP24071810928", "卖出平多", "68,940", "0.25 BTC", "2026-07-18 11:15:32"]]
               },
               {
+                time: "2026-07-18 10:24:10",
+                title: "关联平仓记录",
+                caption: "可能出现部分平仓后再次开仓的情况，时间轴用于串联完整事件。",
+                tag: "平仓记录",
+                headers: ["平仓订单 ID", "委托订单 ID", "仓位 ID", "平仓价格", "平仓数量", "平仓时间"],
+                rows: [["CLOSE-718540", "ODR-991728780", "POS-78721194", "67,980", "0.15 BTC", "2026-07-18 10:24:10"]]
+              },
+              {
+                time: "2026-07-18 10:18:56",
+                title: "关联委托记录",
+                caption: "部分平仓对应的委托主单记录。",
+                tag: "当前委托",
+                headers: ["委托订单 ID", "对应止盈止损 ID", "订单方向", "委托价格", "委托数量", "委托时间"],
+                rows: [["ODR-991728780", "TP24071810841", "卖出平多", "67,990", "0.15 BTC", "2026-07-18 10:18:56"]]
+              },
+              {
+                time: "2026-07-18 08:15:36",
                 title: "关联开仓记录",
                 caption: "开仓记录用于确认该持仓最初是由哪一笔成交形成。",
                 tag: "开仓记录",
                 headers: ["开仓订单 ID", "委托订单 ID", "仓位 ID", "开仓价格", "开仓数量", "开仓时间"],
                 rows: [["OPEN-718201", "ODR-991728650", "POS-78721194", "67,540", "0.80 BTC", "2026-07-18 08:15:36"]]
-              },
-              {
-                title: "关联平仓记录",
-                caption: "平仓记录展示该仓位已成交的平仓明细，便于核对已实现盈亏来源。",
-                tag: "平仓记录",
-                headers: ["平仓订单 ID", "委托订单 ID", "仓位 ID", "平仓价格", "平仓数量", "平仓时间"],
-                rows: [["CLOSE-718996", "ODR-991728898", "POS-78721194", "68,920", "0.20 BTC", "2026-07-18 12:28:39"]]
               }
             ]
           },
           "position-eth": {
             title: "当前持仓关联记录",
-            subtitle: "围绕当前持仓仓位查看对应委托、开仓记录和平仓记录。",
+            subtitle: "围绕当前持仓仓位按时间轴倒序查看对应委托、开仓记录和平仓记录。",
             primaryLabel: "仓位 ID",
             primaryValue: "POS-78724903",
             primarySub: "ETHUSDT 永续 / 用户 10277109 / 开空",
             secondaryLabel: "联动范围",
-            secondaryValue: "1 条委托 / 1 条开仓 / 1 条平仓",
-            secondarySub: "用于从实时仓位回溯订单链路",
-            note: "说明：当前持仓页联动的是该仓位下仍有效的当前委托，以及该仓位已经发生的开仓和平仓成交记录。",
-            sections: [
+            secondaryValue: "2 条委托 / 2 条开仓 / 2 条平仓 / 2 次资金费",
+            secondarySub: "按时间轴倒序回看仓位事件链路",
+            note: "说明：当前持仓页联动的是该仓位下仍有效的当前委托，以及该仓位已经发生的开仓和平仓成交记录；时间轴中会穿插资金费结算事件（正负均可能），用于还原真实交易过程。",
+            timeline: [
               {
+                time: "2026-07-18 14:00:00",
+                title: "资金费结算",
+                caption: "资金费结算会影响净盈亏，可能为正或负。",
+                tag: "资金费",
+                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
+                rows: [["2026-07-18 14:00:00", "-0.007000%", "118,960", "<span style='color:#7ef3c3'>+8.33</span>", "<button class='linkBtn' data-drawer-key='funding-current-eth'>查看资金费明细</button>"]]
+              },
+              {
+                time: "2026-07-18 12:22:04",
+                title: "关联平仓记录",
+                caption: "平仓记录展示该仓位已成交的平仓明细，便于核对已实现盈亏来源。",
+                tag: "平仓记录",
+                headers: ["平仓订单 ID", "委托订单 ID", "仓位 ID", "平仓价格", "平仓数量", "平仓时间"],
+                rows: [["CLOSE-718981", "ODR-991728703", "POS-78724903", "3,655", "12 ETH", "2026-07-18 12:22:04"]]
+              },
+              {
+                time: "2026-07-18 12:00:00",
+                title: "资金费结算",
+                caption: "同一仓位在存续期间可能发生多次资金费结算。",
+                tag: "资金费",
+                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
+                rows: [["2026-07-18 12:00:00", "-0.007000%", "120,240", "<span style='color:#ff9e9e'>-8.42</span>", "<button class='linkBtn' data-drawer-key='funding-current-eth'>查看资金费明细</button>"]]
+              },
+              {
+                time: "2026-07-18 11:38:20",
+                title: "关联开仓记录",
+                caption: "同一仓位可能发生加仓/再次开仓，形成多段开仓成交。",
+                tag: "开仓记录",
+                headers: ["开仓订单 ID", "委托订单 ID", "仓位 ID", "开仓价格", "开仓数量", "开仓时间"],
+                rows: [["OPEN-718390", "ODR-991728745", "POS-78724903", "3,742", "14 ETH", "2026-07-18 11:38:20"]]
+              },
+              {
+                time: "2026-07-18 11:08:24",
                 title: "关联委托记录",
                 caption: "当前持仓回看该仓位仍有效的委托主单。",
                 tag: "当前委托",
@@ -1681,18 +1872,28 @@
                 rows: [["ODR-991728712", "TP24071810955", "买入开空", "3,728", "18 ETH", "2026-07-18 11:08:24"]]
               },
               {
+                time: "2026-07-18 10:46:12",
+                title: "关联平仓记录",
+                caption: "可能出现部分平仓后再次开仓的情况，时间轴用于串联完整事件。",
+                tag: "平仓记录",
+                headers: ["平仓订单 ID", "委托订单 ID", "仓位 ID", "平仓价格", "平仓数量", "平仓时间"],
+                rows: [["CLOSE-718612", "ODR-991728690", "POS-78724903", "3,698", "8 ETH", "2026-07-18 10:46:12"]]
+              },
+              {
+                time: "2026-07-18 10:41:30",
+                title: "关联委托记录",
+                caption: "部分平仓对应的委托主单记录。",
+                tag: "当前委托",
+                headers: ["委托订单 ID", "对应止盈止损 ID", "订单方向", "委托价格", "委托数量", "委托时间"],
+                rows: [["ODR-991728690", "TP24071810902", "买入平空", "3,700", "8 ETH", "2026-07-18 10:41:30"]]
+              },
+              {
+                time: "2026-07-18 09:04:11",
                 title: "关联开仓记录",
                 caption: "开仓记录用于确认该持仓最初是由哪一笔成交形成。",
                 tag: "开仓记录",
                 headers: ["开仓订单 ID", "委托订单 ID", "仓位 ID", "开仓价格", "开仓数量", "开仓时间"],
                 rows: [["OPEN-718245", "ODR-991728712", "POS-78724903", "3,710", "32 ETH", "2026-07-18 09:04:11"]]
-              },
-              {
-                title: "关联平仓记录",
-                caption: "平仓记录展示该仓位已成交的平仓明细，便于核对已实现盈亏来源。",
-                tag: "平仓记录",
-                headers: ["平仓订单 ID", "委托订单 ID", "仓位 ID", "平仓价格", "平仓数量", "平仓时间"],
-                rows: [["CLOSE-718981", "ODR-991728703", "POS-78724903", "3,655", "12 ETH", "2026-07-18 12:22:04"]]
               }
             ]
           },
@@ -1766,23 +1967,100 @@
           },
           "history-btc": {
             title: "历史仓位关联记录",
-            subtitle: "围绕历史仓位查看生命周期内的委托、开仓和平仓记录。",
+            subtitle: "围绕历史仓位按时间轴倒序查看生命周期内的委托、开仓和平仓记录。",
             primaryLabel: "历史仓位 ID",
             primaryValue: "HIS-55721291",
             primarySub: "BTCUSDT 永续 / 用户 10248391 / 全部平仓",
             secondaryLabel: "链路汇总",
-            secondaryValue: "2 条委托 / 1 条开仓 / 2 条平仓",
-            secondarySub: "便于复盘历史仓位的完整交易过程",
-            note: "说明：历史仓位联动展示该仓位生命周期内的委托记录、开仓记录和平仓记录。平仓记录同时保留平仓盈亏、触发类型和来源 ID，方便开发与测试核对收益归因。",
-            sections: [
+            secondaryValue: "3 条委托 / 2 条开仓 / 3 条平仓 / 3 次资金费",
+            secondarySub: "按时间轴倒序复盘历史仓位的完整交易过程",
+            note: "说明：历史仓位联动展示该仓位生命周期内的委托记录、开仓记录和平仓记录；时间轴中会穿插资金费结算事件（正负均可能），用于更真实复盘仓位过程；以下按时间轴倒序展示。",
+            timeline: [
               {
+                time: "2026-07-14 17:45:28",
+                title: "关联平仓记录",
+                caption: "平仓记录保留平仓盈亏与触发来源，用于对应历史仓位详情链接页。",
+                tag: "平仓记录",
+                minWidth: 1280,
+                headers: ["订单 ID", "委托订单 ID", "用户 UID", "合约名称", "方向", "平仓盈亏", "下单价格", "成交均价", "开平仓数量", "订单类型", "杠杆倍数", "触发类型", "来源 ID", "更新时间"],
+                rows: [["CLOSE-700992", "ODR-991720114", "10248391", "BTCUSDT 永续", "卖出平多", "<span style='color:#7ef3c3'>+10,540</span>", "68,510", "68,720", "0.60 BTC", "市价", "20x", "止盈止损", "TP2407138891", "2026-07-14 17:45:28"]]
+              },
+              {
+                time: "2026-07-14 17:44:49",
                 title: "关联委托记录",
                 caption: "历史仓位下单链路，包含普通委托与止盈止损触发委托。",
                 tag: "委托记录",
                 headers: ["委托订单 ID", "触发来源", "订单方向", "委托价格", "委托数量", "委托时间"],
-                rows: [["ODR-991719650", "普通委托", "买入开多", "66,860", "1.00 BTC", "2026-07-11 09:10:00"], ["ODR-991720114", "止盈止损触发", "卖出平多", "68,510", "0.60 BTC", "2026-07-14 17:44:49"]]
+                rows: [["ODR-991720114", "止盈止损触发", "卖出平多", "68,510", "0.60 BTC", "2026-07-14 17:44:49"]]
               },
               {
+                time: "2026-07-14 08:00:00",
+                title: "资金费结算",
+                caption: "资金费结算会影响净盈亏，可能为正或负。",
+                tag: "资金费",
+                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
+                rows: [["2026-07-14 08:00:00", "0.012000%", "112,400", "<span style='color:#7ef3c3'>+13.49</span>", "<button class='linkBtn' data-drawer-key='funding-history-btc'>查看资金费明细</button>"]]
+              },
+              {
+                time: "2026-07-13 09:22:18",
+                title: "关联平仓记录",
+                caption: "平仓记录保留平仓盈亏与触发来源，用于对应历史仓位详情链接页。",
+                tag: "平仓记录",
+                minWidth: 1280,
+                headers: ["订单 ID", "委托订单 ID", "用户 UID", "合约名称", "方向", "平仓盈亏", "下单价格", "成交均价", "开平仓数量", "订单类型", "杠杆倍数", "触发类型", "来源 ID", "更新时间"],
+                rows: [["CLOSE-700921", "ODR-991720002", "10248391", "BTCUSDT 永续", "卖出平多", "<span style='color:#7ef3c3'>+8,420</span>", "67,980", "68,120", "0.40 BTC", "限价", "20x", "普通订单", "-", "2026-07-13 09:22:18"]]
+              },
+              {
+                time: "2026-07-13 08:00:00",
+                title: "资金费结算",
+                caption: "同一仓位在存续期间可能发生多次资金费结算。",
+                tag: "资金费",
+                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
+                rows: [["2026-07-13 08:00:00", "0.012000%", "108,360", "<span style='color:#ff9e9e'>-12.99</span>", "<button class='linkBtn' data-drawer-key='funding-history-btc'>查看资金费明细</button>"]]
+              },
+              {
+                time: "2026-07-12 10:05:26",
+                title: "关联开仓记录",
+                caption: "同一历史仓位可能出现加仓/再次开仓，形成多段开仓成交。",
+                tag: "开仓记录",
+                headers: ["开仓订单 ID", "委托订单 ID", "仓位 ID", "开仓价格", "开仓数量", "开仓时间"],
+                rows: [["OPEN-700862", "ODR-991719988", "HIS-55721291", "67,220", "0.50 BTC", "2026-07-12 10:05:26"]]
+              },
+              {
+                time: "2026-07-12 10:04:50",
+                title: "关联委托记录",
+                caption: "加仓对应的委托主单记录。",
+                tag: "委托记录",
+                headers: ["委托订单 ID", "触发来源", "订单方向", "委托价格", "委托数量", "委托时间"],
+                rows: [["ODR-991719988", "普通委托", "买入开多", "67,180", "0.50 BTC", "2026-07-12 10:04:50"]]
+              },
+              {
+                time: "2026-07-12 08:00:00",
+                title: "资金费结算",
+                caption: "资金费结算会影响净盈亏，可能为正或负。",
+                tag: "资金费",
+                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
+                rows: [["2026-07-12 08:00:00", "0.012000%", "104,880", "<span style='color:#7ef3c3'>+12.59</span>", "<button class='linkBtn' data-drawer-key='funding-history-btc'>查看资金费明细</button>"]]
+              },
+              {
+                time: "2026-07-11 12:18:08",
+                title: "关联平仓记录",
+                caption: "可能出现部分平仓后再次开仓的情况，时间轴用于串联完整事件。",
+                tag: "平仓记录",
+                minWidth: 1280,
+                headers: ["订单 ID", "委托订单 ID", "用户 UID", "合约名称", "方向", "平仓盈亏", "下单价格", "成交均价", "开平仓数量", "订单类型", "杠杆倍数", "触发类型", "来源 ID", "更新时间"],
+                rows: [["CLOSE-700812", "ODR-991719822", "10248391", "BTCUSDT 永续", "卖出平多", "<span style='color:#7ef3c3'>+2,180</span>", "67,140", "67,260", "0.20 BTC", "限价", "20x", "普通订单", "-", "2026-07-11 12:18:08"]]
+              },
+              {
+                time: "2026-07-11 12:12:41",
+                title: "关联委托记录",
+                caption: "部分平仓对应的委托主单记录。",
+                tag: "委托记录",
+                headers: ["委托订单 ID", "触发来源", "订单方向", "委托价格", "委托数量", "委托时间"],
+                rows: [["ODR-991719822", "普通委托", "卖出平多", "67,140", "0.20 BTC", "2026-07-11 12:12:41"]]
+              },
+              {
+                time: "2026-07-11 09:10:00",
                 title: "关联开仓记录",
                 caption: "历史仓位的开仓成交起点。",
                 tag: "开仓记录",
@@ -1790,34 +2068,76 @@
                 rows: [["OPEN-700801", "ODR-991719650", "HIS-55721291", "66,880", "1.00 BTC", "2026-07-11 09:10:00"]]
               },
               {
-                title: "关联平仓记录",
-                caption: "平仓记录保留平仓盈亏与触发来源，用于对应历史仓位详情链接页。",
-                tag: "平仓记录",
-                minWidth: 1280,
-                headers: ["订单 ID", "委托订单 ID", "用户 UID", "合约名称", "方向", "平仓盈亏", "下单价格", "成交均价", "开平仓数量", "订单类型", "杠杆倍数", "触发类型", "来源 ID", "更新时间"],
-                rows: [["CLOSE-700921", "ODR-991720002", "10248391", "BTCUSDT 永续", "卖出平多", "<span style='color:#7ef3c3'>+8,420</span>", "67,980", "68,120", "0.40 BTC", "限价", "20x", "普通订单", "-", "2026-07-13 09:22:18"], ["CLOSE-700992", "ODR-991720114", "10248391", "BTCUSDT 永续", "卖出平多", "<span style='color:#7ef3c3'>+10,540</span>", "68,510", "68,720", "0.60 BTC", "市价", "20x", "止盈止损", "TP2407138891", "2026-07-14 17:45:28"]]
+                time: "2026-07-11 09:10:00",
+                title: "关联委托记录",
+                caption: "历史仓位下单链路，包含普通委托与止盈止损触发委托。",
+                tag: "委托记录",
+                headers: ["委托订单 ID", "触发来源", "订单方向", "委托价格", "委托数量", "委托时间"],
+                rows: [["ODR-991719650", "普通委托", "买入开多", "66,860", "1.00 BTC", "2026-07-11 09:10:00"]]
               }
             ]
           },
           "history-eth": {
             title: "历史仓位关联记录",
-            subtitle: "围绕历史仓位查看生命周期内的委托、开仓和平仓记录。",
+            subtitle: "围绕历史仓位按时间轴倒序查看生命周期内的委托、开仓和平仓记录。",
             primaryLabel: "历史仓位 ID",
             primaryValue: "HIS-55721109",
             primarySub: "ETHUSDT 永续 / 用户 10277109 / 爆仓",
             secondaryLabel: "链路汇总",
-            secondaryValue: "2 条委托 / 1 条开仓 / 1 条平仓",
-            secondarySub: "便于复盘历史仓位的完整交易过程",
-            note: "说明：历史仓位联动展示该仓位生命周期内的委托记录、开仓记录和平仓记录。若仓位以爆仓结束，平仓记录会体现爆仓触发的来源和最终盈亏。",
-            sections: [
+            secondaryValue: "3 条委托 / 2 条开仓 / 1 条平仓 / 2 次资金费",
+            secondarySub: "按时间轴倒序复盘历史仓位的完整交易过程",
+            note: "说明：历史仓位联动展示该仓位生命周期内的委托记录、开仓记录和平仓记录；时间轴中会穿插资金费结算事件（正负均可能），用于更真实复盘仓位过程；以下按时间轴倒序展示。若仓位以爆仓结束，平仓记录会体现爆仓触发的来源和最终盈亏。",
+            timeline: [
               {
+                time: "2026-07-10 02:16:40",
+                title: "关联平仓记录",
+                caption: "爆仓或全部平仓后的最终成交结果。",
+                tag: "平仓记录",
+                headers: ["平仓订单 ID", "委托订单 ID", "仓位 ID", "平仓价格", "平仓数量", "平仓盈亏", "平仓时间"],
+                rows: [["CLOSE-700884", "ODR-991719955", "HIS-55721109", "4,054", "46 ETH", "<span style='color:#ff9e9e'>-8,420</span>", "2026-07-10 02:16:40"]]
+              },
+              {
+                time: "2026-07-10 02:16:40",
                 title: "关联委托记录",
                 caption: "历史仓位的委托链路，包含开仓委托与爆仓前最后一笔平仓委托。",
                 tag: "委托记录",
                 headers: ["委托订单 ID", "触发来源", "订单方向", "委托价格", "委托数量", "委托时间"],
-                rows: [["ODR-991719702", "普通委托", "卖出开空", "3,778", "46 ETH", "2026-07-09 13:24:52"], ["ODR-991719955", "风控强平", "买入平空", "4,054", "46 ETH", "2026-07-10 02:16:40"]]
+                rows: [["ODR-991719955", "风控强平", "买入平空", "4,054", "46 ETH", "2026-07-10 02:16:40"]]
               },
               {
+                time: "2026-07-10 00:00:00",
+                title: "资金费结算",
+                caption: "资金费结算会影响净盈亏，可能为正或负。",
+                tag: "资金费",
+                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
+                rows: [["2026-07-10 00:00:00", "-0.006000%", "163,800", "<span style='color:#ff9e9e'>-9.83</span>", "<button class='linkBtn' data-drawer-key='funding-history-eth'>查看资金费明细</button>"]]
+              },
+              {
+                time: "2026-07-09 18:40:12",
+                title: "关联开仓记录",
+                caption: "同一历史仓位可能出现加仓/再次开仓，形成多段开仓成交。",
+                tag: "开仓记录",
+                headers: ["开仓订单 ID", "委托订单 ID", "仓位 ID", "开仓价格", "开仓数量", "开仓时间"],
+                rows: [["OPEN-700862", "ODR-991719812", "HIS-55721109", "3,852", "18 ETH", "2026-07-09 18:40:12"]]
+              },
+              {
+                time: "2026-07-09 18:39:50",
+                title: "关联委托记录",
+                caption: "加仓对应的委托主单记录。",
+                tag: "委托记录",
+                headers: ["委托订单 ID", "触发来源", "订单方向", "委托价格", "委托数量", "委托时间"],
+                rows: [["ODR-991719812", "普通委托", "卖出开空", "3,848", "18 ETH", "2026-07-09 18:39:50"]]
+              },
+              {
+                time: "2026-07-09 16:00:00",
+                title: "资金费结算",
+                caption: "同一仓位在存续期间可能发生多次资金费结算。",
+                tag: "资金费",
+                headers: ["结算时间", "资金费率", "资金费计算时持仓金额", "资金费金额", "联动"],
+                rows: [["2026-07-09 16:00:00", "-0.006000%", "166,820", "<span style='color:#ff9e9e'>-10.01</span>", "<button class='linkBtn' data-drawer-key='funding-history-eth'>查看资金费明细</button>"]]
+              },
+              {
+                time: "2026-07-09 13:24:52",
                 title: "关联开仓记录",
                 caption: "历史仓位的开仓成交起点。",
                 tag: "开仓记录",
@@ -1825,11 +2145,12 @@
                 rows: [["OPEN-700845", "ODR-991719702", "HIS-55721109", "3,780", "46 ETH", "2026-07-09 13:24:52"]]
               },
               {
-                title: "关联平仓记录",
-                caption: "爆仓或全部平仓后的最终成交结果。",
-                tag: "平仓记录",
-                headers: ["平仓订单 ID", "委托订单 ID", "仓位 ID", "平仓价格", "平仓数量", "平仓盈亏", "平仓时间"],
-                rows: [["CLOSE-700884", "ODR-991719955", "HIS-55721109", "4,054", "46 ETH", "<span style='color:#ff9e9e'>-8,420</span>", "2026-07-10 02:16:40"]]
+                time: "2026-07-09 13:24:52",
+                title: "关联委托记录",
+                caption: "历史仓位的委托链路，包含开仓委托与爆仓前最后一笔平仓委托。",
+                tag: "委托记录",
+                headers: ["委托订单 ID", "触发来源", "订单方向", "委托价格", "委托数量", "委托时间"],
+                rows: [["ODR-991719702", "普通委托", "卖出开空", "3,778", "46 ETH", "2026-07-09 13:24:52"]]
               }
             ]
           },
@@ -1990,6 +2311,67 @@
           ].join("");
         }
 
+        function buildRelationTimelineItem(item) {
+          var headers = item.headers.map(function (header) {
+            return "<th>" + header + "</th>";
+          }).join("");
+          var rows = item.rows.map(function (row) {
+            return "<tr>" + row.map(function (cell) {
+              return "<td>" + cell + "</td>";
+            }).join("") + "</tr>";
+          }).join("");
+          return [
+            "<div class=\"timelineItem\">",
+            "<div class=\"timelineTime\"><span>", item.time, "</span></div>",
+            "<div class=\"contentCard timelineCard\">",
+            "<div class=\"cardHead\"><div><h3>", item.title, "</h3><p>", item.caption, "</p></div><div class=\"miniActions\"><span class=\"chip\">", item.tag, "</span></div></div>",
+            "<div class=\"tableWrap\"><table style=\"min-width:", String(item.minWidth || 980), "px\"><thead><tr>", headers, "</tr></thead><tbody>", rows, "</tbody></table></div>",
+            "</div>",
+            "</div>"
+          ].join("");
+        }
+
+        function normalizeRelationGroupTag(tag) {
+          if (tag === "当前委托" || tag === "委托记录") return "委托记录";
+          if (tag === "开仓记录") return "开仓记录";
+          if (tag === "平仓记录") return "平仓记录";
+          if (tag === "资金费") return "资金费";
+          return tag || "其他";
+        }
+
+        function buildRelationTypeSection(title, items) {
+          var sorted = items.slice().sort(function (a, b) {
+            return String(b.time || "").localeCompare(String(a.time || ""));
+          });
+
+          var maxWidth = 980;
+          var rowCount = 0;
+          sorted.forEach(function (item) {
+            maxWidth = Math.max(maxWidth, Number(item.minWidth || 980));
+            rowCount += (item.rows || []).length;
+          });
+
+          var sample = sorted[0] || { headers: [], rows: [] };
+          var headers = (sample.headers || []).map(function (header) {
+            return "<th>" + header + "</th>";
+          }).join("");
+
+          var rows = sorted.map(function (item) {
+            return (item.rows || []).map(function (row) {
+              return "<tr>" + row.map(function (cell) {
+                return "<td>" + cell + "</td>";
+              }).join("") + "</tr>";
+            }).join("");
+          }).join("");
+
+          return [
+            "<div class=\"contentCard\" style=\"margin-top:16px\">",
+            "<div class=\"cardHead\"><div><h3>", title, "</h3><p>共 ", String(rowCount), " 条，按时间倒序汇总展示。</p></div><div class=\"miniActions\"><span class=\"chip\">", title, "</span></div></div>",
+            "<div class=\"tableWrap\"><table style=\"min-width:", String(maxWidth), "px\"><thead><tr>", headers, "</tr></thead><tbody>", rows, "</tbody></table></div>",
+            "</div>"
+          ].join("");
+        }
+
         function renderRelationDrawer(key) {
           var data = relationData[key];
           if (!data) return;
@@ -2002,7 +2384,39 @@
           drawerSecondaryValue.textContent = data.secondaryValue;
           drawerSecondarySub.textContent = data.secondarySub;
           drawerNote.textContent = data.note;
-          drawerSections.innerHTML = data.sections.map(buildRelationSection).join("");
+
+          if (data.timeline) {
+            drawerViewBar.style.display = "flex";
+            if (currentDrawerView !== "timeline" && currentDrawerView !== "type") setDrawerView("timeline");
+            setDrawerView(currentDrawerView);
+            if (currentDrawerView === "type") {
+              var groups = {};
+              data.timeline.forEach(function (item) {
+                var group = normalizeRelationGroupTag(item.tag);
+                if (!groups[group]) groups[group] = [];
+                groups[group].push(item);
+              });
+
+              var ordered = ["平仓记录", "开仓记录", "委托记录", "资金费"];
+              var html = ordered.filter(function (group) {
+                return groups[group] && groups[group].length;
+              }).map(function (group) {
+                return buildRelationTypeSection(group, groups[group]);
+              }).join("");
+
+              Object.keys(groups).forEach(function (group) {
+                if (ordered.indexOf(group) !== -1) return;
+                html += buildRelationTypeSection(group, groups[group]);
+              });
+
+              drawerSections.innerHTML = html;
+            } else {
+              drawerSections.innerHTML = "<div class=\"timelineList\">" + data.timeline.map(buildRelationTimelineItem).join("") + "</div>";
+            }
+          } else {
+            drawerViewBar.style.display = "none";
+            drawerSections.innerHTML = data.sections.map(buildRelationSection).join("");
+          }
         }
 
         function syncCaliberDrawer(id) {
@@ -2051,6 +2465,8 @@
         }
 
         function openHistoryDrawer(key) {
+          currentDrawerKey = key;
+          setDrawerView("timeline");
           renderRelationDrawer(key);
           showDrawer(drawer, drawerMask);
         }
@@ -2084,5 +2500,4 @@
     </script>
   </body>
 </html>
-
 
