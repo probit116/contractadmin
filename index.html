@@ -901,7 +901,7 @@
                   <div class="field"><label>用户 UID</label><input class="control" value="10248391" /></div>
                   <div class="field"><label>合约名称</label><select class="control"><option>全部合约名称</option><option>BTCUSDT 永续</option><option>ETHUSDT 永续</option></select></div>
                   <div class="field"><label>开仓类型</label><select class="control"><option>全部开仓类型</option><option>全仓</option><option>逐仓</option></select></div>
-                  <div class="field"><label>状态</label><select class="control"><option>全部状态</option><option>未激活</option><option>已激活</option><option>触发中</option><option>已触发</option><option>用户撤销</option><option>平台撤销</option><option>已过期</option></select></div>
+                  <div class="field"><label>状态</label><select class="control"><option>全部状态</option><option>未激活</option><option>已激活</option><option>已取消</option></select></div>
                   <div class="field"><label>时间筛选</label><select class="control"><option>全部时间</option><option>今日</option><option>近 7 天</option><option>近 30 天</option><option>自定义范围</option></select></div>
                   <div class="field"><label>盘口类型</label><select class="control"><option>全部盘口类型</option><option>实盘</option><option>模拟盘</option></select></div>
                 </div>
@@ -911,26 +911,27 @@
 
             <div class="summary">
               <div class="metric"><div class="k">止盈止损订单总数</div><div class="v">2,184</div><div class="sub">近 7 日 +12.40%</div></div>
+              <div class="metric"><div class="k">未激活订单</div><div class="v">342</div><div class="sub">待进入监控</div></div>
               <div class="metric"><div class="k">已激活订单</div><div class="v">1,026</div><div class="sub">实时可触发监控中</div></div>
-              <div class="metric"><div class="k">触发中订单</div><div class="v">342</div><div class="sub">回调幅度持续跟踪</div></div>
-              <div class="metric"><div class="k">已触发订单</div><div class="v">816</div><div class="sub">含用户撤销与平台撤销</div></div>
+              <div class="metric"><div class="k">已取消订单</div><div class="v">816</div><div class="sub">用户撤销与平台撤销</div></div>
             </div>
 
             <div class="contentCard">
               <div class="cardHead">
-                <div><h3>止盈止损列表</h3><p>覆盖止盈价格、止损价格、开仓均价、触发价格、关联委托订单 ID 与状态字段，止盈/止损两列至少存在一列，为空显示 --。</p></div>
+                <div><h3>止盈止损列表</h3><p>覆盖订单类型（止盈/止损）、开仓均价、触发价格、关联委托订单 ID 与状态字段。</p></div>
               </div>
               <div class="tableWrap">
                 <table>
                   <thead>
                     <tr>
-                      <th>合约名称</th><th>止盈止损 ID</th><th>订单类型</th><th>对应委托订单 ID</th><th>用户 UID</th><th>盘口类型</th><th>止盈价格</th><th>止损价格</th><th>创建时当前价格</th><th>开仓均价</th><th>数量</th><th>触发价格</th><th>仓位模式</th><th>触发价格类型</th><th>委托数量</th><th>订单状态</th><th>创建时间</th><th>更新时间</th>
+                      <th>合约名称</th><th>止盈止损 ID</th><th>订单类型</th><th>对应委托订单 ID</th><th>用户 UID</th><th>盘口类型</th><th>创建时当前价格</th><th>开仓均价</th><th>数量</th><th>触发价格</th><th>仓位模式</th><th>触发价格类型</th><th>委托数量</th><th>订单状态</th><th>创建时间</th><th>更新时间</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>BTCUSDT 永续</td><td>TP24071810928</td><td>限价止盈</td><td>ODR-991728898</td><td>10248391</td><td>实盘</td><td>69,800</td><td>--</td><td>68,210</td><td>66,950</td><td>0.60 BTC</td><td>69,800</td><td>全仓</td><td>标记价格</td><td>0.60 BTC</td><td><span class="status blue">触发中</span></td><td>2026-07-18 10:42:18</td><td>2026-07-18 11:16:50</td></tr>
-                    <tr><td>ETHUSDT 永续</td><td>TP24071810955</td><td>市价止损</td><td>ODR-991728712</td><td>10277109</td><td>模拟盘</td><td>--</td><td>市价</td><td>3,768</td><td>3,640</td><td>12 ETH</td><td>3,720</td><td>逐仓</td><td>最新价</td><td>12 ETH</td><td><span class="status green">已激活</span></td><td>2026-07-18 09:31:02</td><td>2026-07-18 09:36:11</td></tr>
-                    <tr><td>BTCUSDT 永续</td><td>TP24071787419</td><td>限价止盈+限价止损</td><td>--</td><td>10300421</td><td>实盘</td><td>70,000</td><td>68,500</td><td>68,905</td><td>68,240</td><td>0.25 BTC</td><td>70,000</td><td>全仓</td><td>标记价格</td><td>0.25 BTC</td><td><span class="status gray">未激活</span></td><td>2026-07-17 20:14:58</td><td>2026-07-17 20:14:58</td></tr>
+                    <tr><td>BTCUSDT 永续</td><td>TP24071810928</td><td>止盈</td><td>ODR-991728898</td><td>10248391</td><td>实盘</td><td>68,210</td><td>66,950</td><td>0.60 BTC</td><td>69,800</td><td>全仓</td><td>标记价格</td><td>0.60 BTC</td><td><span class="status green">已激活</span></td><td>2026-07-18 10:42:18</td><td>2026-07-18 11:16:50</td></tr>
+                    <tr><td>ETHUSDT 永续</td><td>TP24071810955</td><td>止损</td><td>ODR-991728712</td><td>10277109</td><td>模拟盘</td><td>3,768</td><td>3,640</td><td>12 ETH</td><td>3,720</td><td>逐仓</td><td>最新价</td><td>12 ETH</td><td><span class="status green">已激活</span></td><td>2026-07-18 09:31:02</td><td>2026-07-18 09:36:11</td></tr>
+                    <tr><td>BTCUSDT 永续</td><td>TP24071787419</td><td>止盈</td><td>--</td><td>10300421</td><td>实盘</td><td>68,905</td><td>68,240</td><td>0.25 BTC</td><td>70,000</td><td>全仓</td><td>指数价格</td><td>0.25 BTC</td><td><span class="status gray">未激活</span></td><td>2026-07-17 20:14:58</td><td>2026-07-17 20:14:58</td></tr>
+                    <tr><td>ETHUSDT 永续</td><td>TP24071787201</td><td>止损</td><td>ODR-991728601</td><td>10299811</td><td>实盘</td><td>3,780</td><td>3,705</td><td>8 ETH</td><td>3,650</td><td>逐仓</td><td>最新价</td><td>8 ETH</td><td><span class="status red">已取消</span></td><td>2026-07-17 18:22:10</td><td>2026-07-17 19:05:33</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -1312,7 +1313,7 @@
             <h4>1. 止盈止损</h4>
             <span class="auditMeta">交易管理</span>
           </div>
-          <div class="note">口径定义：“订单 ID”在当前页面按止盈止损单主键展示；同时补充“对应委托订单 ID”方便追踪关联委托，**未激活且尚未生成委托单时填 --；若同一止盈止损主键同时设置止盈价 + 止损价且已生成两笔委托单，对应委托订单 ID 以英文逗号分隔展示两笔 ODR，例如 ODR-001,ODR-002**；止盈价格 / 止损价格两列至少存在一列，为空填 `--`，**若下单时选择“市价”，止盈/止损价格列直接展示文字“市价”，若选择“限价”则展示具体触发价格数值**；**订单类型列必须展示**，枚举：限价止盈 / 限价止损 / 市价止盈 / 市价止损 / 限价止盈+限价止损；**订单状态语义：未激活 = 触发条件尚未满足，委托单未挂出；已激活 = 关联挂单委托已成交入库，止盈止损进入监控中；触发中 = 激活后价格朝触发价方向运行，持续监控中；已触发 = 市场价格达到触发价格，委托已下单；用户撤销 / 平台撤销 / 已过期 = 终态，不再触发**。**排序规则：第一排序按状态权重 未激活>触发中>已激活>已触发>用户撤销 / 平台撤销 / 已过期（数字越大越靠前）；第二排序按止盈止损 ID 倒序，同状态内 ID 数字大的在前**。更新时间语义：优先按“最近一次订单状态变更时间”回填，无状态变更记录则按“后台订单查询接口返回时间”。</div>
+          <div class="note">口径定义：“订单 ID”在当前页面按止盈止损单主键展示；同时补充“对应委托订单 ID”方便追踪关联委托，**未激活且尚未生成委托单时填 --**；**订单类型列必须展示**，枚举：`止盈` / `止损`，仅区分业务方向，下单方式统一为市价，不再标注限价/市价字样；**订单状态语义：未激活 = 触发条件尚未满足，委托单未挂出；已激活 = 止盈止损进入监控中，实时等待触发；已取消 = 用户或平台撤销，终态不再触发**。**排序规则：第一排序按状态权重 未激活>已激活>已取消（数字越大越靠前）；第二排序按止盈止损 ID 倒序，同状态内 ID 数字大的在前**。更新时间语义：优先按“最近一次订单状态变更时间”回填，无状态变更记录则按“后台订单查询接口返回时间”。</div>
           <div class="contentCard" style="margin-top:12px">
             <div class="tableWrap auditTable">
               <table>
@@ -1325,25 +1326,23 @@
                   <tr><td>搜索栏</td><td>用户 UID</td><td>用户 UID</td><td>支持按用户主账号检索。当前原型已经将该字段拆成独立搜索项，避免与其他条件共用输入框。</td></tr>
                   <tr><td>筛选栏</td><td>合约名称</td><td>合约名称</td><td>指止盈止损所属合约。当前原型已经将该字段做成独立项，便于单独筛选或识别。</td></tr>
                   <tr><td>筛选栏</td><td>开仓类型（全仓/逐仓）</td><td>开仓类型</td><td>指仓位保证金模式。当前原型已经将该字段做成独立项，便于单独筛选或识别。</td></tr>
-                  <tr><td>筛选栏</td><td>全部状态</td><td>状态</td><td>默认值为“全部状态”，可选未激活/已激活/触发中/已触发/用户撤销/平台撤销/已过期。当前原型已经将该字段做成独立筛选项，并按需求补齐全部枚举值。</td></tr>
+                  <tr><td>筛选栏</td><td>全部状态</td><td>状态</td><td>默认值为“全部状态”，可选未激活/已激活/已取消。当前原型已经将该字段做成独立筛选项，并按需求补齐全部枚举值。</td></tr>
                   <tr><td>筛选栏</td><td>时间筛选</td><td>时间筛选</td><td>按创建或更新时间窗口查询。当前原型已经将该字段做成独立项，便于单独筛选或识别。</td></tr>
                   <tr><td>筛选栏</td><td>盘口类型（实盘/模拟盘）</td><td>盘口类型</td><td>区分真实交易与模拟交易环境。当前原型已经将该字段做成独立项，便于单独筛选或识别。</td></tr>
                   <tr><td>信息栏</td><td>合约名称</td><td>合约名称</td><td>止盈止损所属合约。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>订单 ID</td><td>止盈止损 ID</td><td>按止盈止损订单唯一主键展示，字段命名更明确，便于和其他订单主键区分。列表第二排序字段，按 **ID 数字倒序**（即新创建的 ID 在前）。</td></tr>
-                  <tr><td>信息栏</td><td>订单类型</td><td>订单类型</td><td>必展示列。枚举：`限价止盈` / `限价止损` / `市价止盈` / `市价止损` / `限价止盈+限价止损`；若同一主键下还混有“市价止盈+限价止损”这类组合，直接按“X+Y”格式拼接，不新增独立枚举。</td></tr>
-                  <tr><td>信息栏</td><td class="mutedCell">无（原型补充）</td><td>对应委托订单 ID</td><td>关联当前委托主单 ID；**未激活状态且尚未生成委托单时填 --**；**若同一止盈止损主键同时设置止盈价 + 止损价、并已分别生成两笔委托单，则以英文逗号分隔展示两笔 ODR，例如 ODR-991720114,ODR-991720115**。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
+                  <tr><td>信息栏</td><td>订单类型</td><td>订单类型</td><td>必展示列。枚举：`止盈` / `止损`，仅区分业务方向，下单方式统一为市价，不再标注限价/市价字样。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（原型补充）</td><td>对应委托订单 ID</td><td>关联当前委托主单 ID；**未激活状态且尚未生成委托单时填 --**。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
                   <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>下单用户唯一标识。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td class="mutedCell">由筛选项映射</td><td>盘口类型</td><td>由盘口类型筛选项映射到列表展示字段，值为实盘或模拟盘，用于直接识别该记录所属交易环境。</td></tr>
-                  <tr><td>信息栏</td><td>止盈价格</td><td>止盈价格</td><td>止盈触发价；**与止损价格两列至少存在一列非空**。下单方式为 **限价** 时展示具体价格数值；下单方式为 **市价** 时单元格直接展示文字 `市价`，不填价格。空值统一展示 `--`，不展示 0 或留空。</td></tr>
-                  <tr><td>信息栏</td><td>止损价格</td><td>止损价格</td><td>止损触发价；**与止盈价格两列至少存在一列非空**。下单方式为 **限价** 时展示具体价格数值；下单方式为 **市价** 时单元格直接展示文字 `市价`，不填价格。空值统一展示 `--`，不展示 0 或留空。</td></tr>
                   <tr><td>信息栏</td><td>创建时当前价格</td><td>创建时当前价格</td><td>创建该止盈止损单时的市场最新价 / 标记价快照。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>开仓均价</td><td>开仓均价</td><td>对应仓位的开仓均价（由原“持仓成本”字段改名）。按仓位维度的加权平均开仓价口径展示。</td></tr>
                   <tr><td>信息栏</td><td>数量</td><td>数量</td><td>止盈止损关联的仓位数量。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>信息栏</td><td>触发价格</td><td>触发价格</td><td>当前条件下预计触发的实际价格，随触发价格类型（标记价/最新价）联动计算。</td></tr>
+                  <tr><td>信息栏</td><td>触发价格</td><td>触发价格</td><td>当前条件下预计触发的实际价格，随触发价格类型（标记价/最新价/指数价）联动计算。</td></tr>
                   <tr><td>信息栏</td><td>仓位模式</td><td>仓位模式</td><td>全仓或逐仓。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>信息栏</td><td>触发价格类型</td><td>触发价格类型</td><td>触发价的取数口径，枚举为标记价格 / 最新价等。</td></tr>
+                  <tr><td>信息栏</td><td>触发价格类型</td><td>触发价格类型</td><td>触发价的取数口径，枚举：`标记价格` / `最新价` / `指数价格`。标记价格取合约合理标记价，最新价取盘口实时成交价，指数价格取多交易所加权聚合指数价。</td></tr>
                   <tr><td>信息栏</td><td>委托数量</td><td>委托数量</td><td>触发后实际送出的委托数量；未激活阶段通常与数量字段相等，已触发后按成交后净数量回填。</td></tr>
-                  <tr><td>信息栏</td><td>订单状态</td><td>订单状态</td><td>止盈止损单实时状态：**未激活 = 触发条件尚未满足，委托单未挂出；已激活 = 关联挂单委托已成交入库，止盈止损进入监控中；触发中 = 激活后价格朝触发价方向运行，持续监控中；已触发 = 市场价格达到触发价格，委托已下单；用户撤销 / 平台撤销 / 已过期 = 终态，不再触发**。列表第一排序字段，**按未激活>触发中>已激活>已触发>用户撤销/平台撤销/已过期 的权重倒序**，权重越大越靠前。</td></tr>
+                  <tr><td>信息栏</td><td>订单状态</td><td>订单状态</td><td>止盈止损单实时状态：**未激活 = 触发条件尚未满足，委托单未挂出；已激活 = 止盈止损进入监控中，实时等待触发；已取消 = 用户或平台撤销，终态不再触发**。列表第一排序字段，**按未激活>已激活>已取消 的权重倒序**，权重越大越靠前。</td></tr>
                   <tr><td>信息栏</td><td>创建时间</td><td>创建时间</td><td>止盈止损单创建入库时间。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>更新时间</td><td>更新时间</td><td>**优先按最近一次订单状态变更时间**回填（例如 未激活→已激活 的状态更新时刻、已触发 的触发时刻、撤销/过期的终态时刻）；**若无状态变更记录，则按后台订单查询接口的返回时间**回填，避免页面刷新后字段为空。</td></tr>
                   <tr><td>页码栏</td><td>页码条</td><td>分页条</td><td>列表分页与总数展示。当前原型已经提供该展示或交互能力。</td></tr>
