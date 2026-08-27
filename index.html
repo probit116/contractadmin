@@ -353,12 +353,23 @@
         gap:14px;
       }
 
+      .summary.two{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+
       .summary.three{
         grid-template-columns:repeat(3,minmax(0,1fr));
       }
 
       .summary.five{
         grid-template-columns:repeat(5,minmax(0,1fr));
+      }
+
+      .summary.center{
+        justify-content:center;
+        max-width:50%;
+        margin-left:auto;
+        margin-right:auto;
       }
 
       .metric{
@@ -1223,11 +1234,9 @@
               </div>
             </div>
 
-            <div class="summary">
-              <div class="metric"><div class="k">资金费结算笔数</div><div class="v">9,248</div><div class="sub">近 30 天</div></div>
-              <div class="metric"><div class="k">平均资金费率</div><div class="v">0.010000%</div><div class="sub">正负方向动态切换</div></div>
-              <div class="metric"><div class="k">累计资金费用</div><div class="v">186,420</div><div class="sub">按结算周期聚合</div></div>
-              <div class="metric"><div class="k">高频合约</div><div class="v">BTCUSDT</div><div class="sub">占比 38.60%</div></div>
+            <div class="summary two center">
+              <div class="metric"><div class="k">资金费结算笔数</div><div class="v">9,248</div></div>
+              <div class="metric"><div class="k">累计资金费用</div><div class="v">186,420</div></div>
             </div>
 
             <div class="contentCard">
@@ -1668,10 +1677,8 @@
                   <tr><td>筛选栏</td><td>合约名称</td><td>合约名称</td><td>资金费所属合约。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>筛选栏</td><td>盘口类型（实盘/模拟盘）</td><td>盘口类型</td><td>区分实盘与模拟盘。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>筛选栏</td><td>时间筛选</td><td>时间筛选</td><td>按结算时间窗口查询。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>汇总卡片</td><td class="mutedCell">无（本轮补充）</td><td>资金费结算笔数</td><td>当前查询范围内资金费结算批次的累计总数（按批次去重计数，不含展开后的仓位明细）。示例「近 30 天 9,248」即近 30 天内完成的资金费结算批次总笔数。该字段为当前页面的补充定义。</td></tr>
-                  <tr><td>汇总卡片</td><td class="mutedCell">无（本轮补充）</td><td>平均资金费率</td><td>当前查询范围内全部结算批次的资金费率算术平均值（按批次取平均，不按持仓金额加权），用于观察整体费率水平及正负方向的切换频率。该字段为当前页面的补充定义。</td></tr>
-                  <tr><td>汇总卡片</td><td class="mutedCell">无（本轮补充）</td><td>累计资金费用</td><td>当前查询范围内全部结算批次「累计资金费用」列的代数和合计（正数表示平台方向净流入、负数表示净流出），按结算周期聚合，用于识别查询区间内资金费整体规模。该字段为当前页面的补充定义。</td></tr>
-                  <tr><td>汇总卡片</td><td class="mutedCell">无（本轮补充）</td><td>高频合约（主力合约）</td><td>两步计算：① 先按「合约名称」分组，统计当前查询范围内每个币对的结算批次笔数；② 取「结算笔数最多的币对」作为高频合约名称显示，下方占比 = 该币对结算笔数 ÷ 全部币对总结算笔数 × 100%，保留 2 位小数；若多个币对并列第一，取列表查询排序规则（按结算时间倒序）最先出现的币对作为显示值，同时占比以该并列组的合计计算。该指标用于识别资金费结算在哪个合约上最为集中，辅助运营定位主力合约及风控关注对象。</td></tr>
+                  <tr><td>汇总卡片</td><td class="mutedCell">无（本轮补充）</td><td>资金费结算笔数</td><td>默认范围为全部，与上方筛选条件（顶级合伙人UID、用户UID、仓位ID、合约名称、盘口类型、时间筛选）联动；筛选条件变更后按新范围重新计算。取值逻辑：当前查询范围内资金费结算批次的累计总数（按批次去重计数，不含展开后的仓位明细）。</td></tr>
+                  <tr><td>汇总卡片</td><td class="mutedCell">无（本轮补充）</td><td>累计资金费用</td><td>默认范围为全部，与上方筛选条件（顶级合伙人UID、用户UID、仓位ID、合约名称、盘口类型、时间筛选）联动；筛选条件变更后按新范围重新计算。取值逻辑：当前查询范围内全部结算批次「累计资金费用」列的代数和合计（正数表示平台方向净流入、负数表示净流出）。</td></tr>
                   <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>所属用户。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>顶级合伙人 UID</td><td>顶级合伙人 UID</td><td>代理顶层 UID。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td class="mutedCell">由筛选项映射</td><td>盘口类型</td><td>由盘口类型筛选项映射到列表展示字段，值为实盘或模拟盘，用于直接识别该资金费记录所属交易环境。</td></tr>
