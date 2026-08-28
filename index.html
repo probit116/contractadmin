@@ -1137,7 +1137,6 @@
                   <div class="field"><label>仓位 ID</label><input class="control" value="HIS-55721291" /></div>
                   <div class="field"><label>仓位模式</label><select class="control"><option>全部仓位模式</option><option>全仓</option><option>逐仓</option></select></div>
                   <div class="field"><label>仓位方向</label><select class="control"><option>全部仓位方向</option><option>开多</option><option>开空</option></select></div>
-                  <div class="field"><label>仓位状态</label><select class="control"><option>全部仓位状态</option><option>全部平仓</option><option>爆仓</option></select></div>
                   <div class="field"><label>合约名称</label><select class="control"><option>全部合约名称</option><option>BTCUSDT 永续</option><option>ETHUSDT 永续</option></select></div>
                   <div class="field"><label>时间筛选</label><select class="control"><option>全部时间</option><option>近 7 天</option><option>近 30 天</option><option>近 90 天</option><option>自定义范围</option></select></div>
                   <div class="field"><label>盘口类型</label><select class="control"><option>全部盘口类型</option><option>实盘</option><option>模拟盘</option></select></div>
@@ -1162,12 +1161,12 @@
                 <table>
                   <thead>
                     <tr>
-                      <th>仓位 ID</th><th>用户 UID</th><th>合伙人 UID</th><th>顶级合伙人 UID</th><th>盘口类型</th><th>合约名称</th><th>杠杆倍数</th><th>仓位方向</th><th>仓位状态</th><th>开仓类型</th><th>开仓价格</th><th>最大持仓量</th><th>强平触发价</th><th>平仓均价</th><th>已平仓量</th><th>总手续费</th><th>盈利率</th><th>仓位保证金（U）</th><th>仓位保证金（体验金）</th><th>平仓盈亏</th><th>开仓时间</th><th>平仓时间</th>
+                      <th>仓位 ID</th><th>用户 UID</th><th>合伙人 UID</th><th>顶级合伙人 UID</th><th>盘口类型</th><th>合约名称</th><th>杠杆倍数</th><th>仓位方向</th><th>开仓类型</th><th>开仓价格</th><th>最大持仓量</th><th>平仓均价</th><th>已平仓量</th><th>总手续费</th><th>平仓盈亏</th><th>开仓时间</th><th>平仓时间</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>HIS-55721291</td><td>10248391</td><td>30087511</td><td>80012001</td><td>实盘</td><td>BTCUSDT 永续</td><td>20x</td><td>开多</td><td><span class="status gray">全部平仓</span></td><td>全仓</td><td>66,880</td><td>1.00 BTC</td><td>63,220</td><td>68,540</td><td>1.00 BTC</td><td>128.60</td><td style="color:#7ef3c3">+85.02%</td><td>22,300</td><td>0</td><td><button class="linkBtn" data-drawer-key="history-btc">+18,960 查看关联</button></td><td>2026-07-11 09:10:00</td><td>2026-07-14 17:45:28</td></tr>
-                    <tr><td>HIS-55721109</td><td>10277109</td><td>30087511</td><td>80012001</td><td>模拟盘</td><td>ETHUSDT 永续</td><td>12x</td><td>开空</td><td><span class="status red">爆仓</span></td><td>逐仓</td><td>3,780</td><td>46 ETH</td><td>4,066</td><td>4,054</td><td>46 ETH</td><td>96.44</td><td style="color:#ff9e9e">-91.12%</td><td>9,240</td><td>200</td><td><button class="linkBtn" data-drawer-key="history-eth">-8,420 查看关联</button></td><td>2026-07-09 13:24:52</td><td>2026-07-10 02:16:40</td></tr>
+                    <tr><td>HIS-55721291</td><td>10248391</td><td>30087511</td><td>80012001</td><td>实盘</td><td>BTCUSDT 永续</td><td>20x</td><td>开多</td><td>全仓</td><td>66,880</td><td>1.00 BTC</td><td>68,540</td><td>1.00 BTC</td><td>128.60</td><td><button class="linkBtn" data-drawer-key="history-btc">+18,960 查看关联</button></td><td>2026-07-11 09:10:00</td><td>2026-07-14 17:45:28</td></tr>
+                    <tr><td>HIS-55721109</td><td>10277109</td><td>30087511</td><td>80012001</td><td>模拟盘</td><td>ETHUSDT 永续</td><td>12x</td><td>开空</td><td>逐仓</td><td>3,780</td><td>46 ETH</td><td>4,054</td><td>46 ETH</td><td>96.44</td><td><button class="linkBtn" data-drawer-key="history-eth">-8,420 查看关联</button></td><td>2026-07-09 13:24:52</td><td>2026-07-10 02:16:40</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -1204,12 +1203,12 @@
                 <table>
                   <thead>
                     <tr>
-                      <th>用户 UID</th><th>合伙人 UID</th><th>总成交额</th><th>总手续费</th><th>总结算盈亏</th><th>总净盈亏</th><th>盈利率</th><th>总划入</th><th>总划出</th><th>净划入</th><th>体验金领取</th><th>体验金收益</th>
+                      <th>用户 UID</th><th>合伙人 UID</th><th>总成交额</th><th>总手续费</th><th>总结算盈亏</th><th>总净盈亏</th><th>总划入</th><th>总划出</th><th>净划入</th><th>体验金领取</th><th>体验金收益</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>10248391</td><td>30087511</td><td>12.8M</td><td>168,800</td><td>+760,200</td><td>+591,400</td><td style="color:#7ef3c3">105.61%</td><td>820,000</td><td>260,000</td><td>560,000</td><td>2,000</td><td>+428</td></tr>
-                    <tr><td>10277109</td><td>30087511</td><td>8.2M</td><td>94,300</td><td>-120,800</td><td>-215,100</td><td style="color:#ff9e9e">-430.20%</td><td>410,000</td><td>360,000</td><td>50,000</td><td>1,500</td><td>-116</td></tr>
+                    <tr><td>10248391</td><td>30087511</td><td>12.8M</td><td>168,800</td><td>+760,200</td><td>+591,400</td><td>820,000</td><td>260,000</td><td>560,000</td><td>2,000</td><td>+428</td></tr>
+                    <tr><td>10277109</td><td>30087511</td><td>8.2M</td><td>94,300</td><td>-120,800</td><td>-215,100</td><td>410,000</td><td>360,000</td><td>50,000</td><td>1,500</td><td>-116</td></tr>
                   </tbody>
                 </table>
               </div>
