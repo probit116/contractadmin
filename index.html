@@ -1,4 +1,4 @@
-﻿<!doctype html>
+﻿﻿<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
@@ -620,6 +620,13 @@
         line-height:1.8;
       }
 
+      .versionLogDetail{
+        padding:20px 22px;
+        font-size:14px;
+        line-height:2.15;
+        letter-spacing:.01em;
+      }
+
       .drawerViewBar{
         margin-top:14px;
         display:flex;
@@ -913,8 +920,6 @@
                 <div class="fieldGrid">
                   <div class="field"><label>止盈止损 ID</label><input class="control" value="TP24071810928" /></div>
                   <div class="field"><label>对应委托订单 ID</label><input class="control" value="ODR-991728898" /></div>
-                  <div class="field"><label>母合伙人 UID</label><input class="control" value="80012001" /></div>
-                  <div class="field"><label>合伙人 UID</label><input class="control" value="30087511" /></div>
                   <div class="field"><label>用户 UID</label><input class="control" value="10248391" /></div>
                   <div class="field"><label>合约名称</label><select class="control"><option>全部合约名称</option><option>BTCUSDT 永续</option><option>ETHUSDT 永续</option></select></div>
                   <div class="field"><label>开仓类型</label><select class="control"><option>全部开仓类型</option><option>全仓</option><option>逐仓</option></select></div>
@@ -1007,6 +1012,8 @@
               <div class="toolbarCard">
                 <h3>查询与筛选</h3>
                 <div class="fieldGrid">
+                  <div class="field"><label>母合伙人 UID</label><input class="control" value="80012001" /></div>
+                  <div class="field"><label>合伙人 UID</label><input class="control" value="30087511" /></div>
                   <div class="field"><label>用户 UID</label><input class="control" value="10277109" /></div>
                   <div class="field"><label>委托订单 ID</label><input class="control" value="ODR-991728712" /></div>
                   <div class="field"><label>对应止盈止损 ID</label><input class="control" value="TP24071810955" /></div>
@@ -1034,12 +1041,12 @@
                 <table>
                   <thead>
                     <tr>
-                      <th>委托订单 ID</th><th>对应止盈止损 ID</th><th>仓位 ID</th><th>用户 UID</th><th>合伙人 UID</th><th>盘口类型</th><th>合约名称</th><th>订单方向</th><th>委托价格</th><th>委托数量</th><th>委托类型</th><th>止盈价</th><th>止损价</th><th>委托时间</th><th>关联开/平仓</th>
+                      <th>委托订单 ID</th><th>对应止盈止损 ID</th><th>仓位 ID</th><th>用户 UID</th><th>合伙人 UID</th><th>母合伙人 UID</th><th>盘口类型</th><th>合约名称</th><th>订单方向</th><th>委托价格</th><th>委托数量</th><th>委托类型</th><th>止盈价</th><th>止损价</th><th>委托时间</th><th>关联开/平仓</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>ODR-991728712</td><td>TP24071810955</td><td>POS-78724903</td><td>10277109</td><td>30087511</td><td>模拟盘</td><td>ETHUSDT 永续</td><td>买入开空</td><td>3,728</td><td>18 ETH</td><td>限价</td><td>3,610</td><td>3,840</td><td>2026-07-18 11:08:24</td><td><button class="linkBtn" data-drawer-key="order-eth">查看记录</button></td></tr>
-                    <tr><td>ODR-991728898</td><td>TP24071810928</td><td>POS-78721194</td><td>10248391</td><td>30087511</td><td>实盘</td><td>BTCUSDT 永续</td><td>卖出平多</td><td>68,940</td><td>0.25 BTC</td><td>市价</td><td>69,120</td><td>67,980</td><td>2026-07-18 11:15:32</td><td><button class="linkBtn" data-drawer-key="order-btc">查看记录</button></td></tr>
+                    <tr><td>ODR-991728712</td><td>TP24071810955</td><td>POS-78724903</td><td>10277109</td><td>30087511</td><td>80012001</td><td>模拟盘</td><td>ETHUSDT 永续</td><td>买入开空</td><td>3,728</td><td>18 ETH</td><td>限价</td><td>3,610</td><td>3,840</td><td>2026-07-18 11:08:24</td><td><button class="linkBtn" data-drawer-key="order-eth">查看记录</button></td></tr>
+                    <tr><td>ODR-991728898</td><td>TP24071810928</td><td>POS-78721194</td><td>10248391</td><td>30087511</td><td>80012001</td><td>实盘</td><td>BTCUSDT 永续</td><td>卖出平多</td><td>68,940</td><td>0.25 BTC</td><td>市价</td><td>69,120</td><td>67,980</td><td>2026-07-18 11:15:32</td><td><button class="linkBtn" data-drawer-key="order-btc">查看记录</button></td></tr>
                   </tbody>
                 </table>
               </div>
@@ -1076,12 +1083,12 @@
                 <table>
                   <thead>
                     <tr>
-                      <th>用户 UID</th><th>合伙人 UID</th><th>盘口类型</th><th>合约名称</th><th>订单 ID</th><th>委托订单 ID</th><th>仓位 ID</th><th>杠杆</th><th>方向</th><th>开仓价格</th><th>开仓数量</th><th>委托价格</th><th>手续费</th><th>订单类型</th><th>开仓时间</th>
+                      <th>用户 UID</th><th>合伙人 UID</th><th>母合伙人 UID</th><th>盘口类型</th><th>合约名称</th><th>订单 ID</th><th>委托订单 ID</th><th>仓位 ID</th><th>杠杆</th><th>方向</th><th>开仓价格</th><th>开仓数量</th><th>委托价格</th><th>手续费</th><th>订单类型</th><th>开仓时间</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>10248391</td><td>30087511</td><td>实盘</td><td>BTCUSDT 永续</td><td>OPEN-718201</td><td>ODR-991728650</td><td>POS-78721194</td><td>20x</td><td>开多</td><td>67,540</td><td>0.80 BTC</td><td>67,520</td><td>48.20</td><td>限价</td><td>2026-07-18 08:15:36</td></tr>
-                    <tr><td>10277109</td><td>30087511</td><td>模拟盘</td><td>ETHUSDT 永续</td><td>OPEN-718245</td><td>ODR-991728712</td><td>POS-78724903</td><td>10x</td><td>开空</td><td>3,710</td><td>32 ETH</td><td>3,712</td><td>36.80</td><td>市价</td><td>2026-07-18 09:04:11</td></tr>
+                    <tr><td>10248391</td><td>30087511</td><td>80012001</td><td>实盘</td><td>BTCUSDT 永续</td><td>OPEN-718201</td><td>ODR-991728650</td><td>POS-78721194</td><td>20x</td><td>开多</td><td>67,540</td><td>0.80 BTC</td><td>67,520</td><td>48.20</td><td>限价</td><td>2026-07-18 08:15:36</td></tr>
+                    <tr><td>10277109</td><td>30087511</td><td>80012001</td><td>模拟盘</td><td>ETHUSDT 永续</td><td>OPEN-718245</td><td>ODR-991728712</td><td>POS-78724903</td><td>10x</td><td>开空</td><td>3,710</td><td>32 ETH</td><td>3,712</td><td>36.80</td><td>市价</td><td>2026-07-18 09:04:11</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -1094,6 +1101,8 @@
               <div class="toolbarCard">
                 <h3>查询与筛选</h3>
                 <div class="fieldGrid">
+                  <div class="field"><label>母合伙人 UID</label><input class="control" value="80012001" /></div>
+                  <div class="field"><label>合伙人 UID</label><input class="control" value="30087511" /></div>
                   <div class="field"><label>用户 UID</label><input class="control" value="10277109" /></div>
                   <div class="field"><label>订单 ID</label><input class="control" value="CLOSE-718981" /></div>
                   <div class="field"><label>委托订单 ID</label><input class="control" value="ODR-991728703" /></div>
@@ -1116,12 +1125,12 @@
                 <table>
                   <thead>
                     <tr>
-                      <th>用户 UID</th><th>合伙人 UID</th><th>盘口类型</th><th>合约名称</th><th>订单 ID</th><th>委托订单 ID</th><th>仓位 ID</th><th>杠杆</th><th>仓位模式</th><th>方向</th><th>平仓价格</th><th>平仓数量</th><th>手续费</th><th>平仓时间</th>
+                      <th>用户 UID</th><th>合伙人 UID</th><th>母合伙人 UID</th><th>盘口类型</th><th>合约名称</th><th>订单 ID</th><th>委托订单 ID</th><th>仓位 ID</th><th>杠杆</th><th>仓位模式</th><th>方向</th><th>平仓价格</th><th>平仓数量</th><th>手续费</th><th>平仓时间</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>10277109</td><td>30087511</td><td>模拟盘</td><td>ETHUSDT 永续</td><td>CLOSE-718981</td><td>ODR-991728703</td><td>POS-78724903</td><td>10x</td><td>逐仓</td><td>平空</td><td>3,655</td><td>12 ETH</td><td>14.60</td><td>2026-07-18 12:22:04</td></tr>
-                    <tr><td>10248391</td><td>30087511</td><td>实盘</td><td>BTCUSDT 永续</td><td>CLOSE-718996</td><td>ODR-991728898</td><td>POS-78721194</td><td>20x</td><td>全仓</td><td>平多</td><td>68,920</td><td>0.20 BTC</td><td>12.00</td><td>2026-07-18 12:28:39</td></tr>
+                    <tr><td>10277109</td><td>30087511</td><td>80012001</td><td>模拟盘</td><td>ETHUSDT 永续</td><td>CLOSE-718981</td><td>ODR-991728703</td><td>POS-78724903</td><td>10x</td><td>逐仓</td><td>平空</td><td>3,655</td><td>12 ETH</td><td>14.60</td><td>2026-07-18 12:22:04</td></tr>
+                    <tr><td>10248391</td><td>30087511</td><td>80012001</td><td>实盘</td><td>BTCUSDT 永续</td><td>CLOSE-718996</td><td>ODR-991728898</td><td>POS-78721194</td><td>20x</td><td>全仓</td><td>平多</td><td>68,920</td><td>0.20 BTC</td><td>12.00</td><td>2026-07-18 12:28:39</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -1185,7 +1194,7 @@
                   <div class="field"><label>母合伙人 UID</label><input class="control" value="80012001" /></div>
                   <div class="field"><label>合伙人 UID</label><input class="control" value="30087511" /></div>
                   <div class="field"><label>用户 UID</label><input class="control" value="10248391" /></div>
-                  <div class="field"><label>时间筛选</label><select class="control"><option>全部时间</option><option>今日</option><option>近 7 天</option><option>近 30 天</option><option>2026-07-01 至 2026-07-18</option><option>自定义范围</option></select></div>
+
                 </div>
                 <div class="note toolbarNote">净盈亏查询用于数据管理，突出总结算盈亏、总手续费、总净盈亏、盈利率及充提体验金等用户维度统计。</div>
                 <div class="toolbarActions"><div class="actions"><button class="btn secondary">重置</button><button class="btn primary">查询</button><button class="btn secondary">导出</button></div></div>
@@ -1206,12 +1215,12 @@
                 <table>
                   <thead>
                     <tr>
-                      <th>用户 UID</th><th>合伙人 UID</th><th>总成交额</th><th>总手续费</th><th>总结算盈亏</th><th>总净盈亏</th><th>总划入</th><th>总划出</th><th>净划入</th><th>体验金领取</th><th>体验金收益</th>
+                      <th>用户 UID</th><th>合伙人 UID</th><th>母合伙人 UID</th><th>总成交额</th><th>总手续费</th><th>总结算盈亏</th><th>总净盈亏</th><th>总划入</th><th>总划出</th><th>净划入</th><th>体验金领取</th><th>体验金收益</th><th>最后更新时间</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>10248391</td><td>30087511</td><td>12.8M</td><td>168,800</td><td>+760,200</td><td>+591,400</td><td>820,000</td><td>260,000</td><td>560,000</td><td>2,000</td><td>+428</td></tr>
-                    <tr><td>10277109</td><td>30087511</td><td>8.2M</td><td>94,300</td><td>-120,800</td><td>-215,100</td><td>410,000</td><td>360,000</td><td>50,000</td><td>1,500</td><td>-116</td></tr>
+                    <tr><td>10248391</td><td>30087511</td><td>80012001</td><td>12.8M</td><td>168,800</td><td>+760,200</td><td>+591,400</td><td>820,000</td><td>260,000</td><td>560,000</td><td>2,000</td><td>+428</td><td>2026-07-18 12:35:18</td></tr>
+                    <tr><td>10277109</td><td>30087511</td><td>80012001</td><td>8.2M</td><td>94,300</td><td>-120,800</td><td>-215,100</td><td>410,000</td><td>360,000</td><td>50,000</td><td>1,500</td><td>-116</td><td>2026-07-18 12:36:42</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -1250,33 +1259,48 @@
                 <table>
                   <thead>
                     <tr>
-                      <th>用户 UID</th><th>母合伙人 UID</th><th>盘口类型</th><th>结算批次</th><th>合约名称</th><th>涉及仓位数</th><th>资金费率</th><th>累计资金费用</th><th>结算时间</th><th>详情</th>
+                      <th>用户 UID</th><th>合伙人 UID</th><th>母合伙人 UID</th><th>盘口类型</th><th>结算批次</th><th>合约名称</th><th>涉及仓位数</th><th>资金费率</th><th>累计资金费用</th><th>结算时间</th><th>详情</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>10248391</td><td>80012001</td><td>实盘</td><td>FUND-20260718-0800-A</td><td>BTCUSDT 永续</td><td>2 个仓位</td><td>0.010000%</td><td>9.86</td><td>2026-07-18 08:00:00</td><td><button class="linkBtn" data-drawer-key="funding-batch-current-0800">查看详情</button></td></tr>
-                    <tr><td>10277109</td><td>80012001</td><td>模拟盘</td><td>FUND-20260718-0800-B</td><td>ETHUSDT 永续</td><td>1 个仓位</td><td>-0.007000%</td><td>-8.31</td><td>2026-07-18 08:00:00</td><td><span class="status gray">单仓位</span></td></tr>
-                    <tr><td>10248391</td><td>80012001</td><td>实盘</td><td>FUND-20260714-0800-C</td><td>BTCUSDT 永续</td><td>2 个仓位</td><td>0.012000%</td><td>18.22</td><td>2026-07-14 08:00:00</td><td><button class="linkBtn" data-drawer-key="funding-batch-history-0800">查看详情</button></td></tr>
+                    <tr><td>10248391</td><td>30087511</td><td>80012001</td><td>实盘</td><td>FUND-20260718-0800-A</td><td>BTCUSDT 永续</td><td>2 个仓位</td><td>0.010000%</td><td>9.86</td><td>2026-07-18 08:00:00</td><td><button class="linkBtn" data-drawer-key="funding-batch-current-0800">查看详情</button></td></tr>
+                    <tr><td>10277109</td><td>30087511</td><td>80012001</td><td>模拟盘</td><td>FUND-20260718-0800-B</td><td>ETHUSDT 永续</td><td>1 个仓位</td><td>-0.007000%</td><td>-8.31</td><td>2026-07-18 08:00:00</td><td><span class="status gray">单仓位</span></td></tr>
+                    <tr><td>10248391</td><td>30087511</td><td>80012001</td><td>实盘</td><td>FUND-20260714-0800-C</td><td>BTCUSDT 永续</td><td>2 个仓位</td><td>0.012000%</td><td>18.22</td><td>2026-07-14 08:00:00</td><td><button class="linkBtn" data-drawer-key="funding-batch-history-0800">查看详情</button></td></tr>
                   </tbody>
                 </table>
               </div>
               <div class="pagination"><span>共 9248 条</span><div class="pages"><div class="pageBtn active">1</div><div class="pageBtn">2</div><div class="pageBtn">3</div></div></div>
             </div>
-          </section>
+          </section>
 
           <section class="page" id="version-log">
             <div class="toolbar">
               <div class="toolbarCard">
                 <h3>版本声明</h3>
-                <div class="note toolbarNote">版本声明按自然日记录当前原型改动；本页仅记录 2026-09-16 当日发生的修改内容。</div>
+                <div class="note toolbarNote">版本声明仅记录新增、删除、修改项，不记录未改动内容。</div>
               </div>
             </div>
 
             <div class="contentCard">
               <div class="cardHead">
+                <div><h3>v20260922</h3><p>UID 字段补充与净盈亏查询调整</p></div>
+              </div>
+              <div class="note versionLogDetail" style="margin-top:12px;">
+                · 新增：三级 UID 展示回填规则。一级子代理、一级直客、母代理的“合伙人 UID”显示 <code>--</code>；母代理的“母合伙人 UID”显示其本人 UID；二级子代理、二级直客的“合伙人 UID”显示其直接上一级子合伙人 UID。<br />
+                · 新增：母代理 UID、合伙人 UID 作为筛选条件时，查询结果包含该代理自身数据。<br />
+                · 新增：净盈亏查询明细列表“最后更新时间”字段。<br />
+                · 删除：净盈亏查询查询栏“时间筛选”。<br />
+                · 查询栏新增“合伙人 UID”：当前持仓、资金费历史。<br />
+                · 查询栏新增“母合伙人 UID”“合伙人 UID”：当前委托、平仓记录。<br />
+                · 列表新增“母合伙人 UID”：当前委托、开仓记录、平仓记录、净盈亏查询。<br />
+                · 列表新增“合伙人 UID”：资金费历史。
+              </div>
+            </div>
+            <div class="contentCard">
+              <div class="cardHead">
                 <div><h3>2026091623:59</h3><p>当前版本改动明细（2026-09-16 当日汇总）</p></div>
               </div>
-              <div class="note" style="margin-top:12px; line-height:1.95;">
+              <div class="note versionLogDetail" style="margin-top:12px;">
                 · 全部统计卡片、汇总指标、分页总数默认排除做市账号数据，口径抽屉同步补充排除规则。<br />
                 · 当前委托页补齐当前委托总数、限价委托、止盈止损委托、模拟盘委托口径，明确止盈止损委托为止盈止损触发后生成的委托。<br />
                 · 当前持仓列表删除止盈止损价格字段；历史仓位风险率改为高风险历史仓位数占历史仓位总数，高风险历史仓位定义为仓位级别被系统强平过的订单。<br />
@@ -1341,8 +1365,8 @@
           <div class="note" style="margin-top:10px">
             <strong>二、按链路聚合后的用户级展示口径</strong><br />
             填写母合伙人 UID 或 合伙人 UID 后，查询结果均进入<strong>「下级用户聚合视图——一用户一行」</strong>的汇总展示模式：<br />
-            ① 查询项为「母合伙人 UID = X」时，返回该母合伙人整条代理链路下<strong>全部归属用户</strong>的数据，按「用户 UID」做聚合，<strong>每个用户仅展示一行</strong>，不再按仓位 / 订单展开明细。该行展示的表头字段与当前页面一致（如当前持仓页：持仓数量、保证金、未实现盈亏、已实现盈亏等列做用户口径下的合计）。该行必须携带「母合伙人 UID / 合伙人 UID / 用户 UID」三列，便于核对链路归属。<br />
-            ② 查询项为「合伙人 UID = Y」时，返回该直接合伙人下<strong>全部归属用户</strong>的数据，按「用户 UID」做聚合，<strong>每个用户仅展示一行</strong>，口径与上述用户级聚合一致。<br />
+            ① 查询项为「母合伙人 UID = X」时，返回该母合伙人整条代理链路下<strong>全部归属用户</strong>的数据，且<strong>包含该母代理自身数据</strong>，按「用户 UID」做聚合，<strong>每个用户仅展示一行</strong>，不再按仓位 / 订单展开明细。该行展示的表头字段与当前页面一致（如当前持仓页：持仓数量、保证金、未实现盈亏、已实现盈亏等列做用户口径下的合计）。该行必须携带「母合伙人 UID / 合伙人 UID / 用户 UID」三列，便于核对链路归属。<br />
+            ② 查询项为「合伙人 UID = Y」时，返回该直接合伙人下<strong>全部归属用户</strong>的数据，且<strong>包含该子代理自身数据</strong>，按「用户 UID」做聚合，<strong>每个用户仅展示一行</strong>，口径与上述用户级聚合一致。<br />
             ③ 查询项为「用户 UID = Z」时，返回该用户自身明细数据（<strong>不做聚合</strong>），仍按原页面默认展开维度（仓位 / 委托 / 成交 / 结算批次 等）逐条展示。
           </div>
           <div class="note" style="margin-top:10px">
@@ -1351,6 +1375,14 @@
             ① 母合伙人 UID / 合伙人 UID 查询：汇总基于「用户级聚合视图」的行合计再求总（即母合伙人链路 / 合伙人链路下全用户总和）。<br />
             ② 用户 UID 查询：汇总基于该用户明细行的合计，与历史口径保持一致。<br />
             ③ 当校验不通过或未发起查询时，汇总卡片不刷新，保持上一次查询结果或全量默认值，避免出现空卡片误导判断。
+          </div>
+          <div class="note" style="margin-top:10px">
+            <strong>四、母合伙人 UID / 合伙人 UID 展示回填规则</strong><br />
+            ① 只要当前页面列表展示了「合伙人 UID」或「母合伙人 UID」，则两列必须同时展示；对应查询栏中的这两个筛选项也必须同时提供。<br />
+            ② 若当前对象为<strong>一级子代理、一级直客或母代理</strong>，则「合伙人 UID」统一显示为 <code>--</code>。<br />
+            ③ 若当前对象为<strong>母代理</strong>，则「母合伙人 UID」显示该母代理<strong>自己的 UID</strong>。<br />
+            ④ 若当前对象为<strong>二级子代理或二级直客</strong>，则「合伙人 UID」显示其<strong>直接上一级子合伙人 UID</strong>；即使链路上方存在多级代理，也只回填紧邻上一级，不跨级取值。<br />
+            ⑤ 母合伙人 UID、合伙人 UID 作为筛选条件时，返回数据范围均<strong>包含代理自身数据</strong>，不只统计其下级。
           </div>
         </div>
 
@@ -1476,6 +1508,7 @@
                 </thead>
                 <tbody>
                   <tr><td>搜索栏</td><td>母合伙人 UID</td><td>母合伙人 UID</td><td>代理链路最上层 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直属上一级合伙人 UID；具体回填方式遵循上方全局 UID 展示规则。</td></tr>
                   <tr><td>搜索栏</td><td>用户 UID</td><td>用户 UID</td><td>委托所属用户 UID。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>搜索栏</td><td>委托订单 ID</td><td>委托订单 ID</td><td>委托单唯一主键。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>搜索栏</td><td class="mutedCell">无（原型补充）</td><td>对应止盈止损 ID</td><td>支持按挂接止盈止损单 ID 追踪委托。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
@@ -1490,7 +1523,8 @@
                   <tr><td>信息栏</td><td class="mutedCell">无（原型补充）</td><td>对应止盈止损 ID</td><td>委托若挂接止盈止损则展示其 ID。该字段为原型补充，用于补足订单链路排查和关联追踪。</td></tr>
                   <tr><td>信息栏</td><td>仓位 ID</td><td>仓位 ID</td><td>委托关联仓位。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>下单用户。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>所属合伙人。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直属上一级合伙人 UID；一级子代理、一级直客或母代理统一显示 <code>--</code>，其余按全局 UID 展示规则回填。</td></tr>
+                  <tr><td>信息栏</td><td>母合伙人 UID</td><td>母合伙人 UID</td><td>代理链路顶层 UID；若当前对象为母代理，则该字段显示其自己的 UID。</td></tr>
                   <tr><td>信息栏</td><td class="mutedCell">由筛选项映射</td><td>盘口类型</td><td>由盘口类型筛选项映射到列表展示字段，值为实盘或模拟盘，用于直接识别该委托所属交易环境。</td></tr>
                   <tr><td>信息栏</td><td>合约名称</td><td>合约名称</td><td>委托合约。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>订单方向</td><td>订单方向</td><td>买入开多/卖出平多等。字段名称和业务含义与页面定义一致。</td></tr>
@@ -1532,7 +1566,8 @@
                   <tr><td>筛选栏</td><td>全部订单类型（限价/市价）</td><td>订单类型</td><td>按下单类型筛选。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>筛选栏</td><td>全部合约名称</td><td>合约名称</td><td>开仓记录所属合约。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>成交用户。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>所属合伙人。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直属上一级合伙人 UID；具体回填方式遵循上方全局 UID 展示规则。</td></tr>
+                  <tr><td>信息栏</td><td>母合伙人 UID</td><td>母合伙人 UID</td><td>代理链路顶层 UID；若当前对象为母代理，则该字段显示其自己的 UID。</td></tr>
                   <tr><td>信息栏</td><td class="mutedCell">由筛选项映射</td><td>盘口类型</td><td>由盘口类型筛选项映射到列表展示字段，值为实盘或模拟盘，用于直接识别该开仓记录所属交易环境。</td></tr>
                   <tr><td>信息栏</td><td>合约名称</td><td>合约名称</td><td>成交合约。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>订单 ID</td><td>订单 ID</td><td>成交订单主键。字段名称和业务含义与页面定义一致。</td></tr>
@@ -1577,7 +1612,8 @@
                   <tr><td>筛选栏</td><td>全部订单类型</td><td>订单类型</td><td>限价/市价等。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>筛选栏</td><td>全部合约名称</td><td>合约名称</td><td>平仓所属合约。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>平仓用户。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>所属合伙人。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直属上一级合伙人 UID；具体回填方式遵循上方全局 UID 展示规则。</td></tr>
+                  <tr><td>信息栏</td><td>母合伙人 UID</td><td>母合伙人 UID</td><td>代理链路顶层 UID；若当前对象为母代理，则该字段显示其自己的 UID。</td></tr>
                   <tr><td>信息栏</td><td class="mutedCell">由筛选项映射</td><td>盘口类型</td><td>由盘口类型筛选项映射到列表展示字段，值为实盘或模拟盘，用于直接识别该平仓记录所属交易环境。</td></tr>
                   <tr><td>信息栏</td><td>合约名称</td><td>合约名称</td><td>平仓所属合约。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>订单 ID</td><td>订单 ID</td><td>平仓订单主键。字段名称和业务含义与页面定义一致。</td></tr>
@@ -1627,8 +1663,8 @@
                   <tr><td>汇总信息</td><td>风险率</td><td>风险率</td><td>默认排除做市账号数据；计算公式 = 高风险历史仓位数 / 历史仓位总数 × 100%。其中高风险历史仓位指仓位级别被系统强平过的订单。</td></tr>
                   <tr><td>信息栏</td><td>仓位 ID</td><td>仓位 ID</td><td>历史仓位主键。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>所属用户。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>所属合伙人。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>信息栏</td><td>母合伙人 UID</td><td>母合伙人 UID</td><td>代理顶层 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直属上一级合伙人 UID；一级子代理、一级直客或母代理统一显示 <code>--</code>，其余按全局 UID 展示规则回填。</td></tr>
+                  <tr><td>信息栏</td><td>母合伙人 UID</td><td>母合伙人 UID</td><td>代理顶层 UID；若当前对象为母代理，则该字段显示其自己的 UID。</td></tr>
                   <tr><td>信息栏</td><td class="mutedCell">由筛选项映射</td><td>盘口类型</td><td>由盘口类型筛选项映射到列表展示字段，值为实盘或模拟盘，用于直接识别该历史仓位所属交易环境。</td></tr>
                   <tr><td>信息栏</td><td>合约名称</td><td>合约名称</td><td>仓位所属合约。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>杠杆倍数</td><td>杠杆倍数</td><td>开仓杠杆。字段名称和业务含义与页面定义一致。</td></tr>
@@ -1676,7 +1712,7 @@
             <h4>7. 净盈亏查询——数据管理</h4>
             <span class="auditMeta">数据管理</span>
           </div>
-          <div class="note">口径定义：净盈亏查询按用户维度聚合，净盈亏 = 总结算盈亏 - 总手续费；净划入 = 总划入 - 总划出；盈利率 = 总净盈亏 / 净划入。盈利率统一按百分比展示并固定保留 2 位小数。</div>
+          <div class="note">口径定义：净盈亏查询按用户维度聚合，净盈亏 = 总结算盈亏 - 总手续费；净划入 = 总划入 - 总划出；盈利率 = 总净盈亏 / 净划入。盈利率统一按百分比展示并固定保留 2 位小数。最后更新时间表示该用户聚合结果最近一次完成汇总回写并可对外查询的时间。</div>
           <div class="contentCard" style="margin-top:12px">
             <div class="tableWrap auditTable">
               <table>
@@ -1687,12 +1723,13 @@
                   <tr><td>搜索栏</td><td>母合伙人 UID</td><td>母合伙人 UID</td><td>代理顶层 UID。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>搜索栏</td><td>用户 UID</td><td>用户 UID</td><td>统计所属用户。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>搜索栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直接合伙人 UID。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>筛选栏</td><td>时间筛选</td><td>时间筛选</td><td>统计周期范围。字段名称和业务含义与页面定义一致。</td></tr>
+
                   <tr><td>汇总信息</td><td>总结算盈亏</td><td>总结算盈亏</td><td>统计周期内已结算盈亏总额。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>汇总信息</td><td>总手续费</td><td>总手续费</td><td>统计周期内累计手续费。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>汇总信息</td><td>总净盈亏</td><td>总净盈亏</td><td>总结算盈亏减总手续费。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>统计对象用户。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>所属合伙人。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直属上一级合伙人 UID；一级子代理、一级直客或母代理统一显示 <code>--</code>，其余按全局 UID 展示规则回填。</td></tr>
+                  <tr><td>信息栏</td><td>母合伙人 UID</td><td>母合伙人 UID</td><td>代理链路顶层 UID；若当前对象为母代理，则该字段显示其自己的 UID。</td></tr>
                   <tr><td>信息栏</td><td>总成交额</td><td>总成交额</td><td>统计周期累计成交额。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>总手续费</td><td>总手续费</td><td>统计周期累计手续费。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>总结算盈亏</td><td>总结算盈亏</td><td>统计周期累计已结算盈亏。字段名称和业务含义与页面定义一致。</td></tr>
@@ -1703,6 +1740,7 @@
                   <tr><td>信息栏</td><td>净划入</td><td>净划入</td><td>总划入减总划出。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>体验金领取</td><td>体验金领取</td><td>统计周期领取体验金总额。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>信息栏</td><td>体验金收益</td><td>体验金收益</td><td>体验金贡献收益。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>最后更新时间</td><td>表示该用户维度净盈亏结果最近一次完成汇总回写并可被当前页面查询到的时间，用于判断统计结果的新鲜度。该字段为当前页面的补充定义。</td></tr>
                   <tr><td>页码栏</td><td>页码栏</td><td>分页条</td><td>列表分页与总数展示。当前原型已经提供该展示或交互能力。</td></tr>
                 </tbody>
               </table>
@@ -1724,14 +1762,16 @@
                 </thead>
                 <tbody>
                   <tr><td>搜索栏</td><td>母合伙人 UID</td><td>母合伙人 UID</td><td>代理顶层 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>搜索栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直属上一级合伙人 UID；具体回填方式遵循上方全局 UID 展示规则。</td></tr>
                   <tr><td>搜索栏</td><td>用户 UID</td><td>用户 UID</td><td>所属用户。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>搜索栏</td><td>仓位 ID</td><td>仓位 ID</td><td>对应仓位主键。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>筛选栏</td><td>合约名称</td><td>合约名称</td><td>资金费所属合约。字段名称和业务含义与页面定义一致。</td></tr>
                   <tr><td>筛选栏</td><td>时间筛选</td><td>时间筛选</td><td>按结算时间窗口查询。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>汇总卡片</td><td class="mutedCell">无（本轮补充）</td><td>资金费结算笔数</td><td>默认范围为全部，与上方筛选条件（母合伙人UID、用户UID、仓位ID、合约名称、盘口类型、时间筛选）联动；筛选条件变更后按新范围重新计算。取值逻辑：当前查询范围内资金费结算批次的累计总数（按批次去重计数，不含展开后的仓位明细）。</td></tr>
-                  <tr><td>汇总卡片</td><td class="mutedCell">无（本轮补充）</td><td>累计资金费用</td><td>默认范围为全部，与上方筛选条件（母合伙人UID、用户UID、仓位ID、合约名称、盘口类型、时间筛选）联动；筛选条件变更后按新范围重新计算。取值逻辑：当前查询范围内全部结算批次「累计资金费用」列的代数和合计（正数表示平台方向净流入、负数表示净流出）。</td></tr>
+                  <tr><td>汇总卡片</td><td class="mutedCell">无（本轮补充）</td><td>资金费结算笔数</td><td>默认范围为全部，与上方筛选条件（母合伙人UID、合伙人UID、用户UID、仓位ID、合约名称、盘口类型、时间筛选）联动；筛选条件变更后按新范围重新计算。取值逻辑：当前查询范围内资金费结算批次的累计总数（按批次去重计数，不含展开后的仓位明细）。</td></tr>
+                  <tr><td>汇总卡片</td><td class="mutedCell">无（本轮补充）</td><td>累计资金费用</td><td>默认范围为全部，与上方筛选条件（母合伙人UID、合伙人UID、用户UID、仓位ID、合约名称、盘口类型、时间筛选）联动；筛选条件变更后按新范围重新计算。取值逻辑：当前查询范围内全部结算批次「累计资金费用」列的代数和合计（正数表示平台方向净流入、负数表示净流出）。</td></tr>
                   <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>所属用户。字段名称和业务含义与页面定义一致。</td></tr>
-                  <tr><td>信息栏</td><td>母合伙人 UID</td><td>母合伙人 UID</td><td>代理顶层 UID。字段名称和业务含义与页面定义一致。</td></tr>
+                  <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直属上一级合伙人 UID；一级子代理、一级直客或母代理统一显示 <code>--</code>，其余按全局 UID 展示规则回填。</td></tr>
+                  <tr><td>信息栏</td><td>母合伙人 UID</td><td>母合伙人 UID</td><td>代理顶层 UID；若当前对象为母代理，则该字段显示其自己的 UID。</td></tr>
                   <tr><td>信息栏</td><td class="mutedCell">由筛选项映射</td><td>盘口类型</td><td>由盘口类型筛选项映射到列表展示字段，值为实盘或模拟盘，用于直接识别该资金费记录所属交易环境。</td></tr>
                   <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>结算批次</td><td>把同一用户、同一合约、同一结算时间下的资金费结算聚合成一条批次记录，便于先看批次，再展开看单仓位。该字段为当前页面的补充定义。</td></tr>
                   <tr><td>信息栏</td><td>合约名称</td><td>合约名称</td><td>结算合约。字段名称和业务含义与页面定义一致。</td></tr>
@@ -2484,7 +2524,6 @@
     </script>
   </body>
 </html>
-
 
 
 
