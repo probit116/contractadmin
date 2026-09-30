@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
@@ -363,6 +363,14 @@
 
       .summary.five{
         grid-template-columns:repeat(5,minmax(0,1fr));
+      }
+
+      .summary.six{
+        grid-template-columns:repeat(6,minmax(0,1fr));
+      }
+
+      .summary.seven{
+        grid-template-columns:repeat(7,minmax(0,1fr));
       }
 
       .summary.center{
@@ -1161,28 +1169,30 @@
               </div>
             </div>
 
-            <div class="summary five">
+            <div class="summary seven">
               <div class="metric"><div class="k">手续费</div><div class="v">1.26M</div><div class="sub">历史仓位累计</div></div>
               <div class="metric"><div class="k">平仓盈亏</div><div class="v">+3.84M</div><div class="sub">不含资金费</div></div>
               <div class="metric"><div class="k">净盈亏</div><div class="v">+2.58M</div><div class="sub">扣除手续费后</div></div>
+              <div class="metric"><div class="k">资金费</div><div class="v">+186,420</div><div class="sub">当前仓位资金费累计</div></div>
+              <div class="metric"><div class="k">用户净盈亏</div><div class="v">+2.86M</div><div class="sub">已实现盈亏 + 资金费 + 手续费返佣 - 手续费</div></div>
               <div class="metric"><div class="k">交易额</div><div class="v">86.2M</div><div class="sub">历史成交额累计</div></div>
               <div class="metric"><div class="k">风险率</div><div class="v">1.82%</div><div class="sub">高风险历史仓位 / 历史仓位数</div></div>
             </div>
 
             <div class="contentCard">
               <div class="cardHead">
-                <div><h3>历史仓位列表</h3><p>支持查看平仓盈亏详情与关联记录。</p></div>
+                <div><h3>历史仓位列表</h3><p>支持查看开仓保证金、资金费、用户净盈亏、盈利率、平仓盈亏详情与关联记录。</p></div>
               </div>
               <div class="tableWrap">
                 <table>
                   <thead>
                     <tr>
-                      <th>仓位 ID</th><th>用户 UID</th><th>合伙人 UID</th><th>母合伙人 UID</th><th>盘口类型</th><th>合约名称</th><th>杠杆倍数</th><th>仓位方向</th><th>开仓类型</th><th>开仓价格</th><th>最大持仓量</th><th>平仓均价</th><th>已平仓量</th><th>手续费</th><th>平仓盈亏</th><th>开仓时间</th><th>平仓时间</th>
+                      <th>仓位 ID</th><th>用户 UID</th><th>合伙人 UID</th><th>母合伙人 UID</th><th>盘口类型</th><th>合约名称</th><th>杠杆倍数</th><th>仓位方向</th><th>开仓类型</th><th>开仓价格</th><th>最大持仓量</th><th>平仓均价</th><th>已平仓量</th><th>手续费</th><th>开仓保证金</th><th>平仓盈亏</th><th>资金费</th><th>用户净盈亏</th><th>盈利率</th><th>开仓时间</th><th>平仓时间</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>HIS-55721291</td><td>10248391</td><td>30087511</td><td>80012001</td><td>实盘</td><td>BTCUSDT 永续</td><td>20x</td><td>开多</td><td>全仓</td><td>66,880</td><td>1.00 BTC</td><td>68,540</td><td>1.00 BTC</td><td>128.60</td><td><button class="linkBtn" data-drawer-key="history-btc">+18,960 查看关联</button></td><td>2026-07-11 09:10:00</td><td>2026-07-14 17:45:28</td></tr>
-                    <tr><td>HIS-55721109</td><td>10277109</td><td>30087511</td><td>80012001</td><td>模拟盘</td><td>ETHUSDT 永续</td><td>12x</td><td>开空</td><td>逐仓</td><td>3,780</td><td>46 ETH</td><td>4,054</td><td>46 ETH</td><td>96.44</td><td><button class="linkBtn" data-drawer-key="history-eth">-8,420 查看关联</button></td><td>2026-07-09 13:24:52</td><td>2026-07-10 02:16:40</td></tr>
+                    <tr><td>HIS-55721291</td><td>10248391</td><td>30087511</td><td>80012001</td><td>实盘</td><td>BTCUSDT 永续</td><td>20x</td><td>开多</td><td>全仓</td><td>66,880</td><td>1.00 BTC</td><td>68,540</td><td>1.00 BTC</td><td>128.60</td><td>5,024.50</td><td><button class="linkBtn" data-drawer-key="history-btc">+18,960 查看关联</button></td><td style="color:#7ef3c3">+26.48</td><td style="color:#7ef3c3">+18,857.88</td><td style="color:#7ef3c3">+377.35%</td><td>2026-07-11 09:10:00</td><td>2026-07-14 17:45:28</td></tr>
+                    <tr><td>HIS-55721109</td><td>10277109</td><td>30087511</td><td>80012001</td><td>模拟盘</td><td>ETHUSDT 永续</td><td>12x</td><td>开空</td><td>逐仓</td><td>3,780</td><td>46 ETH</td><td>4,054</td><td>46 ETH</td><td>96.44</td><td>20,268</td><td><button class="linkBtn" data-drawer-key="history-eth">-8,420 查看关联</button></td><td style="color:#ff9e9e">-19.84</td><td style="color:#ff9e9e">-8,536.28</td><td style="color:#ff9e9e">-41.54%</td><td>2026-07-09 13:24:52</td><td>2026-07-10 02:16:40</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -1200,16 +1210,16 @@
                   <div class="field"><label>用户 UID</label><input class="control" value="10248391" /></div>
                   <div class="field"><label>时间筛选（按当前时区）</label><select class="control"><option>全部时间</option><option selected>今日</option><option>近 7 天</option><option>近 30 天</option><option>自定义范围</option></select></div>
                 </div>
-                <div class="note toolbarNote">净盈亏查询用于数据管理，运营可按今日、指定日期或自定义时间段查询；时间筛选优先按用户当前时区自然日生效，未获取用户时区时按 UTC+8 兜底。成交额统计、结算盈亏统计、手续费统计均按所选时间段重新统计，不展示全量总数据。</div>
+                <div class="note toolbarNote">净盈亏查询用于数据管理，运营可按今日、指定日期或自定义时间段查询；时间筛选优先按用户当前时区自然日生效，未获取用户时区时按 UTC+8 兜底。成交额统计、已实现盈亏统计、手续费统计、净盈亏统计均按所选时间段重新统计，不展示全量总数据。</div>
                 <div class="toolbarActions"><div class="actions"><button class="btn secondary">重置</button><button class="btn primary">查询</button><button class="btn secondary">导出</button></div></div>
               </div>
             </div>
 
             <div class="summary">
               <div class="metric"><div class="k">成交额统计</div><div class="v">21.0M</div><div class="sub">当前筛选范围内累计成交额</div></div>
-              <div class="metric"><div class="k">结算盈亏统计</div><div class="v">+5.62M</div><div class="sub">当前筛选范围内累计</div></div>
+              <div class="metric"><div class="k">已实现盈亏统计</div><div class="v">+5.62M</div><div class="sub">当前筛选范围内累计</div></div>
               <div class="metric"><div class="k">手续费统计</div><div class="v">1.14M</div><div class="sub">当前筛选范围内合计</div></div>
-              <div class="metric"><div class="k">净盈亏统计</div><div class="v">+4.48M</div><div class="sub">结算盈亏 - 手续费</div></div>
+              <div class="metric"><div class="k">净盈亏统计</div><div class="v">+4.63M</div><div class="sub">已实现盈亏 + 资金费 + 手续费返佣 - 手续费</div></div>
             </div>
 
             <div class="contentCard">
@@ -1220,12 +1230,12 @@
                 <table>
                   <thead>
                     <tr>
-                      <th>用户 UID</th><th>合伙人 UID</th><th>母合伙人 UID</th><th>成交额</th><th>手续费</th><th>结算盈亏</th><th>净盈亏</th><th>划入</th><th>划出</th><th>净划入</th><th>体验金领取</th><th>体验金收益</th><th>最后更新时间</th>
+                      <th>用户 UID</th><th>合伙人 UID</th><th>母合伙人 UID</th><th>成交额</th><th>手续费</th><th>已实现盈亏</th><th>资金费</th><th>手续费返佣</th><th>净盈亏</th><th>划入</th><th>划出</th><th>净划入</th><th>体验金领取</th><th>体验金收益</th><th>最后更新时间</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>10248391</td><td>30087511</td><td>80012001</td><td>12.8M</td><td>168,800</td><td>+760,200</td><td>+591,400</td><td>820,000</td><td>260,000</td><td>560,000</td><td>2,000</td><td>+428</td><td>2026-07-18 12:35:18</td></tr>
-                    <tr><td>10277109</td><td>30087511</td><td>80012001</td><td>8.2M</td><td>94,300</td><td>-120,800</td><td>-215,100</td><td>410,000</td><td>360,000</td><td>50,000</td><td>1,500</td><td>-116</td><td>2026-07-18 12:36:42</td></tr>
+                    <tr><td>10248391</td><td>30087511</td><td>80012001</td><td>12.8M</td><td>168,800</td><td>+760,200</td><td>0</td><td>+12,600</td><td>+604,000</td><td>820,000</td><td>260,000</td><td>560,000</td><td>2,000</td><td>+428</td><td>2026-07-18 12:35:18</td></tr>
+                    <tr><td>10277109</td><td>30087511</td><td>80012001</td><td>8.2M</td><td>94,300</td><td>-120,800</td><td>0</td><td>+5,700</td><td>-209,400</td><td>410,000</td><td>360,000</td><td>50,000</td><td>1,500</td><td>-116</td><td>2026-07-18 12:36:42</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -1286,6 +1296,18 @@
               </div>
             </div>
 
+            <div class="contentCard">
+              <div class="cardHead">
+                <div><h3>v20260929</h3><p>历史仓位补充保证金、盈利率、资金费与用户净盈亏</p></div>
+              </div>
+              <div class="note versionLogDetail" style="margin-top:12px;">
+                · 修改：历史仓位列表新增“开仓保证金”“盈利率”字段；开仓保证金按 `Σ（开仓价格 × 开仓数量 × 合约乘数 / 杠杆倍数）` 累加，同一历史仓位存在多笔开仓时按全部开仓记录累计；盈利率按 `平仓盈利金额 / 开仓保证金` 计算。<br />
+                · 新增：历史仓位汇总区“资金费”统计参数，计算公式为 `当前仓位资金费累计`。<br />
+                · 新增：历史仓位汇总区“用户净盈亏”统计参数，计算公式为 `已实现盈亏 + 资金费 + 手续费返佣 - 手续费`。<br />
+                · 修改：历史仓位列表新增“资金费”“用户净盈亏”字段；资金费按该历史仓位生命周期内累计资金费展示，用户净盈亏按 `已实现盈亏 + 资金费 + 手续费返佣 - 手续费` 展示；当前原型未单独提供手续费返佣示例值时，列表样例按 `0` 代入。<br />
+                · 修改：净盈亏查询明细列表新增“资金费”“手续费返佣”字段；净盈亏统计与明细中的净盈亏口径统一调整为 `已实现盈亏 + 资金费 + 手续费返佣 - 手续费`。
+              </div>
+            </div>
             <div class="contentCard">
               <div class="cardHead">
                 <div><h3>v20260927</h3><p>按自然日最终状态归并</p></div>
@@ -1429,7 +1451,14 @@
             <h4>1. 止盈止损</h4>
             <span class="auditMeta">交易管理</span>
           </div>
-          <div class="note">口径定义：“订单 ID”在当前页面按止盈止损单主键展示；同时补充“对应委托订单 ID”方便追踪关联委托，**未激活且尚未生成委托单时填 --**；**订单类型列必须展示**，枚举：`止盈` / `止损`，仅区分业务方向，下单方式统一为市价，不再标注限价/市价字样；**订单状态语义：未激活 = 触发条件尚未满足，委托单未挂出；已激活 = 止盈止损进入监控中，实时等待触发；已取消 = 用户或平台撤销，终态不再触发**。**排序规则：第一排序按状态权重 未激活>已激活>已取消（数字越大越靠前）；第二排序按止盈止损 ID 倒序，同状态内 ID 数字大的在前**。更新时间语义：优先按“最近一次订单状态变更时间”回填，无状态变更记录则按“后台订单查询接口返回时间”。</div>
+          <div class="note">
+            口径定义：<br />
+            “订单 ID”在当前页面按止盈止损单主键展示；同时补充“对应委托订单 ID”方便追踪关联委托，**未激活且尚未生成委托单时填 --**。<br />
+            **订单类型列必须展示**，枚举：`止盈` / `止损`，仅区分业务方向，下单方式统一为市价，不再标注限价/市价字样。<br />
+            **订单状态语义：未激活 = 触发条件尚未满足，委托单未挂出；已激活 = 止盈止损进入监控中，实时等待触发；已取消 = 用户或平台撤销，终态不再触发**。<br />
+            **排序规则：第一排序按状态权重 未激活>已激活>已取消（数字越大越靠前）；第二排序按止盈止损 ID 倒序，同状态内 ID 数字大的在前**。<br />
+            更新时间语义：优先按“最近一次订单状态变更时间”回填，无状态变更记录则按“后台订单查询接口返回时间”。
+          </div>
           <div class="contentCard" style="margin-top:12px">
             <div class="tableWrap auditTable">
               <table>
@@ -1474,7 +1503,12 @@
             <h4>2. 当前持仓</h4>
             <span class="auditMeta">交易管理</span>
           </div>
-          <div class="note">口径定义：当前持仓以“仍未完全平仓的实时仓位”为口径，默认排除做市账号数据；盈利率按（未实现盈亏 + 已实现盈亏）/ 保证金（U）计算。关联记录抽屉默认按时间轴倒序展示，可切换为按类型查看；当前仅保留委托、开仓、平仓三类交易链路，用于还原同一仓位的真实成交过程。由于同一仓位可同时配置多个止盈止损，当前持仓列表不展示止盈止损价格字段，避免把多个价格错误压缩成单一参数。</div>
+          <div class="note">
+            口径定义：<br />
+            当前持仓以“仍未完全平仓的实时仓位”为口径，默认排除做市账号数据；盈利率按（未实现盈亏 + 已实现盈亏）/ 保证金（U）计算。<br />
+            关联记录抽屉默认按时间轴倒序展示，可切换为按类型查看；当前仅保留委托、开仓、平仓三类交易链路，用于还原同一仓位的真实成交过程。<br />
+            由于同一仓位可同时配置多个止盈止损，当前持仓列表不展示止盈止损价格字段，避免把多个价格错误压缩成单一参数。
+          </div>
           <div class="contentCard" style="margin-top:12px">
             <div class="tableWrap auditTable">
               <table>
@@ -1523,7 +1557,13 @@
             <h4>3. 当前委托</h4>
             <span class="auditMeta">交易管理</span>
           </div>
-          <div class="note">口径定义：当前委托页全部统计默认排除做市账号数据。`当前委托总数` 指当前查询条件命中的撮合中有效委托，仅包含模拟盘委托和实盘限价委托，不统计已完全成交、已完全撤销记录；其中模拟盘委托当前按非 USDT 币对正向永续合约口径识别。`止盈止损委托` 指止盈止损条件触发后由系统生成并下发的委托，不是用户在前端直接下的限价委托。若委托附带止盈止损，则补充展示对应止盈止损 ID；原型同时补充“关联开/平仓”入口，用于查看该委托所属仓位下的开仓和平仓成交结果。</div>
+          <div class="note">
+            口径定义：<br />
+            当前委托页全部统计默认排除做市账号数据。<br />
+            `当前委托总数` 指当前查询条件命中的撮合中有效委托，仅包含模拟盘委托和实盘限价委托，不统计已完全成交、已完全撤销记录；其中模拟盘委托当前按非 USDT 币对正向永续合约口径识别。<br />
+            `止盈止损委托` 指止盈止损条件触发后由系统生成并下发的委托，不是用户在前端直接下的限价委托。<br />
+            若委托附带止盈止损，则补充展示对应止盈止损 ID；原型同时补充“关联开/平仓”入口，用于查看该委托所属仓位下的开仓和平仓成交结果。
+          </div>
           <div class="contentCard" style="margin-top:12px">
             <div class="tableWrap auditTable">
               <table>
@@ -1572,7 +1612,11 @@
             <h4>4. 开仓记录</h4>
             <span class="auditMeta">交易管理</span>
           </div>
-          <div class="note">口径定义：开仓记录按成交开仓明细展示，一条记录对应一次开仓成交结果。原型补充“委托订单 ID”，用于将成交结果回挂到对应委托主单。</div>
+          <div class="note">
+            口径定义：<br />
+            开仓记录按成交开仓明细展示，一条记录对应一次开仓成交结果。<br />
+            原型补充“委托订单 ID”，用于将成交结果回挂到对应委托主单。
+          </div>
           <div class="contentCard" style="margin-top:12px">
             <div class="tableWrap auditTable">
               <table>
@@ -1620,7 +1664,11 @@
             <h4>5. 平仓记录</h4>
             <span class="auditMeta">交易管理</span>
           </div>
-          <div class="note">口径定义：平仓记录按实际平仓成交明细展示，一条记录对应一次平仓成交结果。原型补充“委托订单 ID”，用于将平仓成交结果回挂到对应委托主单。</div>
+          <div class="note">
+            口径定义：<br />
+            平仓记录按实际平仓成交明细展示，一条记录对应一次平仓成交结果。<br />
+            原型补充“委托订单 ID”，用于将平仓成交结果回挂到对应委托主单。
+          </div>
           <div class="contentCard" style="margin-top:12px">
             <div class="tableWrap auditTable">
               <table>
@@ -1667,7 +1715,15 @@
             <h4>6. 历史仓位</h4>
             <span class="auditMeta">交易管理</span>
           </div>
-          <div class="note">口径定义：历史仓位为已结束仓位集合，包含全部平仓与爆仓，默认排除做市账号数据。`风险率 = 高风险历史仓位数 / 历史仓位数 × 100%`；其中 `高风险历史仓位` 指仓位级别被系统强平过的订单。由于列表同时展示开仓时间与平仓时间，查询栏必须拆成两个独立时间筛选，避免开发和测试无法确认时间条件应作用于哪个字段。平仓盈亏列支持打开关联记录抽屉，默认按时间轴倒序展示，可切换为按类型查看；当前仅保留委托、开仓、平仓三类交易链路，用于复盘同一仓位的完整成交过程。</div>
+          <div class="note">
+            口径定义：<br />
+            历史仓位为已结束仓位集合，包含全部平仓与爆仓，默认排除做市账号数据。<br />
+            `风险率 = 高风险历史仓位数 / 历史仓位数 × 100%`；其中 `高风险历史仓位` 指仓位级别被系统强平过的订单。<br />
+            由于列表同时展示开仓时间与平仓时间，查询栏必须拆成两个独立时间筛选，避免开发和测试无法确认时间条件应作用于哪个字段。<br />
+            历史仓位列表新增 `开仓保证金`、`资金费`、`用户净盈亏` 与 `盈利率` 字段，其中 `开仓保证金 = Σ（开仓价格 × 开仓数量 × 合约乘数 / 杠杆倍数）`，同一历史仓位若存在多笔开仓则按全部开仓记录累计；`资金费 = 当前仓位资金费累计`；`用户净盈亏 = 已实现盈亏 + 资金费 + 手续费返佣 - 手续费`；`盈利率 = 平仓盈利金额 / 开仓保证金 × 100%`。<br />
+            当前原型未单独提供手续费返佣示例值时，列表样例按 `0` 代入。<br />
+            平仓盈亏列支持打开关联记录抽屉，默认按时间轴倒序展示，可切换为按类型查看；当前仅保留委托、开仓、平仓、资金费四类交易链路，用于复盘同一仓位的完整成交过程。
+          </div>
           <div class="contentCard" style="margin-top:12px">
             <div class="tableWrap auditTable">
               <table>
@@ -1689,6 +1745,8 @@
                   <tr><td>汇总信息</td><td>手续费</td><td>手续费</td><td>历史仓位累计手续费。由于页面支持时间筛选，字段名称去掉“总”字，避免被误读为全量总计。</td></tr>
                   <tr><td>汇总信息</td><td>平仓盈亏</td><td>平仓盈亏</td><td>不含手续费的平仓盈亏汇总。由于页面支持时间筛选，字段名称去掉“总”字，避免被误读为全量总计。</td></tr>
                   <tr><td>汇总信息</td><td>净盈亏</td><td>净盈亏</td><td>平仓盈亏扣除手续费后。由于页面支持时间筛选，字段名称去掉“总”字，避免被误读为全量总计。</td></tr>
+                  <tr><td>汇总信息</td><td class="mutedCell">无（本轮补充）</td><td>资金费</td><td>按当前仓位资金费累计统计，用于查看当前筛选范围内历史仓位在存续期间累计发生的资金费结果。该值随当前页面筛选条件联动统计。</td></tr>
+                  <tr><td>汇总信息</td><td class="mutedCell">无（本轮补充）</td><td>用户净盈亏</td><td>按已实现盈亏 + 资金费 + 手续费返佣 - 手续费计算，用于从用户最终收益口径看历史仓位贡献。该值随当前页面筛选条件联动统计。</td></tr>
                   <tr><td>汇总信息</td><td>交易额</td><td>交易额</td><td>历史仓位累计成交额。由于页面支持时间筛选，字段名称去掉“总”字，避免被误读为全量总计。</td></tr>
                   <tr><td>汇总信息</td><td>风险率</td><td>风险率</td><td>默认排除做市账号数据；计算公式 = 高风险历史仓位数 / 历史仓位数 × 100%。其中高风险历史仓位指仓位级别被系统强平过的订单。</td></tr>
                   <tr><td>信息栏</td><td>仓位 ID</td><td>仓位 ID</td><td>历史仓位主键。</td></tr>
@@ -1705,7 +1763,11 @@
                   <tr><td>信息栏</td><td>平仓均价</td><td>平仓均价</td><td>已平仓部分加权均价。</td></tr>
                   <tr><td>信息栏</td><td>已平仓量</td><td>已平仓量</td><td>累计已平仓数量。</td></tr>
                   <tr><td>信息栏</td><td>手续费</td><td>手续费</td><td>仓位生命周期累计手续费。由于页面支持时间筛选，字段名称去掉“总”字，避免被误读为全量总计。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>开仓保证金</td><td>按同一历史仓位全部开仓记录累加计算，公式 = Σ（开仓价格 × 开仓数量 × 合约乘数 / 杠杆倍数）。若生命周期内存在再次开仓或加仓，需继续向下累计，不因中途部分平仓而回退。</td></tr>
                   <tr><td>信息栏</td><td>平仓盈亏（链接页面）</td><td>平仓盈亏</td><td>点击后打开右侧关联记录抽屉，默认按时间轴倒序查看该历史仓位对应的委托记录、开仓记录和平仓记录；同时支持切换为按类型分组查看。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>资金费</td><td>按该历史仓位生命周期内累计资金费展示，取值为该仓位在存续期间全部资金费结算结果的代数和。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>用户净盈亏</td><td>按已实现盈亏 + 资金费 + 手续费返佣 - 手续费计算。当前原型未单独提供手续费返佣示例值时，列表样例按 0 代入。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>盈利率</td><td>按平仓盈利金额 / 开仓保证金 × 100% 计算。分母使用同一历史仓位全部开仓记录累计后的开仓保证金，结果按百分比展示并保留 2 位小数。</td></tr>
                   <tr><td>链接页</td><td class="mutedCell">无（本轮补充）</td><td>查看模式</td><td>关联记录抽屉提供“时间轴 / 类型”两种查看模式，默认时间轴。时间轴用于顺着事件发展阅读完整过程，类型用于按委托、开仓、平仓分组汇总查看；两种模式使用同一份底层数据，不改变各列表字段参数。</td></tr>
                   <tr><td>信息栏</td><td>开仓时间</td><td>开仓时间</td><td>首笔开仓时间。</td></tr>
                   <tr><td>信息栏</td><td>平仓时间</td><td>平仓时间</td><td>最终平仓或爆仓时间。</td></tr>
@@ -1737,7 +1799,14 @@
             <h4>7. 净盈亏查询——数据管理</h4>
             <span class="auditMeta">数据管理</span>
           </div>
-          <div class="note">口径定义：净盈亏查询按用户维度聚合，净盈亏 = 结算盈亏 - 手续费；净划入 = 划入 - 划出。运营可按今日、指定日期或自定义时间段查询。时间筛选优先按用户当前时区自然日生效；未获取用户时区时，按 UTC+8 作为默认兜底口径。成交额统计、结算盈亏统计、手续费统计均随所选时间段实时重算，统计结果仅代表当前筛选时间段内的数据，不代表全量总数据。最后更新时间表示该用户聚合结果最近一次完成汇总回写并可对外查询的时间。</div>
+          <div class="note">
+            口径定义：<br />
+            净盈亏查询按用户维度聚合，净盈亏 = 已实现盈亏 + 资金费 + 手续费返佣 - 手续费；净划入 = 划入 - 划出。<br />
+            运营可按今日、指定日期或自定义时间段查询。<br />
+            时间筛选优先按用户当前时区自然日生效；未获取用户时区时，按 UTC+8 作为默认兜底口径。<br />
+            成交额统计、已实现盈亏统计、手续费统计、净盈亏统计均随所选时间段实时重算，统计结果仅代表当前筛选时间段内的数据，不代表全量总数据。<br />
+            最后更新时间表示该用户聚合结果最近一次完成汇总回写并可对外查询的时间。
+          </div>
           <div class="contentCard" style="margin-top:12px">
             <div class="tableWrap auditTable">
               <table>
@@ -1751,16 +1820,18 @@
                   <tr><td>筛选栏</td><td>时间筛选（按当前时区）</td><td>时间筛选（按当前时区）</td><td>运营可按今日、指定日期或自定义时间段发起查询；优先按用户当前时区自然日的最后更新时间窗口筛选，默认值为今日；未获取用户时区时，按 UTC+8 作为默认兜底口径。</td></tr>
 
                   <tr><td>汇总信息</td><td>成交额统计</td><td>成交额统计</td><td>运营按所选今日、指定日期或自定义时间段查询后，统计该时间段内的累计成交额，用于判断当前筛选范围内的交易规模，不代表全量总数据。</td></tr>
-                  <tr><td>汇总信息</td><td>结算盈亏统计</td><td>结算盈亏统计</td><td>运营按所选今日、指定日期或自定义时间段查询后，统计该时间段内的已结算盈亏累计值，不代表全量总数据。</td></tr>
+                  <tr><td>汇总信息</td><td>已实现盈亏统计</td><td>已实现盈亏统计</td><td>运营按所选今日、指定日期或自定义时间段查询后，统计该时间段内的已实现盈亏累计值，不代表全量总数据。</td></tr>
                   <tr><td>汇总信息</td><td>手续费统计</td><td>手续费统计</td><td>运营按所选今日、指定日期或自定义时间段查询后，统计该时间段内的累计手续费，不代表全量总数据。</td></tr>
-                  <tr><td>汇总信息</td><td>净盈亏统计</td><td>净盈亏统计</td><td>结算盈亏减手续费后的统计结果。</td></tr>
+                  <tr><td>汇总信息</td><td>净盈亏统计</td><td>净盈亏统计</td><td>按已实现盈亏 + 资金费 + 手续费返佣 - 手续费计算后的统计结果。</td></tr>
                   <tr><td>信息栏</td><td>用户 UID</td><td>用户 UID</td><td>统计对象用户。</td></tr>
                   <tr><td>信息栏</td><td>合伙人 UID</td><td>合伙人 UID</td><td>直属上一级合伙人 UID；一级子代理、一级直客或母代理统一显示 <code>--</code>，其余按全局 UID 展示规则回填。</td></tr>
                   <tr><td>信息栏</td><td>母合伙人 UID</td><td>母合伙人 UID</td><td>代理链路顶层 UID；若当前对象为母代理，则该字段显示其自己的 UID。</td></tr>
                   <tr><td>信息栏</td><td>成交额</td><td>成交额</td><td>统计周期累计成交额。字段名称去掉“总”字，避免被误读为全站总计；实际口径仍为当前筛选范围内该用户维度累计值。</td></tr>
                   <tr><td>信息栏</td><td>手续费</td><td>手续费</td><td>统计周期累计手续费。字段名称去掉“总”字，避免被误读为全站总计；实际口径仍为当前筛选范围内该用户维度累计值。</td></tr>
-                  <tr><td>信息栏</td><td>结算盈亏</td><td>结算盈亏</td><td>统计周期累计已结算盈亏。字段名称去掉“总”字，避免被误读为全站总计；实际口径仍为当前筛选范围内该用户维度累计值。</td></tr>
-                  <tr><td>信息栏</td><td>净盈亏</td><td>净盈亏</td><td>净收益结果。字段名称去掉“总”字，避免被误读为全站总计；实际口径仍为当前筛选范围内该用户维度累计值。</td></tr>
+                  <tr><td>信息栏</td><td>已实现盈亏</td><td>已实现盈亏</td><td>统计周期累计已实现盈亏。字段名称去掉“总”字，避免被误读为全站总计；实际口径仍为当前筛选范围内该用户维度累计值。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>资金费</td><td>统计周期内累计资金费，用于和已实现盈亏、手续费返佣、手续费共同计算净盈亏。</td></tr>
+                  <tr><td>信息栏</td><td class="mutedCell">无（本轮补充）</td><td>手续费返佣</td><td>统计周期内累计手续费返佣，用于和手续费、已实现盈亏、资金费共同计算净盈亏。</td></tr>
+                  <tr><td>信息栏</td><td>净盈亏</td><td>净盈亏</td><td>净收益结果，按已实现盈亏 + 资金费 + 手续费返佣 - 手续费计算。字段名称去掉“总”字，避免被误读为全站总计；实际口径仍为当前筛选范围内该用户维度累计值。</td></tr>
                   <tr><td>信息栏</td><td>划入</td><td>划入</td><td>统计周期内划入金额。字段名称去掉“总”字，避免被误读为全站总计；实际口径仍为当前筛选范围内该用户维度累计值。</td></tr>
                   <tr><td>信息栏</td><td>划出</td><td>划出</td><td>统计周期内划出金额。字段名称去掉“总”字，避免被误读为全站总计；实际口径仍为当前筛选范围内该用户维度累计值。</td></tr>
                   <tr><td>信息栏</td><td>净划入</td><td>净划入</td><td>划入减划出。</td></tr>
@@ -1779,7 +1850,12 @@
             <h4>8. 资金费历史</h4>
             <span class="auditMeta">数据管理</span>
           </div>
-          <div class="note">口径定义：资金费历史主列表按“结算批次”聚合展示，默认排除做市账号数据；页面顶部汇总卡片仅保留资金费结算笔数与累计资金费用两项指标，不展示平均资金费率和高频合约。当同一批次涉及 2 个及以上仓位时，列表先展示聚合结果，再通过详情抽屉展开到单仓位明细。单仓位明细中，“资金费计算时持仓金额”表示结算时刻用于计算资金费的仓位名义金额。</div>
+          <div class="note">
+            口径定义：<br />
+            资金费历史主列表按“结算批次”聚合展示，默认排除做市账号数据；页面顶部汇总卡片仅保留资金费结算笔数与累计资金费用两项指标，不展示平均资金费率和高频合约。<br />
+            当同一批次涉及 2 个及以上仓位时，列表先展示聚合结果，再通过详情抽屉展开到单仓位明细。<br />
+            单仓位明细中，“资金费计算时持仓金额”表示结算时刻用于计算资金费的仓位名义金额。
+          </div>
           <div class="contentCard" style="margin-top:12px">
             <div class="tableWrap auditTable">
               <table>
@@ -1823,7 +1899,11 @@
             <h4>9. 版本声明</h4>
             <span class="auditMeta">变更记录</span>
           </div>
-          <div class="note">口径定义：版本声明页仅记录当前原型已生效的新增、删除、修改项，不记录未改动内容。页面展示以“版本标识 + 变更主题 + 变更明细”三部分组成；变更明细必须与页面最终状态一致，不允许多写、漏写或把原本已存在但本轮未动的字段误记为本轮变更。</div>
+          <div class="note">
+            口径定义：<br />
+            版本声明页仅记录当前原型已生效的新增、删除、修改项，不记录未改动内容。<br />
+            页面展示以“版本标识 + 变更主题 + 变更明细”三部分组成；变更明细必须与页面最终状态一致，不允许多写、漏写或把原本已存在但本轮未动的字段误记为本轮变更。
+          </div>
           <div class="contentCard" style="margin-top:12px">
             <div class="tableWrap auditTable">
               <table>
@@ -1839,7 +1919,8 @@
               </table>
             </div>
           </div>
-        </section>      </div>`r`n    </aside>
+        </section>      </div>
+    </aside>
 
     <script>
       (function () {
@@ -2572,6 +2653,23 @@
     </script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
